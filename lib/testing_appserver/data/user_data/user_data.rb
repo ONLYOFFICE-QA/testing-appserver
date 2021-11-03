@@ -12,7 +12,7 @@ module TestingAppServer
 
     def initialize(user_data = {})
       secret_data = AppServerPrivateData.new.decrypt
-      @portal = user_data.fetch(:portal, 'http://appserver.qa-onlyoffice.net/')
+      @portal = user_data.fetch(:portal, DEFAULT_PORTAL)
       @mail = user_data.fetch(:mail, secret_data['portal_mail_admin'])
       @pwd =  user_data.fetch(:pwd, secret_data['portal_password_admin'])
       @first_name = user_data.fetch(:first_name, DEFAULT_ADMIN_NAME)
