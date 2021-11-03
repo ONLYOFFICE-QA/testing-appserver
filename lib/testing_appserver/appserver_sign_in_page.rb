@@ -38,7 +38,7 @@ module TestingAppServer
       sign_in_submit_element.click
       return if login_error?
 
-      @instance.webdriver.wait_until(100) { !sign_in_login_element.present? }
+      @instance.webdriver.wait_until { !sign_in_login_element.present? }
       AppServerMainPage.new(@instance)
     end
   end

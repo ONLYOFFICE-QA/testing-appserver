@@ -1,5 +1,6 @@
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
 
 inherit_from: .rubocop_todo.yml
@@ -15,4 +16,9 @@ Bundler/GemFilename:
 # since we don't initialize class directly in spec
 # and checking of one class can be split into different specs
 RSpec/DescribeClass:
+  Enabled: false
+
+# Totally disable this check
+# since we use instance variable in spec
+RSpec/InstanceVariable:
   Enabled: false

@@ -1,18 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.1)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
-      tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.519.0)
-    aws-sdk-core (3.121.3)
+    aws-partitions (1.524.0)
+    aws-sdk-core (3.121.6)
       aws-eventstream (~> 1, >= 1.0.2)
-      aws-partitions (~> 1, >= 1.239.0)
+      aws-partitions (~> 1, >= 1.520.1)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
     aws-sdk-kms (1.50.0)
@@ -33,18 +27,10 @@ GEM
     faker (2.19.0)
       i18n (>= 1.6, < 2)
     headless (2.3.1)
-    httparty (0.20.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     iniparse (1.5.0)
     jmespath (1.4.0)
-    mime-types (3.3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0901)
-    minitest (5.14.4)
-    multi_xml (0.6.0)
     onlyoffice_bugzilla_helper (0.6.1)
     onlyoffice_file_helper (0.5.0)
       onlyoffice_logger_helper (~> 1)
@@ -97,9 +83,9 @@ GEM
       rspec-support (~> 3.10.0)
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
-    rspec-support (3.10.2)
+    rspec-support (3.10.3)
     rspec_passed_time_formatter (0.2.0)
-    rubocop (1.22.2)
+    rubocop (1.22.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -110,7 +96,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.12.0)
       parser (>= 3.0.1.1)
-    rubocop-performance (1.11.5)
+    rubocop-performance (1.12.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     rubocop-rspec (2.5.0)
@@ -120,22 +106,17 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    tzinfo (2.0.4)
-      concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
     watir (6.19.1)
       regexp_parser (>= 1.2, < 3)
       selenium-webdriver (>= 3.142.7)
     wrata_api (0.2.0)
     yml_reader (0.7)
-    zeitwerk (2.5.1)
 
 PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
-  activesupport
-  httparty
   onlyoffice_tcm_helper
   onlyoffice_testrail_wrapper
   onlyoffice_webdriver_wrapper

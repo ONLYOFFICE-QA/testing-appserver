@@ -7,12 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 2
-# Configuration parameters: AssignmentOnly.
-RSpec/InstanceVariable:
-  Exclude:
-    - 'spec/smoke_spec.rb'
-
-# Offense count: 2
 Style/MixinUsage:
   Exclude:
     - 'lib/testing_appserver/appserver_test_instance.rb'

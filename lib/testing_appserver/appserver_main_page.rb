@@ -25,8 +25,11 @@ module TestingAppServer
     end
 
     def all_modules_present?
-      main_page_documents_element.present? && main_page_projects_element.present? &&
-        main_page_calendar_element.present? && main_page_mail_element.present? && main_page_crm_element.present? &&
+      main_page_documents_element.present? &&
+        main_page_projects_element.present? &&
+        main_page_calendar_element.present? &&
+        main_page_mail_element.present? &&
+        main_page_crm_element.present? &&
         main_page_people_element.present?
     end
   end
