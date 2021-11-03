@@ -4,7 +4,7 @@ require_relative 'appserver_test_instance'
 require_relative 'appserver_sign_in_page'
 
 module TestingAppServer
-  # Helper methods for site initializing
+  # Helper methods for AppServer initializing
   class AppServerHelper
     attr_accessor :test
 
