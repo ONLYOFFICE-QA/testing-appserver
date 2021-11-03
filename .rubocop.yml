@@ -1,0 +1,18 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+
+# We use `gems.rb` in this project
+Bundler/GemFilename:
+  EnforcedStyle: gems.rb
+
+# Totally disable this check
+# since we don't initialize class directly in spec
+# and checking of one class can be split into different specs
+RSpec/DescribeClass:
+  Enabled: false
