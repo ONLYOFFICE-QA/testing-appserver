@@ -5,6 +5,10 @@ require_relative 'appserver_private_data'
 module TestingAppServer
   # User data
   class UserData
+    DEFAULT_PORTAL = 'http://appserver.qa-onlyoffice.net/'
+    DEFAULT_ADMIN_NAME = 'Administrator'
+    DEFAULT_ADMIN_LASTNAME = ''
+
     attr_accessor :portal, :mail, :pwd, :first_name, :last_name, :type
 
     def initialize(user_data = {})
@@ -16,9 +20,5 @@ module TestingAppServer
       @last_name = user_data.fetch(:last_name, DEFAULT_ADMIN_LASTNAME)
       @type = user_data.fetch(:type, :admin)
     end
-
-    DEFAULT_PORTAL = 'http://appserver.qa-onlyoffice.net/'
-    DEFAULT_ADMIN_NAME = 'Administrator'
-    DEFAULT_ADMIN_LASTNAME = ''
   end
 end
