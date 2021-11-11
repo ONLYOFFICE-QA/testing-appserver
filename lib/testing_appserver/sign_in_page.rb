@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'appserver_main_page'
+require_relative 'main_page'
 
 module TestingAppServer
   # AppServer Sign In page
   # https://user-images.githubusercontent.com/40513035/139641048-1b64d227-082f-4f2d-b751-87e4bf9cc1dd.png
-  class AppServerSignIn
+  class SignInPage
     include PageObject
 
     text_field(:sign_in_login, xpath: "//input[@id='login']")
@@ -39,7 +39,7 @@ module TestingAppServer
       return if login_error?
 
       @instance.webdriver.wait_until { !sign_in_login_element.present? }
-      AppServerMainPage.new(@instance)
+      MainPage.new(@instance)
     end
   end
 end
