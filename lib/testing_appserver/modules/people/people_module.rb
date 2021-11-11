@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/appserver_top_toolbar'
+require_relative '../../top_toolbar/top_toolbar'
 
 module TestingAppServer
   # AppServer People module
   # https://user-images.githubusercontent.com/40513035/141245151-1fcad62a-9935-472d-a25d-513e10540a30.png
-  class AppServerPeople
-    include AppServerTopToolbar
+  class PeopleModule
+    include TopToolbar
     include PageObject
 
     link(:groups_link, xpath: "//a[@href='/products/people/filter']")

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'appserver_test_instance'
-require_relative 'appserver_sign_in_page'
+require_relative 'sign_in_page'
 
 module TestingAppServer
   # Helper methods for AppServer initializing
@@ -13,7 +13,7 @@ module TestingAppServer
       if test.webdriver.get_page_source.include?('Error 503')
         test.webdriver.webdriver_error('HTTP Error 503. Service Unavailable')
       end
-      login_page = AppServerSignIn.new(test)
+      login_page = SignInPage.new(test)
       @main_page = login_page.sign_in(user.mail, user.pwd)
       [@main_page, test]
     end

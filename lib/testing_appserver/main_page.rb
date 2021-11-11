@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative 'modules/documents/appserver_documents'
-require_relative 'modules/people/appserver_people'
-require_relative 'modules/settings/appserver_settings'
-require_relative 'modules/appserver_place_holder'
-require_relative 'top_toolbar/appserver_top_toolbar'
+require_relative 'modules/documents/documents_module'
+require_relative 'modules/people/people_module'
+require_relative 'modules/settings/settings_module'
+require_relative 'modules/module_place_holder'
+require_relative 'top_toolbar/top_toolbar'
 
 module TestingAppServer
   # AppServer Main Page
   # https://user-images.githubusercontent.com/40513035/139641190-90056c14-8dac-4db7-a5f6-9834c3cd1e56.png
-  class AppServerMainPage
-    include AppServerTopToolbar
+  class MainPage
+    include TopToolbar
     include PageObject
 
     main_page_module = "//div[@class='home-modules']"
@@ -35,13 +35,13 @@ module TestingAppServer
       instance_eval("main_page_#{selected_module}_element.click", __FILE__, __LINE__) # choose module from main page
       case selected_module
       when :documents
-        AppServerDocuments.new(@instance)
+        DocumentsModule.new(@instance)
       when :people
-        AppServerPeople.new(@instance)
+        PeopleModule.new(@instance)
       when :settings
-        AppServerSettings.new(@instance)
+        SettingsModule.new(@instance)
       else
-        AppServerPlaceHolder.new(@instance, selected_module)
+        ModulePlaceHolder.new(@instance, selected_module)
       end
     end
 

@@ -4,7 +4,7 @@ require 'yaml'
 
 module TestingAppServer
   # Class for storing config parameters
-  class AppServerPrivateData
+  class PrivateData
     def initialize(file: "#{Dir.pwd}/lib/testing_appserver/data/private_data/data.yml.gpg",
                    pass_file: "#{Dir.home}/.config/onlyoffice/qa-testing-site-onlyoffice.yml")
       @file = file
