@@ -8,7 +8,6 @@ module TestingAppServer
     DEFAULT_PORTAL = 'http://appserver.qa-onlyoffice.net/'
     DEFAULT_ADMIN_NAME = 'Administrator'
     DEFAULT_ADMIN_LASTNAME = ''
-    USER_EMAIL = 'test@qamail.teamlab.info'
 
     attr_accessor :portal, :mail, :pwd, :first_name, :last_name, :type, :pwd_generation_type, :generate_pwd
     attr_reader :full_name

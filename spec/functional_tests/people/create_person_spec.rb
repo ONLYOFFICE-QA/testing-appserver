@@ -2,7 +2,8 @@
 
 require 'spec_helper'
 
-user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith', mail: TestingAppServer::UserData::USER_EMAIL,
+user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
+                                      mail: TestingAppServer::PrivateData.new.decrypt['user_mail'],
                                       pwd: SecureRandom.hex(7), type: :user)
 
 describe 'Create person' do
