@@ -43,6 +43,8 @@ module TestingAppServer
       UserProfile.new(@instance)
     end
 
+    private
+
     def fill_user_form(params = {})
       self.first_name = params.first_name
       self.last_name = params.last_name
