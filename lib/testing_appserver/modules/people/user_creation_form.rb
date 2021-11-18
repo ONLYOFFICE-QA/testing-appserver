@@ -53,7 +53,7 @@ module TestingAppServer
     end
 
     def add_password(params)
-      case params.pwd_generation_type
+      case params.pwd_set_up_type
       when :temporary_pwd
         temporary_password_element.click
         if params.generate_pwd
