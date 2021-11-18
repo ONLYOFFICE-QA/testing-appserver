@@ -43,7 +43,7 @@ module TestingAppServer
     end
 
     def disable_user
-      return if profile_not_disabled?
+      return if profile_disabled?
 
       open_profile_actions
       profile_actions_disable_element.click
@@ -58,8 +58,8 @@ module TestingAppServer
       @instance.webdriver.wait_until { success_toast_element.present? }
     end
 
-    def profile_not_disabled?
-      edit_profile_element.present?
+    def profile_disabled?
+      !edit_profile_element.present?
     end
 
     def open_profile_actions

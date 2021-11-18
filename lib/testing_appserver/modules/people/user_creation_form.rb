@@ -35,7 +35,7 @@ module TestingAppServer
       @instance.webdriver.wait_until { first_name_element.present? }
     end
 
-    def create_new_user(params = {}, generate_pwd: false)
+    def create_new_user(params = {}, generate_pwd = false)
       fill_user_form(params, generate_pwd)
       @instance.webdriver.move_to_element_by_locator(save_form_element.selector[:xpath])
       save_form_element.click
@@ -43,7 +43,7 @@ module TestingAppServer
       UserProfile.new(@instance)
     end
 
-    def fill_user_form(params = {}, generate_pwd: false)
+    def fill_user_form(params = {}, generate_pwd = false)
       self.first_name = params.first_name
       self.last_name = params.last_name
       self.email = params.mail
