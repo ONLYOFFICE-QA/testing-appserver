@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith', mail: TestingAppServer::UserData::USER_EMAIL,
-                                      pwd: SecureRandom.hex(5), type: :user)
+                                      pwd: SecureRandom.hex(7), type: :user)
 
 describe 'Create person' do
   before do
