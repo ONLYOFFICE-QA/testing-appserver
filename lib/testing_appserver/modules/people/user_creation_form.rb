@@ -21,7 +21,7 @@ module TestingAppServer
     div(:generate_password, xpath: "(//div[@class = 'password-field-wrapper']/div)[2]")
     text_field(:password, xpath: "//input[@name='password']")
 
-    button(:save_form, xpath: "//button[@class='sc-kNPwMy iHxaXx']") # add_id
+    button(:save_form, xpath: "//button[@tabindex='10']") # add_id
 
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
