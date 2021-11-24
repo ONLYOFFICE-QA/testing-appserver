@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'appserver_test_instance'
-require_relative 'sign_in_page'
+require_relative '../appserver_test_instance'
+require_relative '../sign_in_page'
 
 module TestingAppServer
   # Helper methods for AppServer initializing

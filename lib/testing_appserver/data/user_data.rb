@@ -5,7 +5,7 @@ require_relative 'private_data'
 module TestingAppServer
   # User data
   class UserData
-    DEFAULT_PORTAL = 'http://appserver.qa-onlyoffice.net/'
+    DEFAULT_PORTAL = 'http://appserver.qa-onlyoffice.net'
     DEFAULT_ADMIN_NAME = 'Administrator'
     DEFAULT_ADMIN_LASTNAME = ''
 

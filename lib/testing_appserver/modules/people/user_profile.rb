@@ -21,7 +21,7 @@ module TestingAppServer
     div(:profile_actions_disable, xpath: "//div[@label = 'Disable']") # add_id
     div(:profile_actions_delete, xpath: "//div[@label = 'Delete profile']") # add_id
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
-    button(:confirm_deletion, xpath: "//button[@class='sc-kNPwMy bsBjWx']") # add_id
+    button(:confirm_deletion, xpath: "//button[@tabindex='-1']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
