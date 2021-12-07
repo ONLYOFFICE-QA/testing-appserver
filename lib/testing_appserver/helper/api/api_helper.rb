@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'documents_api'
 require_relative 'people_api'
 
 module TestingAppServer
@@ -15,6 +16,10 @@ module TestingAppServer
 
     def people
       @people ||= PeopleApi.new
+    end
+
+    def documents
+      @documents ||= DocumentsApi.new
     end
   end
 end
