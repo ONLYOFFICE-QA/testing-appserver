@@ -4,7 +4,6 @@ require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/document_creation_field'
 require_relative 'modules/documents_helper'
 require_relative 'modules/documents_side_bar'
-require_relative 'modules/file_list_element/file_list_element'
 
 module TestingAppServer
   # AppServer Documents module
@@ -13,7 +12,6 @@ module TestingAppServer
     include DocumentsCreationField
     include DocumentsHelper
     include DocumentsSideBar
-    include FileListElement
     include TopToolbar
     include PageObject
 
