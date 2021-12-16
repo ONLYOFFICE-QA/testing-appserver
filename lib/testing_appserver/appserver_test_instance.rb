@@ -7,6 +7,7 @@ require 'onlyoffice_testrail_wrapper'
 require 'onlyoffice_webdriver_wrapper'
 require 'onlyoffice_tcm_helper'
 require 'palladium'
+require_relative 'data/helper_files/helper_files'
 require_relative 'data/user_data'
 require_relative 'helper/api/api_helper'
 require_relative 'helper/appserver_helper'
@@ -18,9 +19,10 @@ include OnlyofficeWebdriverWrapper
 module TestingAppServer
   # Instance of browser to perform actions
   class AppserverTestInstance
-    attr_accessor :webdriver, :doc_instance
+    attr_accessor :webdriver, :doc_instance, :user
 
-    def initialize(browser = :chrome)
+    def initialize(user, browser = :chrome)
+      @user = user
       @webdriver = WebDriver.new(browser, record_video: false)
       @webdriver.open(UserData::DEFAULT_PORTAL)
     end

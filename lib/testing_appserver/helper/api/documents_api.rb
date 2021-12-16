@@ -7,9 +7,34 @@ module TestingAppServer
   class DocumentsApi
     include DocumentsHelper
 
+    # @param file [String] File name
+    # @return [Hash] Inserted to "My documents" section file info
+    def upload_to_my_document(file)
+      Teamlab.files.upload_to_my_docs(file).body['response']
+    end
+
+    # @param id [String] Parent folder ID
+    # @param name [String] Folder title
+    # @return [Hash] New folder contents
+    def create_folder(name, id)
+      Teamlab.files.new_folder(id, name).body['response']
+    end
+
+    # @param id_folder [String] Folder ID
+    # @param file [String] File name
+    # @return [Hash] Uploaded file info
+    def upload_file_to_folder(id_folder, file)
+      Teamlab.files.upload_to_folder(id_folder, file).body['response']
+    end
+
+    # @return [Hash] My documents section contents
+    def my_documents_folder
+      Teamlab.files.get_my_docs.body['response']
+    end
+
     # @param filter_type [String] None, DocumentsOnly, PresentationsOnly, SpreadsheetsOnly, ImagesOnly, ArchiveOnly, MediaOnly
     # @return [Array] List of all my documents specified in request
-    def get_all_my_files(filter_type)
+    def all_my_documents_files(filter_type)
       Teamlab.files.get_my_docs(filterType: filter_type).body['response']['files']
     end
 

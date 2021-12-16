@@ -6,10 +6,10 @@ require_relative '../sign_in_page'
 module TestingAppServer
   # Helper methods for AppServer initializing
   class AppServerHelper
-    attr_accessor :test
+    attr_accessor :test, :user
 
     def init_instance(user = UserData.new)
-      test = AppserverTestInstance.new
+      test = AppserverTestInstance.new(user)
       if test.webdriver.get_page_source.include?('Error 503')
         test.webdriver.webdriver_error('HTTP Error 503. Service Unavailable')
       end

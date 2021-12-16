@@ -24,7 +24,7 @@ module TestingAppServer
       instance_eval("side_#{selected_module}_element.click", __FILE__, __LINE__) # choose module from side tool bar
       case selected_module
       when :documents
-        DocumentsModule.new(@instance)
+        MyDocuments.new(@instance)
       when :people
         PeopleModule.new(@instance)
       when :settings
