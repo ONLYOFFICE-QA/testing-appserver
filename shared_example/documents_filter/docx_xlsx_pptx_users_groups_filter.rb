@@ -24,7 +24,7 @@ shared_examples_for 'docx_xlsx_pptx_users_groups_filter' do |folder, admin, user
   end
 
   it "Group filter works in #{folder}" do
-    pending('Groups filter doesnt work')
+    pending('Groups filter doesnt work: https://bugzilla.onlyoffice.com/show_bug.cgi?id=54567')
     documents_page.set_filter(:groups, group_name: @admin_group['name'])
     expect(documents_page).to be_files_present(@files_array)
     expect(documents_page).to be_file_present(@folder_name)
@@ -33,7 +33,7 @@ shared_examples_for 'docx_xlsx_pptx_users_groups_filter' do |folder, admin, user
   end
 
   it "User filter works in #{folder}" do
-    pending('User search doesnt work with both name and surname')
+    pending('User search doesnt work with both name and surname: https://bugzilla.onlyoffice.com/show_bug.cgi?id=54568')
     documents_page.set_filter(:users, user_name: admin.full_name)
     expect(documents_page).to be_files_present(@files_array)
     expect(documents_page).to be_file_present(@folder_name)
