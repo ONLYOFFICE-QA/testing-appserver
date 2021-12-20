@@ -18,15 +18,15 @@ archive_name = "My_Archive_#{SecureRandom.hex(7)}.zip"
 picture_name = "My_Archive_#{SecureRandom.hex(7)}.jpg"
 audio_name = "My_Audio_#{SecureRandom.hex(7)}.mp3"
 all_files = [document_name, document_name_folder, spreadsheet_name, presentation_name, archive_name, picture_name, audio_name]
-all_files.each { |file| TestingAppServer::HelperFiles.upload_to_tmp_folder(file) }
+all_files.each { |file| TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file) }
 
 # upload files to portal
 (all_files - [document_name_folder]).each do |file|
-  api_admin.documents.upload_to_my_document(TestingAppServer::HelperFiles.path_to_tmp_file + file)
+  api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
 end
 folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_in_my_documents(folder_name)
-api_admin.documents.upload_to_folder(folder_name, TestingAppServer::HelperFiles.path_to_tmp_file + document_name_folder)
+api_admin.documents.upload_to_folder(folder_name, TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
 admin_group = api_admin.people.add_group_with_manager_names(Faker::Food.fruits, manager: admin.full_name)
 user_group = api_admin.people.add_group_with_manager_names(Faker::Food.vegetables, manager: user.full_name)
 
@@ -35,7 +35,7 @@ describe 'Documents filter My documents' do
     api_admin.documents.delete_files_by_title(all_files)
     api_admin.documents.delete_folders_by_title([folder_name])
     api_admin.people.delete_groups([admin_group['id'], user_group['id']])
-    all_files.each { |file| TestingAppServer::HelperFiles.delete_from_tmp_folder(file) }
+    all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do
