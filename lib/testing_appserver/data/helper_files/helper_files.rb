@@ -24,7 +24,8 @@ module TestingAppServer
 
     def self.upload_to_tmp_folder(file)
       file_extension = file.split('.')[-1].to_sym
-      FileUtils.cp(SampleFilesLocation.path_to_file + SampleFilesLocation.file_by_format[file_extension], SampleFilesLocation.path_to_tmp_file + file)
+      FileUtils.cp(SampleFilesLocation.path_to_file + SampleFilesLocation.file_by_format[file_extension],
+                   SampleFilesLocation.path_to_tmp_file + file)
     end
 
     def self.delete_from_tmp_folder(file)

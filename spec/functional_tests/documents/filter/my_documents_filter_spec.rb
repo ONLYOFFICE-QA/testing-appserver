@@ -26,7 +26,8 @@ all_files.each { |file| TestingAppServer::SampleFilesLocation.upload_to_tmp_fold
 end
 folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_in_my_documents(folder_name)
-api_admin.documents.upload_to_folder(folder_name, TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
+api_admin.documents.upload_to_folder(folder_name,
+                                     TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
 admin_group = api_admin.people.add_group_with_manager_names(Faker::Food.fruits, manager: admin.full_name)
 user_group = api_admin.people.add_group_with_manager_names(Faker::Food.vegetables, manager: user.full_name)
 
