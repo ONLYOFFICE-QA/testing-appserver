@@ -18,7 +18,7 @@ describe 'Main page links' do
   describe 'Side bar modules' do
     it 'Documents module opens correctly from side bar' do
       documents_page = @main_page.side_bar(:documents)
-      expect(documents_page).to be_a(TestingAppServer::DocumentsModule)
+      expect(documents_page).to be_a(TestingAppServer::MyDocuments)
     end
 
     it 'People module opens correctly from side bar' do
@@ -55,7 +55,7 @@ describe 'Main page links' do
   describe 'Main page modules' do
     it 'Documents module opens correctly from main page' do
       documents_page = @main_page.main_page(:documents)
-      expect(documents_page).to be_a(TestingAppServer::DocumentsModule)
+      expect(documents_page).to be_a(TestingAppServer::MyDocuments)
     end
 
     it 'People module opens correctly from main page' do

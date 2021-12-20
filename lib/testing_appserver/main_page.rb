@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'modules/documents/documents_module'
+require_relative 'modules/documents/my_documents'
 require_relative 'modules/people/people_module'
 require_relative 'modules/settings/settings_module'
 require_relative 'modules/module_place_holder'
@@ -35,7 +35,7 @@ module TestingAppServer
       instance_eval("main_page_#{selected_module}_element.click", __FILE__, __LINE__) # choose module from main page
       case selected_module
       when :documents
-        DocumentsModule.new(@instance)
+        MyDocuments.new(@instance)
       when :people
         PeopleModule.new(@instance)
       when :settings

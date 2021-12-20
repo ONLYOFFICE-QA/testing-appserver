@@ -1,11 +1,29 @@
 # frozen_string_literal: true
 
+require_relative '../../modules/people/modules/people_helper'
+
 module TestingAppServer
   # Api helper methods for People module
   class PeopleApi
+    include PeopleHelper
+
     # @return [Array] List of all portal users
     def all_portal_users
       Teamlab.people.filter_people(nil).body['response']
+    end
+
+    # @param name [String] Group name
+    # @param manager [String] Group manager ID
+    # @param members [Array] List of group members IDs
+    # @return [Hash] Created group info
+    def add_group(name, manager = nil, members = nil)
+      Teamlab.group.add_group(manager, name, members).body['response']
+    end
+
+    # @param group_id [String] Group ID
+    # @return [Hash] Deleted group info
+    def delete_group(group_id)
+      Teamlab.group.delete_group(group_id).body['response']
     end
 
     # @param mail [String] User mail

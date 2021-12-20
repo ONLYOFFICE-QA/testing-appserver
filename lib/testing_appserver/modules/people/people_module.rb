@@ -2,6 +2,7 @@
 
 require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/people_side_bar'
+require_relative 'modules/people_helper'
 require_relative 'user_creation_form'
 require_relative 'user_profile'
 
@@ -10,6 +11,7 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/141245151-1fcad62a-9935-472d-a25d-513e10540a30.png
   class PeopleModule
     include PageObject
+    include PeopleHelper
     include PeopleSideBar
     include TopToolbar
 
