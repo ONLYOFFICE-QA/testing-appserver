@@ -31,26 +31,13 @@ module TestingAppServer
     text_field(:query_field, xpath: "//div[contains(@class,'section-header_filter')]//input[@placeholder='Search']")
 
     link(:reset_filter, xpath: "//a[text()='Reset filter']") # add_id
-    # div(:loading_status, xpath: "//div[@class='loader-block']")
-    # div(:search_in, xpath: "//div[@id='filesBreadCrumbs']")
 
     def set_filter(filter, params = {})
       add_filter_element.click
       @instance.webdriver.wait_until do
         all_files_filter_element.present?
       end
-      filter_list = { folders: folders_filter_element,
-                      documents: documents_filter_element,
-                      presentations: presentations_filter_element,
-                      spreadsheets: spreadsheets_filter_element,
-                      images: images_filter_element,
-                      media: media_filter_element,
-                      archives: archives_filter_element,
-                      all_files: all_files_filter_element,
-                      groups: groups_filter_element,
-                      users: users_filter_element,
-                      no_subfolders: no_subfolders_filter_element }
-      filter_list[filter].click
+      instance_eval("#{filter}_filter_element.click", __FILE__, __LINE__) # choose action from documents filter menu
       choose_group_filter(params[:group_name]) if params[:group_name]
       choose_user_filter(params[:user_name]) if params[:user_name]
       sleep 2 # wait to load search results

@@ -1,20 +1,40 @@
 # frozen_string_literal: true
 
 module TestingAppServer
+  # AppServer files helper
   class HelperFiles
-    PATH_TO_FILE = "#{ENV['HOME']}/RubymineProjects/testing-appserver/lib/testing_appserver/data/helper_files/"
+    def self.path_to_file
+      "#{ENV['HOME']}/RubymineProjects/testing-appserver/lib/testing_appserver/data/helper_files/"
+    end
 
-    # documents
-    XLSX = 'Schülerwettbewerb der Ingenieur ёñ.xlsx'
-    DOCX = 'Collaborative.docx'
-    DOCX_1 = 'Новый документ.docx'
-    PPTX = 'имя с пробелом.pptx'
+    def self.path_to_tmp_file
+      "#{HelperFiles.path_to_file}tmp/"
+    end
 
-    # files
-    ZIP = 'ChromeSetup.zip'
-    MP3 = 'Track_9.mp3'
+    def self.file_by_format
+      {
+        xlsx: 'my_spreadsheet.xlsx',
+        docx: 'my_document.docx',
+        pptx: 'my_presentation.pptx',
+        zip: 'ChromeSetup.zip',
+        mp3: 'Track_9.mp3',
+        jpg: 'my_picture.jpg'
+      }
+    end
 
-    # images
-    JPG = 'э_picture_3.jpg'
+    def self.upload_to_tmp_folder(file)
+      file_extension = file.split('.')[-1].to_sym
+      FileUtils.cp(HelperFiles.path_to_file + HelperFiles.file_by_format[file_extension], HelperFiles.path_to_tmp_file + file)
+    end
+
+    def self.delete_from_tmp_folder(file)
+      FileUtils.rm(HelperFiles.path_to_tmp_file + file)
+    end
+
+    def self.files_by_extension(files, extension)
+      extension_files = []
+      files.each { |file| extension_files << file if file.end_with?(extension.to_s) }
+      extension_files
+    end
   end
 end
