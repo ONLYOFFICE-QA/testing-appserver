@@ -8,10 +8,6 @@ require 'onlyoffice_testrail_wrapper'
 require 'rspec'
 require 'rspec/retry'
 
-def config
-  @config ||= TestingHelpCentreOnlyoffice::Config.new
-end
-
 RSpec.configure do |config|
   is_debug = OnlyofficeFileHelper::RubyHelper.debug?
   config.default_retry_count = if is_debug

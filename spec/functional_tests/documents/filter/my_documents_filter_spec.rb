@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+
 # api initialization
 admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
@@ -44,7 +46,8 @@ describe 'Documents filter My documents' do
     @my_documents_page = main_page.main_page(:documents)
   end
 
-  after do
+  after do |example|
+    test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
 
