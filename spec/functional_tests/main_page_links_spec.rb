@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
 
 describe 'Main page links' do
   before do
     @main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
   end
 
-  after do |_example|
+  after do |example|
+    test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
 

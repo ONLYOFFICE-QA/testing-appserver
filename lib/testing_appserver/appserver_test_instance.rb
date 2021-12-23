@@ -11,6 +11,7 @@ require_relative 'data/helper_files/helper_files'
 require_relative 'data/user_data'
 require_relative 'helper/api/api_helper'
 require_relative 'helper/appserver_helper'
+require_relative 'test_manager/test_manager'
 
 include OnlyofficeDocumentserverTestingFramework
 include OnlyofficeTestrailWrapper

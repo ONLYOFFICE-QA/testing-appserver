@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
 
 admin = TestingAppServer::UserData.new
 user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
@@ -14,7 +15,8 @@ describe 'Create person' do
     @api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
   end
 
-  after do |_example|
+  after do |example|
+    test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
 
 admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
@@ -15,7 +16,8 @@ describe 'My Documents Actions menu' do
     @documents_page = main_page.side_bar(:documents)
   end
 
-  after do |_example|
+  after do |example|
+    test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
 
