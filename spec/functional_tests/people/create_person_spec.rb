@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
 test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
 
 admin = TestingAppServer::UserData.new
