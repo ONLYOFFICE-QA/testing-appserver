@@ -25,8 +25,8 @@ module TestingAppServer
 
     def initialize(params = {})
       params[:suite_name] ||= File.basename(__FILE__)
-      params[:plan_name] ||= test_plan_name
-      params[:plan_name_testrail] ||= test_plan_name
+      params[:plan_name] ||= test_plan_name(params[:version], params[:build_date])
+      params[:plan_name_testrail] ||= test_plan_name(params[:version], params[:build_date])
       params[:product_name] ||= 'AppServer Autotests'
       @tcm_helper = OnlyofficeTcmHelper::TcmHelper.new(params)
       @palladium = init_palladium(params)
@@ -74,9 +74,9 @@ module TestingAppServer
       { failed: 45, pending: 43, passed: 42, passed_2: 46, aborted: 41, blocked: 44 }[status_name]
     end
 
-    def test_plan_name
+    def test_plan_name(version, build_date)
       # TODO: add version and build date using api after bug fix: https://bugzilla.onlyoffice.com/show_bug.cgi?id=54664
-      "Test run date: #{Time.now.strftime('%d/%m/%Y')}, Portal: #{TestingAppServer::UserData::DEFAULT_PORTAL}"
+      "Version: #{version}, Build date: #{build_date}, Portal: #{TestingAppServer::UserData::DEFAULT_PORTAL}"
     end
 
     private

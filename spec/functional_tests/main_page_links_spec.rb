@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+
+main_page, test = TestingAppServer::AppServerHelper.new.init_instance
+version, build_date = main_page.portal_version_and_build_date
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__), version: version, build_date: build_date)
+test.webdriver.quit
 
 describe 'Main page links' do
   before do
