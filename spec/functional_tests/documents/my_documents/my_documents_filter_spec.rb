@@ -9,7 +9,7 @@ admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
                                       mail: TestingAppServer::PrivateData.new.decrypt['user_mail'],
-                                      pwd: SecureRandom.hex(7), type: :user)
+                                      pwd: TestingAppServer::PrivateData.new.decrypt['user_portal_pwd'], type: :user)
 api_admin.people.add_user(user) unless api_admin.people.user_with_email_exist?(user.mail)
 
 # create an upload files to temporary folder

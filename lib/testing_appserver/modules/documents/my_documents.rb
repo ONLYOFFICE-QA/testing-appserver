@@ -1,27 +1,24 @@
 # frozen_string_literal: true
 
 require_relative '../../top_toolbar/top_toolbar'
-require_relative 'modules/document_creation_field'
-require_relative 'modules/documents_filter'
-require_relative 'modules/documents_helper'
-require_relative 'modules/documents_side_bar'
+require_relative 'modules/documents_modules'
+
+require_relative 'documents_common'
+require_relative 'documents_favorites'
+require_relative 'documents_private_room'
+require_relative 'documents_recent'
+require_relative 'documents_shared_with_me'
+require_relative 'documents_trash'
 
 module TestingAppServer
-  # AppServer Documents module
+  # AppServer My Documents
   # https://user-images.githubusercontent.com/40513035/141085330-09584b43-6a2c-419c-9414-0c01219ea5a7.png
   class MyDocuments
-    include DocumentsCreationField
-    include DocumentsFilter
-    include DocumentsHelper
-    include DocumentsSideBar
+    include DocumentsModules
     include TopToolbar
     include PageObject
 
-    span(:my_documents, xpath: "//span[@title = 'My documents']") # add_id
-
-    image(:empty_folder, xpath: "//img[@alt='Empty folder image']") # add_id
-
-    elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")
+    div(:header_my_documents, xpath: "//div[@title='My documents']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
@@ -30,14 +27,7 @@ module TestingAppServer
     end
 
     def wait_to_load
-      @instance.webdriver.wait_until { my_documents_element.present? || empty_folder_element.present? }
-    end
-
-    def file_present?(file_name)
-      item_title_elements.each do |current_element|
-        return true if @instance.webdriver.get_attribute(current_element, 'title') == file_name
-      end
-      false
+      @instance.webdriver.wait_until { header_my_documents_element.present? }
     end
 
     def files_present?(files)

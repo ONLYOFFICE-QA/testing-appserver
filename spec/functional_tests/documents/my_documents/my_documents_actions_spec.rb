@@ -24,19 +24,18 @@ describe 'My Documents Actions menu' do
 
   describe 'Document' do
     before do
-      @documents_page.actions_documents(:new_document)
-      @documents_page.add_name_to_file(new_document)
+      @documents_page.create_file_from_action(:new_document, new_document)
     end
 
     after do
       api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_document}.docx"))
     end
 
-    it 'Created from Actions menu New Document exist in list of My Documents' do
+    it '[My Documents] Created from Actions menu New Document exist in list' do
       expect(api_admin.documents).to be_document_exist("#{new_document}.docx")
     end
 
-    it 'Created from Actions menu New Document opens correctly in My Documents' do
+    it '[My Documents] Created from Actions menu New Document opens correctly' do
       skip('Console errors in the document page')
       expect(@documents_page.check_opened_file_name).to eq("#{new_document}.docx")
     end
@@ -44,19 +43,18 @@ describe 'My Documents Actions menu' do
 
   describe 'Spreadsheet' do
     before do
-      @documents_page.actions_documents(:new_spreadsheet)
-      @documents_page.add_name_to_file(new_spreadsheet)
+      @documents_page.create_file_from_action(:new_spreadsheet, new_spreadsheet)
     end
 
     after do
       api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_spreadsheet}.xlsx"))
     end
 
-    it 'Created from Actions menu New Spreadsheet exist in list of My Documents' do
+    it '[My Documents] Created from Actions menu New Spreadsheet exist in list' do
       expect(api_admin.documents).to be_document_exist("#{new_spreadsheet}.xlsx")
     end
 
-    it 'Created from Actions menu New Spreadsheet opens correctly in My Documents' do
+    it '[My Documents] Created from Actions menu New Spreadsheet opens correctly' do
       skip('Console errors in the document page')
       expect(@documents_page.check_opened_file_name).to eq("#{new_spreadsheet}.xlsx")
     end
@@ -64,19 +62,18 @@ describe 'My Documents Actions menu' do
 
   describe 'Presentation' do
     before do
-      @documents_page.actions_documents(:new_presentation)
-      @documents_page.add_name_to_file(new_presentation)
+      @documents_page.create_file_from_action(:new_presentation, new_presentation)
     end
 
     after do
       api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_presentation}.pptx"))
     end
 
-    it 'Created from Actions menu New Presentation exist in list of My Documents' do
+    it '[My Documents] Created from Actions menu New Presentation exist in list' do
       expect(api_admin.documents).to be_document_exist("#{new_presentation}.pptx")
     end
 
-    it 'Created from Actions menu New Presentation opens correctly in My Documents' do
+    it '[My Documents] Created from Actions menu New Presentation opens correctly' do
       skip('Console errors in the document page')
       expect(@documents_page.check_opened_file_name).to eq("#{new_presentation}.pptx")
     end
@@ -87,10 +84,32 @@ describe 'My Documents Actions menu' do
       api_admin.documents.delete_group(folders: api_admin.documents.id_by_folder_title(new_folder))
     end
 
-    it 'Create New Folder from Actions menu' do
-      @documents_page.actions_documents(:new_folder)
-      @documents_page.add_name_to_file(new_folder)
+    it '[My Documents] Create New Folder from Actions menu' do
+      @documents_page.create_file_from_action(:new_folder, new_folder)
       expect(api_admin.documents).to be_folder_exist(new_folder)
+    end
+  end
+
+  describe 'File Upload' do
+    before do
+      @document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
+      TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(@document_name)
+    end
+
+    after do
+      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title(@document_name))
+      TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(@document_name)
+    end
+
+    it '[My Documents] Upload file from Actions menu works' do
+      file_path = TestingAppServer::SampleFilesLocation.path_to_tmp_file + @document_name
+      @documents_page.actions_upload_file(file_path)
+      expect(api_admin.documents).to be_document_exist(@document_name)
+    end
+
+    it '[My Documents] Upload file and folder buttons from Actions menu are visible' do
+      @documents_page.open_documents_actions
+      expect(@common).to be_upload_file_and_folder_button_present
     end
   end
 end

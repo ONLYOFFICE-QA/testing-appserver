@@ -38,9 +38,20 @@ module TestingAppServer
       Teamlab.files.get_my_docs(filterType: filter_type).body['response']['files']
     end
 
+    # @param filter_type [String] None, DocumentsOnly, PresentationsOnly, SpreadsheetsOnly, ImagesOnly, ArchiveOnly, MediaOnly
+    # @return [Array] List of all my documents specified in request
+    def all_common_documents_files(filter_type)
+      Teamlab.files.get_common_docs(filterType: filter_type).body['response']['files']
+    end
+
     # @return [Array] List of all folders from My documents specified in request
     def all_my_documents_folders
       Teamlab.files.get_my_docs(filterType: 'FoldersOnly').body['response']['folders']
+    end
+
+    # @return [Array] List of all folders from My documents specified in request
+    def all_common_documents_folders
+      Teamlab.files.get_common_docs(filterType: 'FoldersOnly').body['response']['folders']
     end
 
     # @param files [Array] Files IDs for deleting

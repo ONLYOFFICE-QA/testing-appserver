@@ -17,13 +17,32 @@ module TestingAppServer
       current_title_exist?(document_title, files_list)
     end
 
+    def common_document_exist?(document_title)
+      files_list = all_common_documents_files(filter_type(document_title))
+      current_title_exist?(document_title, files_list)
+    end
+
     def folder_exist?(folder_title)
       folder_list = all_my_documents_folders
       current_title_exist?(folder_title, folder_list)
     end
 
+    def common_folder_exist?(folder_title)
+      folder_list = all_common_documents_folders
+      current_title_exist?(folder_title, folder_list)
+    end
+
     def id_by_file_title(document_title)
       files_list = all_my_documents_files(filter_type(document_title))
+      document_id_from_file_list(document_title, files_list)
+    end
+
+    def common_id_by_title(document_title)
+      files_list = all_common_documents_files(filter_type(document_title))
+      document_id_from_file_list(document_title, files_list)
+    end
+
+    def document_id_from_file_list(document_title, files_list)
       files_list.each { |file| return file['id'] if document_title == file['title'] }
     end
 
@@ -33,7 +52,12 @@ module TestingAppServer
 
     def id_by_folder_title(folder_name)
       folder_list = all_my_documents_folders
-      folder_list.each { |folder| return folder['id'] if folder_name == folder['title'] }
+      document_id_from_file_list(folder_name, folder_list)
+    end
+
+    def common_id_by_folder_title(folder_name)
+      folder_list = all_common_documents_folders
+      document_id_from_file_list(folder_name, folder_list)
     end
 
     def delete_folders_by_title(folders_title_list)
