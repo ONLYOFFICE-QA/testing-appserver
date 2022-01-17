@@ -51,7 +51,7 @@ GEM
     onlyoffice_s3_wrapper (0.6.0)
       aws-sdk-s3 (~> 1)
       onlyoffice_file_helper (~> 0)
-    onlyoffice_tcm_helper (0.2.0)
+    onlyoffice_tcm_helper (0.3.2)
       onlyoffice_file_helper (~> 0)
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
