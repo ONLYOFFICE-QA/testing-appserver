@@ -20,7 +20,7 @@ new_folder = "New_Folder_#{SecureRandom.hex(5)}"
 describe 'Documents Common' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @common = main_page.side_bar(:documents).documents_navigation(:common)
+    @common = main_page.top_toolbar(:documents).documents_navigation(:common)
   end
 
   after do |example|
@@ -38,7 +38,7 @@ describe 'Documents Common' do
         @common.create_file_from_action(:new_document, new_document)
         @test.webdriver.quit
         user_main_page, @test = TestingAppServer::AppServerHelper.new.init_instance(user)
-        user_main_page.side_bar(:documents).documents_navigation(:common)
+        user_main_page.top_toolbar(:documents).documents_navigation(:common)
         expect(api_admin.documents).to be_common_document_exist("#{new_document}.docx")
       end
     end
@@ -52,7 +52,7 @@ describe 'Documents Common' do
         @common.create_file_from_action(:new_spreadsheet, new_spreadsheet)
         @test.webdriver.quit
         user_main_page, @test = TestingAppServer::AppServerHelper.new.init_instance(user)
-        user_main_page.side_bar(:documents).documents_navigation(:common)
+        user_main_page.top_toolbar(:documents).documents_navigation(:common)
         expect(api_admin.documents).to be_common_document_exist("#{new_spreadsheet}.xlsx")
       end
     end
@@ -66,7 +66,7 @@ describe 'Documents Common' do
         @common.create_file_from_action(:new_presentation, new_presentation)
         @test.webdriver.quit
         user_main_page, @test = TestingAppServer::AppServerHelper.new.init_instance(user)
-        user_main_page.side_bar(:documents).documents_navigation(:common)
+        user_main_page.top_toolbar(:documents).documents_navigation(:common)
         expect(api_admin.documents).to be_common_document_exist("#{new_presentation}.pptx")
       end
     end
@@ -80,7 +80,7 @@ describe 'Documents Common' do
         @common.create_file_from_action(:new_folder, new_folder)
         @test.webdriver.quit
         user_main_page, @test = TestingAppServer::AppServerHelper.new.init_instance(user)
-        user_main_page.side_bar(:documents).documents_navigation(:common)
+        user_main_page.top_toolbar(:documents).documents_navigation(:common)
         expect(api_admin.documents).to be_common_folder_exist(new_folder)
       end
     end

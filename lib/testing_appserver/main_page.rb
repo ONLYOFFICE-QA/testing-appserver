@@ -8,18 +8,18 @@ require_relative 'top_toolbar/top_toolbar'
 
 module TestingAppServer
   # AppServer Main Page
-  # https://user-images.githubusercontent.com/40513035/139641190-90056c14-8dac-4db7-a5f6-9834c3cd1e56.png
+  # https://user-images.githubusercontent.com/40513035/150920766-4fdd517f-5424-421e-a05a-a4480a4c82b5.png
   class MainPage
     include TopToolbar
     include PageObject
 
     main_page_module = "//div[@class='home-modules']"
-    link(:main_page_documents, xpath: "#{main_page_module}//a[contains(@href, 'files')]")
-    link(:main_page_projects, xpath: "#{main_page_module}//a[contains(@href, 'projects')]")
-    link(:main_page_calendar, xpath: "#{main_page_module}//a[contains(@href, 'calendar')]")
-    link(:main_page_mail, xpath: "#{main_page_module}//a[contains(@href, 'mail')]")
-    link(:main_page_crm, xpath: "#{main_page_module}//a[contains(@href, 'crm')]")
-    link(:main_page_people, xpath: "#{main_page_module}//a[contains(@href, 'people')]")
+    div(:main_page_documents, xpath: "#{main_page_module}//div[contains(@data-link, 'files')]")
+    div(:main_page_projects, xpath: "#{main_page_module}//div[contains(@data-link, 'Projects')]")
+    div(:main_page_calendar, xpath: "#{main_page_module}//div[contains(@data-link, 'calendar')]")
+    div(:main_page_mail, xpath: "#{main_page_module}//div[contains(@data-link, 'mail')]")
+    div(:main_page_crm, xpath: "#{main_page_module}//div[contains(@data-link, 'CRM')]")
+    div(:main_page_people, xpath: "#{main_page_module}//div[contains(@data-link, 'people')]")
 
     def initialize(instance)
       super(instance.webdriver.driver)
@@ -38,10 +38,6 @@ module TestingAppServer
         MyDocuments.new(@instance)
       when :people
         PeopleModule.new(@instance)
-      when :settings
-        SettingsModule.new(@instance)
-      else
-        ModulePlaceHolder.new(@instance, selected_module)
       end
     end
 

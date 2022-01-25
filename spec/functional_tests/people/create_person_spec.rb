@@ -12,7 +12,7 @@ user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
 describe 'Create person' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @people_page = main_page.side_bar(:people)
+    @people_page = main_page.top_toolbar(:people)
     @api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
   end
 
@@ -42,7 +42,7 @@ describe 'Create person' do
       it 'Delete user' do
         profile_page = @people_page.open_profile_by_full_name(user.full_name)
         profile_page.delete_person_from_profile
-        people_page = profile_page.side_bar(:people) # TODO: delete line after fixing bug: Return to user list after deleting
+        people_page = profile_page.top_toolbar(:people) # TODO: delete line after fixing bug: Return to user list after deleting
         expect(people_page).to be_user_not_exist(user.full_name)
       end
     end

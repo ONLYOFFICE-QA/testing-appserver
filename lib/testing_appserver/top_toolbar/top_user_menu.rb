@@ -11,6 +11,7 @@ module TestingAppServer
     div(:owner_icon, xpath: "//div[contains(@class, 'icon-profile-menu')]")
 
     div(:debug_info, xpath: "//div[@label = 'Debug Info']") # add_id
+    div(:settings, xpath: "//div[@label='Settings']") # add_id
 
     def top_user_menu(selected_item)
       unless debug_info_element.present?
@@ -22,6 +23,8 @@ module TestingAppServer
       case selected_item
       when :debug_info
         DebugInfo.new(@instance)
+      when :settings
+        SettingsModule.new(@instance)
       end
     end
 

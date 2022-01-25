@@ -9,10 +9,10 @@ module TestingAppServer
     link(:groups_link, xpath: "//span[@class='rc-tree-title']/a[contains(text(), 'Groups')]") # add_id
 
     # actions
-    div(:actions, xpath: "//div[@label='User']/../../div[1]") # add_id
-    div(:actions_user, xpath: "//div[@label='User']") # add_id
-    div(:actions_guest, xpath: "//div[@label='Guest']") # add_id
-    div(:actions_group, xpath: "//div[@label='Group']") # add_id
+    div(:actions, xpath: "(//div[contains(@class, 'main-button')])[1]")
+    span(:actions_user, xpath: "//span[text()='User']") # add_id
+    span(:actions_guest, xpath: "//span[text()='Guest']") # add_id
+    span(:actions_group, xpath: "//span[text()='Group']") # add_id
 
     def open_people_actions
       actions_element.click unless actions_user_element.present?

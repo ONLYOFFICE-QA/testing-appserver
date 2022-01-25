@@ -14,7 +14,7 @@ new_folder = "New_Folder_#{SecureRandom.hex(5)}"
 describe 'My Documents Actions menu' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @documents_page = main_page.side_bar(:documents)
+    @documents_page = main_page.top_toolbar(:documents)
   end
 
   after do |example|
@@ -109,7 +109,7 @@ describe 'My Documents Actions menu' do
 
     it '[My Documents] Upload file and folder buttons from Actions menu are visible' do
       @documents_page.open_documents_actions
-      expect(@common).to be_upload_file_and_folder_button_present
+      expect(@documents_page).to be_upload_file_and_folder_button_present
     end
   end
 end

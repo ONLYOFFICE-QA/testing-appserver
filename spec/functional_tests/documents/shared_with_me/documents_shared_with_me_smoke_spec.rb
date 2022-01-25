@@ -7,7 +7,7 @@ test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FIL
 describe 'Documents Shared with me' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    my_documents = main_page.side_bar(:documents)
+    my_documents = main_page.top_toolbar(:documents)
     @shared_with_me = my_documents.documents_navigation(:shared_with_me)
   end
 
