@@ -3,7 +3,6 @@
 require_relative 'modules/documents/my_documents'
 require_relative 'modules/people/people_module'
 require_relative 'modules/settings/settings_module'
-require_relative 'modules/module_place_holder'
 require_relative 'top_toolbar/top_toolbar'
 
 module TestingAppServer
