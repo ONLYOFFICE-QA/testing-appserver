@@ -4,7 +4,7 @@ module TestingAppServer
   # AppServer files helper
   class SampleFilesLocation
     def self.path_to_file
-      "#{ENV['HOME']}/RubymineProjects/testing-appserver/lib/testing_appserver/data/helper_files/"
+      "#{Dir.pwd}/lib/testing_appserver/data/helper_files/"
     end
 
     def self.path_to_tmp_file
