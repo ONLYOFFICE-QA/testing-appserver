@@ -7,7 +7,7 @@ test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FIL
 describe 'Documents Recent' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    my_documents = main_page.side_bar(:documents)
+    my_documents = main_page.top_toolbar(:documents)
     @recent = my_documents.documents_navigation(:recent)
   end
 

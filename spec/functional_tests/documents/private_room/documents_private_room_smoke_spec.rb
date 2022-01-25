@@ -7,7 +7,7 @@ test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FIL
 describe 'Documents Private Room' do
   before do
     main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    my_documents = main_page.side_bar(:documents)
+    my_documents = main_page.top_toolbar(:documents)
     @private_room = my_documents.documents_navigation(:private_room)
   end
 
