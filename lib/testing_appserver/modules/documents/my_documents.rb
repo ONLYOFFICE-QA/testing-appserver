@@ -29,12 +29,5 @@ module TestingAppServer
     def wait_to_load
       @instance.webdriver.wait_until { header_my_documents_element.present? }
     end
-
-    def files_present?(files)
-      files.each do |file|
-        return false unless file_present?(file)
-      end
-      true
-    end
   end
 end
