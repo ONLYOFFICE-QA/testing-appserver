@@ -6,14 +6,3 @@ require_relative '../shared_example/documents_filter/documents_folder_filter'
 require_relative '../shared_example/documents_filter/documents_img_media_archives_filter'
 require 'onlyoffice_testrail_wrapper'
 require 'rspec'
-require 'rspec/retry'
-
-RSpec.configure do |config|
-  is_debug = OnlyofficeFileHelper::RubyHelper.debug?
-  config.default_retry_count = if is_debug
-                                 1
-                               else
-                                 2
-                               end
-  config.verbose_retry = true
-end
