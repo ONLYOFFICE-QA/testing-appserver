@@ -20,6 +20,8 @@ module TestingAppServer
     def create_file_from_action(document_type, title)
       actions_documents(document_type)
       add_name_to_file(title)
+      @instance.webdriver.switch_to_main_tab
+      @instance.webdriver.wait_until { file_present?(title) }
     end
   end
 end
