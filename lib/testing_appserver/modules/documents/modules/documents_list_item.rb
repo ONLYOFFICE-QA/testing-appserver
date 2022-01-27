@@ -12,7 +12,7 @@ module TestingAppServer
 
     def file_present?(file_name)
       item_title_elements.each do |current_element|
-        return true if @instance.webdriver.get_attribute(current_element, 'title') == file_name
+        return true if @instance.webdriver.get_attribute(current_element, 'title').include?(file_name)
       end
       false
     end
