@@ -23,5 +23,27 @@ module TestingAppServer
       end
       true
     end
+
+    def file_checkbox_xpath(file_name)
+      "//a[@title='#{file_name}']/../..//label[contains(@class, 'table-container_row-checkbox')]"
+    end
+
+    def file_checked?(file_name)
+      @instance.webdriver.element_visible?(file_checkbox_xpath(file_name))
+    end
+
+    def files_checked?(files)
+      files.each do |file|
+        return false unless file_checked?(file)
+      end
+      true
+    end
+
+    def all_files_not_checked?(files)
+      files.each do |file|
+        return false if file_checked?(file)
+      end
+      true
+    end
   end
 end

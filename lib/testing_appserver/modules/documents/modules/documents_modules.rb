@@ -4,6 +4,7 @@ require_relative 'document_creation_field'
 require_relative 'documents_filter'
 require_relative 'documents_helper'
 require_relative 'documents_actions'
+require_relative 'documents_list_actions'
 require_relative 'documents_list_item'
 require_relative 'documents_navigation'
 
@@ -14,6 +15,7 @@ module TestingAppServer
     include DocumentsFilter
     include DocumentsHelper
     include DocumentsActions
+    include DocumentsListActions
     include DocumentsListItem
     include DocumentsNavigation
 
