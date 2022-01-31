@@ -44,37 +44,37 @@ describe 'Documents filter My documents' do
     expect(@my_documents_page).to be_files_checked(all_files_and_folders)
   end
 
-  it '[My Documents] `Select all Documents` checkbox works' do
+  it '[My Documents] `Select all Documents` works' do
     @my_documents_page.select_files_filter(:documents)
     expect(@my_documents_page).to be_file_checked(document_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [document_name])
   end
 
-  it '[My Documents] `Select all Media` checkbox works' do
+  it '[My Documents] `Select all Media` works' do
     @my_documents_page.select_files_filter(:media)
     expect(@my_documents_page).to be_file_checked(audio_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [audio_name])
   end
 
-  it '[My Documents] `Select all Presentations` checkbox works' do
+  it '[My Documents] `Select all Presentations` works' do
     @my_documents_page.select_files_filter(:presentations)
     expect(@my_documents_page).to be_file_checked(presentation_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [presentation_name])
   end
 
-  it '[My Documents] `Select all Spreadsheets` checkbox works' do
+  it '[My Documents] `Select all Spreadsheets` works' do
     @my_documents_page.select_files_filter(:spreadsheets)
     expect(@my_documents_page).to be_file_checked(spreadsheet_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [spreadsheet_name])
   end
 
-  it '[My Documents] `Select all Files` checkbox works' do
+  it '[My Documents] `Select all Files` works' do
     @my_documents_page.select_files_filter(:all_files)
     expect(@my_documents_page).to be_files_checked(all_files)
     expect(@my_documents_page).to be_all_files_not_checked([folder_name])
   end
 
-  it '[My Documents] `Select all All` checkbox works' do
+  it '[My Documents] `Select all All` works' do
     @my_documents_page.select_files_filter(:all)
     expect(@my_documents_page).to be_files_checked(all_files_and_folders)
   end
