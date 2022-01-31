@@ -32,5 +32,12 @@ module TestingAppServer
       select_all_filter_element.click
       @instance.webdriver.wait_until { select_documents_element.present? }
     end
+
+    def select_all_filters_for_recent_present?
+      select_all_files
+      open_select_all_filter
+      select_all_element.present? && select_all_files_element.present? && select_spreadsheets_element.present? &&
+        select_documents_element.present? && select_presentations_element.present?
+    end
   end
 end
