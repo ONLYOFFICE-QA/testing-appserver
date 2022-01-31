@@ -46,7 +46,7 @@ describe 'Documents Recent' do
     expect(@recent).to be_file_present(new_presentation)
   end
 
-  it '[Recent] `Select all` filters are present' do
+  it '[Recent] `Select all` Filters are present' do
     expect(@recent).to be_select_all_filters_for_recent_present
   end
 
