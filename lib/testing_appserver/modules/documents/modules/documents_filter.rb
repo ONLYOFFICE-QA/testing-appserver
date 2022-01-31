@@ -33,14 +33,18 @@ module TestingAppServer
     link(:reset_filter, xpath: "//a[text()='Reset filter']") # add_id
 
     def set_filter(filter, params = {})
-      add_filter_element.click
-      @instance.webdriver.wait_until do
-        all_files_filter_element.present?
-      end
+      open_filter_menu
       instance_eval("#{filter}_filter_element.click", __FILE__, __LINE__) # choose action from documents filter menu
       choose_group_filter(params[:group_name]) if params[:group_name]
       choose_user_filter(params[:user_name]) if params[:user_name]
       sleep 2 # wait to load search results
+    end
+
+    def open_filter_menu
+      add_filter_element.click
+      @instance.webdriver.wait_until do
+        documents_filter_element.present?
+      end
     end
 
     def selected_group_user_xpath(group_name)
@@ -73,6 +77,12 @@ module TestingAppServer
     def fill_filter(value)
       self.query_field = value
       sleep 2 # wait to load search results
+    end
+
+    def all_search_filters_for_recent_present?
+      open_filter_menu
+      documents_filter_element.present? && presentations_filter_element.present? &&
+        spreadsheets_filter_element.present? && users_filter_element.present? && groups_filter_element.present?
     end
   end
 end
