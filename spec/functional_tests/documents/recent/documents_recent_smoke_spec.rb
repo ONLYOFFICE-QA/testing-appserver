@@ -12,7 +12,7 @@ new_spreadsheet = "New_Spreadsheet_#{SecureRandom.hex(5)}"
 new_presentation = "New_Presentation_#{SecureRandom.hex(5)}"
 all_files = ["#{new_document}.docx", "#{new_spreadsheet}.xlsx", "#{new_presentation}.pptx"]
 
-# create resent files
+# create recent files
 main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
 my_documents = main_page.top_toolbar(:documents)
 my_documents.create_file_from_action(:new_document, new_document)
