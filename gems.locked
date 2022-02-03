@@ -56,7 +56,7 @@ GEM
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
       onlyoffice_logger_helper (~> 1)
-    onlyoffice_webdriver_wrapper (1.1.0)
+    onlyoffice_webdriver_wrapper (1.2.0)
       headless (~> 2)
       onlyoffice_file_helper (~> 0)
       onlyoffice_logger_helper (~> 1)
@@ -135,7 +135,7 @@ DEPENDENCIES
   onlyoffice_documentserver_testing_framework
   onlyoffice_tcm_helper
   onlyoffice_testrail_wrapper
-  onlyoffice_webdriver_wrapper (~> 1.1)
+  onlyoffice_webdriver_wrapper (~> 1.2)
   overcommit
   page-object
   palladium
