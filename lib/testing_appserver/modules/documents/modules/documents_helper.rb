@@ -74,13 +74,13 @@ module TestingAppServer
       folders_title_list.each { |folder_title| delete_group(folders: id_by_folder_title(folder_title, folder_type)) }
     end
 
-    def create_folder_in_my_documents(name)
-      id = my_documents_folder['current']['id']
-      Teamlab.files.new_folder(id, name).body['response']
-    end
-
-    def create_folder_in_common_documents(name)
-      id = common_documents_folder['current']['id']
+    def create_folder_by_folder_type(name, folder_type = :my_documents)
+      case folder_type
+      when :my_documents
+        id = my_documents_folder['current']['id']
+      when :common
+        id = common_documents_folder['current']['id']
+      end
       Teamlab.files.new_folder(id, name).body['response']
     end
 
@@ -95,13 +95,8 @@ module TestingAppServer
       nil
     end
 
-    def upload_to_folder(folder_name, file_path)
-      id_folder = get_id_provider_folder_by_name(folder_name, :my_documents)
-      upload_file_to_folder(id_folder, file_path)
-    end
-
-    def upload_to_folder_common(folder_name, file_path)
-      id_folder = get_id_provider_folder_by_name(folder_name, :common)
+    def upload_to_folder(folder_name, file_path, folder_type = :my_documents)
+      id_folder = get_id_provider_folder_by_name(folder_name, folder_type)
       upload_file_to_folder(id_folder, file_path)
     end
 
