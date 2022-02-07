@@ -3,17 +3,17 @@ GEM
   specs:
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.551.0)
-    aws-sdk-core (3.125.5)
+    aws-partitions (1.552.0)
+    aws-sdk-core (3.126.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.53.0)
-      aws-sdk-core (~> 3, >= 3.125.0)
+    aws-sdk-kms (1.54.0)
+      aws-sdk-core (~> 3, >= 3.126.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.111.3)
-      aws-sdk-core (~> 3, >= 3.125.0)
+    aws-sdk-s3 (1.112.0)
+      aws-sdk-core (~> 3, >= 3.126.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.4.0)
@@ -38,10 +38,10 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     multi_xml (0.6.0)
-    onlyoffice_api (0.12.0)
+    onlyoffice_api (1.0.0)
       httparty (~> 0.16)
     onlyoffice_bugzilla_helper (0.6.1)
-    onlyoffice_documentserver_testing_framework (1.0.0)
+    onlyoffice_documentserver_testing_framework (2.1.0)
       onlyoffice_logger_helper (~> 1)
       onlyoffice_webdriver_wrapper (~> 1)
     onlyoffice_file_helper (0.5.0)
@@ -56,7 +56,7 @@ GEM
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
       onlyoffice_logger_helper (~> 1)
-    onlyoffice_webdriver_wrapper (1.1.0)
+    onlyoffice_webdriver_wrapper (1.2.0)
       headless (~> 2)
       onlyoffice_file_helper (~> 0)
       onlyoffice_logger_helper (~> 1)
@@ -95,7 +95,7 @@ GEM
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
     rspec_passed_time_formatter (0.2.0)
-    rubocop (1.25.0)
+    rubocop (1.25.1)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -135,7 +135,7 @@ DEPENDENCIES
   onlyoffice_documentserver_testing_framework
   onlyoffice_tcm_helper
   onlyoffice_testrail_wrapper
-  onlyoffice_webdriver_wrapper (~> 1.1)
+  onlyoffice_webdriver_wrapper (~> 1.2)
   overcommit
   page-object
   palladium

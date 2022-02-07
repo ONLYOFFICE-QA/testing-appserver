@@ -79,6 +79,13 @@ module TestingAppServer
       sleep 2 # wait to load search results
     end
 
+    def all_search_filters_present?
+      open_filter_menu
+      folders_filter_element.present? && documents_filter_element.present? && presentations_filter_element.present? &&
+        spreadsheets_filter_element.present? && images_filter_element.present? && media_filter_element.present? &&
+        archives_filter_element.present? && all_files_filter_element.present? && no_subfolders_filter_element.present?
+    end
+
     def all_search_filters_for_recent_present?
       open_filter_menu
       documents_filter_element.present? && presentations_filter_element.present? &&
