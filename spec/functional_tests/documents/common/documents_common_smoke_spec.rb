@@ -32,7 +32,6 @@ api_admin.documents.create_folder_in_common_documents(folder_name)
 api_admin.documents.upload_to_folder_common(folder_name,
                                             TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
 
-
 describe 'Documents Shared with me' do
   after :all do
     api_admin.documents.delete_files_by_title(all_files, :common)
