@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'documents_sharing_settings'
+
 module TestingAppServer
   # AppServer field in list of documents for creating and editing documents, spreadsheets, presentations and folders
   # https://user-images.githubusercontent.com/40513035/143570421-1286f0db-80ff-4f24-9dc5-a7520d01326f.png
   module DocumentsListItem
     include PageObject
+    include DocumentsSharingSettings
 
     elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")
 
@@ -44,6 +47,12 @@ module TestingAppServer
         return false if file_checked?(file)
       end
       true
+    end
+
+    def share_file(file_name, user_name)
+      share_button_xpath = "//a[@title='#{file_name}']/../..//span[@title='Share']" # add_id
+      @instance.webdriver.driver.find_element(:xpath, share_button_xpath).click
+      add_share_user(user_name)
     end
   end
 end
