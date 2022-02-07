@@ -85,6 +85,12 @@ describe 'Documents Common' do
       end
     end
 
+    it '[Common] Actions button for user is blocked' do
+      user_main_page, @test = TestingAppServer::AppServerHelper.new.init_instance(user)
+      common = user_main_page.top_toolbar(:documents).documents_navigation(:common)
+      expect(common).not_to be_actions_enabled
+    end
+
     it '[Common] Upload file and folder buttons visible' do
       @common.open_documents_actions
       expect(@common).to be_upload_file_and_folder_button_present

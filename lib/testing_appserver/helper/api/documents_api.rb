@@ -13,6 +13,12 @@ module TestingAppServer
       Teamlab.files.upload_to_my_docs(file).body['response']
     end
 
+    # @param file [String] File name
+    # @return [Hash] Inserted to "Common" section file info
+    def upload_to_common_docs(file)
+      Teamlab.files.upload_to_common_docs(file).body['response']
+    end
+
     # @param id [String] Parent folder ID
     # @param name [String] Folder title
     # @return [Hash] New folder contents
@@ -30,6 +36,11 @@ module TestingAppServer
     # @return [Hash] My documents section contents
     def my_documents_folder
       Teamlab.files.get_my_docs.body['response']
+    end
+
+    # @return [Hash] Common documents section contents
+    def common_documents_folder
+      Teamlab.files.get_common_docs.body['response']
     end
 
     # @param filter_type [String] None, DocumentsOnly, PresentationsOnly, SpreadsheetsOnly, ImagesOnly, ArchiveOnly, MediaOnly
