@@ -32,8 +32,13 @@ module TestingAppServer
       current_title_exist?(folder_title, folder_list)
     end
 
-    def id_by_file_title(document_title)
-      files_list = all_my_documents_files(filter_type(document_title))
+    def id_by_file_title(document_title, folder_type = :my_documents)
+      case folder_type
+      when :my_documents
+        files_list = all_my_documents_files(filter_type(document_title))
+      when :common
+        files_list = all_common_documents_files(filter_type(document_title))
+      end
       document_id_from_file_list(document_title, files_list)
     end
 
@@ -46,12 +51,17 @@ module TestingAppServer
       files_list.each { |file| return file['id'] if document_title == file['title'] }
     end
 
-    def delete_files_by_title(documents_title_list)
-      documents_title_list.each { |document_title| delete_group(files: id_by_file_title(document_title)) }
+    def delete_files_by_title(documents_title_list, folder_type = :my_documents)
+      documents_title_list.each { |document_title| delete_group(files: id_by_file_title(document_title, folder_type)) }
     end
 
-    def id_by_folder_title(folder_name)
-      folder_list = all_my_documents_folders
+    def id_by_folder_title(folder_name, folder_type = :my_documents)
+      case folder_type
+      when :my_documents
+        folder_list = all_my_documents_folders
+      when :common
+        folder_list = all_common_documents_folders
+      end
       document_id_from_file_list(folder_name, folder_list)
     end
 
@@ -60,8 +70,8 @@ module TestingAppServer
       document_id_from_file_list(folder_name, folder_list)
     end
 
-    def delete_folders_by_title(folders_title_list)
-      folders_title_list.each { |folder_title| delete_group(folders: id_by_folder_title(folder_title)) }
+    def delete_folders_by_title(folders_title_list, folder_type = :my_documents)
+      folders_title_list.each { |folder_title| delete_group(folders: id_by_folder_title(folder_title, folder_type)) }
     end
 
     def create_folder_in_my_documents(name)
@@ -69,13 +79,29 @@ module TestingAppServer
       Teamlab.files.new_folder(id, name).body['response']
     end
 
-    def get_id_provider_folder_by_name(folder_name)
-      my_documents_folder['folders'].each { |folder| return folder['id'] if folder['title'].to_s == folder_name }
+    def create_folder_in_common_documents(name)
+      id = common_documents_folder['current']['id']
+      Teamlab.files.new_folder(id, name).body['response']
+    end
+
+    def get_id_provider_folder_by_name(folder_name, folder_type)
+      case folder_type
+      when :my_documents
+        all_folders = my_documents_folder['folders']
+      when :common
+        all_folders = common_documents_folder['folders']
+      end
+      all_folders.each { |folder| return folder['id'] if folder['title'].to_s == folder_name }
       nil
     end
 
     def upload_to_folder(folder_name, file_path)
-      id_folder = get_id_provider_folder_by_name(folder_name)
+      id_folder = get_id_provider_folder_by_name(folder_name, :my_documents)
+      upload_file_to_folder(id_folder, file_path)
+    end
+
+    def upload_to_folder_common(folder_name, file_path)
+      id_folder = get_id_provider_folder_by_name(folder_name, :common)
       upload_file_to_folder(id_folder, file_path)
     end
 
