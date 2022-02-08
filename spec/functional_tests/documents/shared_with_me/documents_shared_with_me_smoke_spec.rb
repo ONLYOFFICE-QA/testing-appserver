@@ -28,7 +28,7 @@ all_files.each do |file|
   api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
 end
 folder_name = Faker::Hipster.word
-api_admin.documents.create_folder_in_my_documents(folder_name)
+api_admin.documents.create_folder_by_folder_type(folder_name)
 api_admin.documents.upload_to_folder(folder_name,
                                      TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
 
