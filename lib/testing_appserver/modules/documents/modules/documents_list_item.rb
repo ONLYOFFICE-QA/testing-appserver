@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'documents_list_item_settings'
 require_relative 'documents_sharing_settings'
 
 module TestingAppServer
@@ -7,6 +8,7 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/143570421-1286f0db-80ff-4f24-9dc5-a7520d01326f.png
   module DocumentsListItem
     include PageObject
+    include DocumentsListItemSettings
     include DocumentsSharingSettings
 
     elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")

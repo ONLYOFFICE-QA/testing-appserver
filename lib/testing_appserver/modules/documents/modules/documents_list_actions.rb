@@ -25,31 +25,40 @@ module TestingAppServer
     end
 
     def select_files_filter(type)
-      select_all_files
       open_select_all_filter
       instance_eval("select_#{type}_element.click", __FILE__, __LINE__) # choose filter for Select All checkbox
       @instance.webdriver.wait_until { !select_documents_element.present? }
     end
 
     def open_select_all_filter
+      select_all_files
       select_all_filter_element.click
       @instance.webdriver.wait_until { select_documents_element.present? }
     end
 
     def all_select_all_filters_present?
-      select_all_files
       open_select_all_filter
-      select_all_element.present? && select_folders_element.present? && select_images_element.present? &&
-        select_archives_element.present? && select_documents_element.present? && select_media_element.present? &&
-        select_presentations_element.present? && select_spreadsheets_element.present? &&
-        select_all_files_element.present?
+      select_folders_element.present? && select_all_documents_filters_present? &&
+        select_all_media_and_archives_filters_present?
     end
 
     def select_all_filters_for_recent_present?
-      select_all_files
       open_select_all_filter
+      select_all_documents_filters_present?
+    end
+
+    def select_all_filters_for_favorites_present?
+      open_select_all_filter
+      select_all_documents_filters_present? && select_all_media_and_archives_filters_present?
+    end
+
+    def select_all_documents_filters_present?
       select_all_element.present? && select_all_files_element.present? && select_spreadsheets_element.present? &&
         select_documents_element.present? && select_presentations_element.present?
+    end
+
+    def select_all_media_and_archives_filters_present?
+      select_images_element.present? && select_archives_element.present? && select_media_element.present?
     end
   end
 end
