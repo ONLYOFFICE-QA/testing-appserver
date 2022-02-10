@@ -13,7 +13,9 @@ document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
 spreadsheet_name = "My_Spreadsheet_#{SecureRandom.hex(7)}.xlsx"
 presentation_name = "My_Presentation_#{SecureRandom.hex(7)}.pptx"
 audio_name = "My_Audio_#{SecureRandom.hex(7)}.mp3"
-all_files = [document_name, spreadsheet_name, presentation_name, audio_name]
+archive_name = "My_Archive_#{SecureRandom.hex(7)}.zip"
+picture_name = "My_Image_#{SecureRandom.hex(7)}.jpg"
+all_files = [document_name, spreadsheet_name, presentation_name, audio_name, archive_name, picture_name]
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
   api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
@@ -72,6 +74,24 @@ describe 'Documents filter My documents' do
     @my_documents_page.select_files_filter(:all_files)
     expect(@my_documents_page).to be_files_checked(all_files)
     expect(@my_documents_page).to be_all_files_not_checked([folder_name])
+  end
+
+  it '[My Documents] `Select all Images` works' do
+    @my_documents_page.select_files_filter(:images)
+    expect(@my_documents_page).to be_file_checked(picture_name)
+    expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [picture_name])
+  end
+
+  it '[My Documents] `Select all Archives` works' do
+    @my_documents_page.select_files_filter(:archives)
+    expect(@my_documents_page).to be_file_checked(archive_name)
+    expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [archive_name])
+  end
+
+  it '[My Documents] `Select all Folders` works' do
+    @my_documents_page.select_files_filter(:folders)
+    expect(@my_documents_page).to be_file_checked(folder_name)
+    expect(@my_documents_page).to be_all_files_not_checked(all_files)
   end
 
   it '[My Documents] `Select all All` works' do
