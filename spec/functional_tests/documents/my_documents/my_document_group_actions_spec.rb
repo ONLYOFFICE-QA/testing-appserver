@@ -39,17 +39,17 @@ describe 'Document file actions' do
     @test.webdriver.quit
   end
 
-    it '[My Documents] `Download` group button works' do
-      @my_documents_page.check_file_checkbox(document_name)
-      @my_documents_page.group_menu_download_file
-      expect(@my_documents_page).to be_file_downloaded(document_name)
-    end
+  it '[My Documents] `Download` group button works' do
+    @my_documents_page.check_file_checkbox(document_name)
+    @my_documents_page.group_menu_download_file
+    expect(@my_documents_page).to be_file_downloaded(document_name)
+  end
 
-    it '[My Documents] `Share` group button opens Share window' do
-      @my_documents_page.check_file_checkbox(document_name)
-      @my_documents_page.group_menu_share_file
-      expect(@my_documents_page.plus_share_element).to be_present
-    end
+  it '[My Documents] `Share` group button opens Share window' do
+    @my_documents_page.check_file_checkbox(document_name)
+    @my_documents_page.group_menu_share_file
+    expect(@my_documents_page.plus_share_element).to be_present
+  end
 
   it '[My Documents] `Move to` Common group button works' do
     @my_documents_page.check_file_checkbox(move_document)
