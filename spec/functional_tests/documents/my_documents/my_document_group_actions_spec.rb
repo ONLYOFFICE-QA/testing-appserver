@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
 
 # api initialization
 admin = TestingAppServer::UserData.new
@@ -34,23 +34,23 @@ describe 'Document file actions' do
     @my_documents_page = main_page.main_page(:documents)
   end
 
-  after do |_example|
-    # test_manager.add_result(example, @test)
+  after do |example|
+    test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
 
-  #   it '[My Documents] `Download` group button works' do
-  #     @my_documents_page.check_file_checkbox(document_name)
-  #     @my_documents_page.group_menu_download_file
-  #     expect(@my_documents_page).to be_file_downloaded(document_name)
-  #   end
-  #
-  #   it '[My Documents] `Share` group button opens Share window' do
-  #     @my_documents_page.check_file_checkbox(document_name)
-  #     @my_documents_page.group_menu_share_file
-  #     expect(@my_documents_page.plus_share_element).to be_present
-  #   end
-  #
+    it '[My Documents] `Download` group button works' do
+      @my_documents_page.check_file_checkbox(document_name)
+      @my_documents_page.group_menu_download_file
+      expect(@my_documents_page).to be_file_downloaded(document_name)
+    end
+
+    it '[My Documents] `Share` group button opens Share window' do
+      @my_documents_page.check_file_checkbox(document_name)
+      @my_documents_page.group_menu_share_file
+      expect(@my_documents_page.plus_share_element).to be_present
+    end
+
   it '[My Documents] `Move to` Common group button works' do
     @my_documents_page.check_file_checkbox(move_document)
     @my_documents_page.group_menu_move_to(:common)
