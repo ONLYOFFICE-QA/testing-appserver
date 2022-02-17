@@ -53,4 +53,11 @@ describe 'Documents Recent' do
   it '[Recent] Search field Filters are present' do
     expect(@recent).to be_all_search_filters_for_recent_present
   end
+
+  it '[Recent] All group filters fore Recent present: Share, Download, Download as, Copy' do
+    @recent.check_file_checkbox("#{new_document}.docx")
+    expect(@recent).to be_all_group_actions_for_resent_present
+    expect(@recent.group_menu_move_to_element).not_to be_present
+    expect(@recent.group_menu_delete_file_element).not_to be_present
+  end
 end

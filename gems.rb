@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 gem 'onlyoffice_api'
 gem 'onlyoffice_documentserver_testing_framework'
+gem 'onlyoffice_file_helper'
 gem 'onlyoffice_tcm_helper'
 gem 'onlyoffice_testrail_wrapper'
 gem 'onlyoffice_webdriver_wrapper', '~> 1.2'

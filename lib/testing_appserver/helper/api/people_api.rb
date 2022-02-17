@@ -55,14 +55,11 @@ module TestingAppServer
     # @param user_data [Object] TestingAppServer::UserData - data for user to create
     # @return [Hash] Created user info
     def add_user(user_data)
-      options = {
-        isVisitor: (user_data.type == :guest),
-        email: user_data.mail,
-        firstname: user_data.first_name,
-        lastname: user_data.last_name,
-        password: user_data.pwd
-      }
-      Teamlab.people.active(options).body['response']
+      Teamlab.people.add_user((user_data.type == :guest),
+                              user_data.mail,
+                              user_data.first_name,
+                              user_data.last_name,
+                              password: user_data.pwd).body['response']
     end
   end
 end

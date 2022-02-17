@@ -18,7 +18,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_my_documents, xpath: "//div[@title='My documents']") # add_id
+    element(:header_my_documents, xpath: "//h1[@title='My documents']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

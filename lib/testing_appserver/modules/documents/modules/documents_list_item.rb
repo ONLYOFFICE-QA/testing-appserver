@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'documents_list_item_settings'
-require_relative 'documents_sharing_settings'
+require_relative 'pop_up_windows/documents_sharing_settings'
 
 module TestingAppServer
   # AppServer field in list of documents for creating and editing documents, spreadsheets, presentations and folders
@@ -29,24 +29,34 @@ module TestingAppServer
       true
     end
 
+    def file_image_xpath(file_name)
+      "//a[@title='#{file_name}']/../..//div[contains(@class, 'table-container_row-checkbox-wrapper')]"
+    end
+
+    def check_file_checkbox(file_name)
+      @instance.webdriver.move_to_element_by_locator(file_image_xpath(file_name))
+      @instance.webdriver.wait_until { file_checkbox_present?(file_name) }
+      @instance.webdriver.driver.find_element(:xpath, file_checkbox_xpath(file_name)).click
+    end
+
     def file_checkbox_xpath(file_name)
       "//a[@title='#{file_name}']/../..//label[contains(@class, 'table-container_row-checkbox')]"
     end
 
-    def file_checked?(file_name)
+    def file_checkbox_present?(file_name)
       @instance.webdriver.element_visible?(file_checkbox_xpath(file_name))
     end
 
     def files_checked?(files)
       files.each do |file|
-        return false unless file_checked?(file)
+        return false unless file_checkbox_present?(file)
       end
       true
     end
 
     def all_files_not_checked?(files)
       files.each do |file|
-        return false if file_checked?(file)
+        return false if file_checkbox_present?(file)
       end
       true
     end

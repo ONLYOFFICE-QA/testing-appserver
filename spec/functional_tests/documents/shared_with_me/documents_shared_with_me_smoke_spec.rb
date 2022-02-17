@@ -73,4 +73,11 @@ describe 'Documents Shared with me' do
   it '[Shared with me] Search field Filters are present' do
     expect(@shared_with_me).to be_all_search_filters_present
   end
+
+  it '[Shared with me] All group filters fore Shared with me present: Download, Download as, Copy, Remove from list' do
+    @shared_with_me.check_file_checkbox(document_name)
+    expect(@shared_with_me).to be_all_group_actions_for_shared_with_me_present
+    expect(@shared_with_me.group_menu_move_to_element).not_to be_present
+    expect(@shared_with_me.group_menu_share_file_element).not_to be_present
+  end
 end

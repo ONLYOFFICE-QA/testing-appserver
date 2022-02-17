@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module TestingAppServer
-  # AppServer Documents list files actions
-  # https://user-images.githubusercontent.com/40513035/151462280-e1e09124-7d11-47b5-9061-76d584386d67.png
-  module DocumentsListActions
+  # AppServer Documents select all filter
+  # https://user-images.githubusercontent.com/40513035/154398918-e0232123-9b8b-499d-ac86-1eaab0be015a.png
+  module DocumentsSelectAllFilter
     include PageObject
 
     label(:select_all_checkbox, xpath: "//label[contains(@class, 'table-container_header-checkbox')]")

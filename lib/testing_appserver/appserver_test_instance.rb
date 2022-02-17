@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'onlyoffice_api'
 require 'onlyoffice_documentserver_testing_framework'
+require 'onlyoffice_file_helper'
 require 'onlyoffice_testrail_wrapper'
 require 'onlyoffice_webdriver_wrapper'
 require 'onlyoffice_tcm_helper'

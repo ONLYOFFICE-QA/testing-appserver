@@ -11,7 +11,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_common, xpath: "//div[@title='Common']") # add_id
+    element(:header_common, xpath: "//h1[@title='Common']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

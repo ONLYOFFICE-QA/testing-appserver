@@ -56,4 +56,21 @@ describe 'Documents Shared with me' do
   it '[Common] Search field Filters are present' do
     expect(@common).to be_all_search_filters_present
   end
+
+  describe 'Group actions' do
+    it '[Common] All group actions present for user: Download, Download as, Copy' do
+      @common.check_file_checkbox(document_name)
+      expect(@common).to be_download_copy_download_as_present
+      expect(@common.group_menu_share_file_element).not_to be_present
+      expect(@common.group_menu_move_to_element).not_to be_present
+      expect(@common.group_menu_delete_file_element).not_to be_present
+    end
+
+    it '[Common] All group actions present for admin' do
+      main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
+      @common = main_page.top_toolbar(:documents).documents_navigation(:common)
+      @common.check_file_checkbox(document_name)
+      expect(@common).to be_all_group_actions_present
+    end
+  end
 end

@@ -11,7 +11,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_favorites, xpath: "//div[@title='Favorites']") # add_id
+    element(:header_favorites, xpath: "//h1[@title='Favorites']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
