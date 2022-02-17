@@ -46,25 +46,25 @@ describe 'Documents filter My documents' do
 
   it '[My Documents] `Select all Documents` works' do
     @my_documents_page.select_files_filter(:documents)
-    expect(@my_documents_page).to be_file_checked(document_name)
+    expect(@my_documents_page).to be_file_checkbox_present(document_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [document_name])
   end
 
   it '[My Documents] `Select all Media` works' do
     @my_documents_page.select_files_filter(:media)
-    expect(@my_documents_page).to be_file_checked(audio_name)
+    expect(@my_documents_page).to be_file_checkbox_present(audio_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [audio_name])
   end
 
   it '[My Documents] `Select all Presentations` works' do
     @my_documents_page.select_files_filter(:presentations)
-    expect(@my_documents_page).to be_file_checked(presentation_name)
+    expect(@my_documents_page).to be_file_checkbox_present(presentation_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [presentation_name])
   end
 
   it '[My Documents] `Select all Spreadsheets` works' do
     @my_documents_page.select_files_filter(:spreadsheets)
-    expect(@my_documents_page).to be_file_checked(spreadsheet_name)
+    expect(@my_documents_page).to be_file_checkbox_present(spreadsheet_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [spreadsheet_name])
   end
 

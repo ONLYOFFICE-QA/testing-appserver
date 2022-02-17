@@ -11,7 +11,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_shared_with_me, xpath: "//div[@title='Shared with me']") # add_id
+    element(:header_shared_with_me, xpath: "//h1[@title='Shared with me']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

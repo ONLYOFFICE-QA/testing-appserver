@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
+require_relative '../../../helper/download_helper'
 require_relative 'document_creation_field'
 require_relative 'documents_filter'
 require_relative 'documents_helper'
 require_relative 'documents_actions'
-require_relative 'documents_list_actions'
+require_relative 'documents_group_actions'
 require_relative 'documents_list_item'
 require_relative 'documents_navigation'
+require_relative 'documents_select_all_filter'
 
 module TestingAppServer
   # All documents required
   module DocumentsModules
+    include AppServerDownloadHelper
     include DocumentsCreationField
     include DocumentsFilter
     include DocumentsHelper
     include DocumentsActions
-    include DocumentsListActions
+    include DocumentsGroupActions
     include DocumentsListItem
     include DocumentsNavigation
+    include DocumentsSelectAllFilter
 
     def create_file_from_action(document_type, title)
       actions_documents(document_type)

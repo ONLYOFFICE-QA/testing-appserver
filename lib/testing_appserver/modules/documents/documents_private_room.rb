@@ -11,7 +11,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_private_room, xpath: "//div[@title='Private Room']") # add_id
+    element(:header_private_room, xpath: "//h1[@title='Private Room']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 
+require_relative 'pop_up_windows/documents_copy'
+require_relative 'pop_up_windows/documents_move_to'
+require_relative 'pop_up_windows/documents_move_to_trash'
+require_relative 'pop_up_windows/documents_sharing_settings'
+
 module TestingAppServer
   # AppServer Documents List Item settings
   # https://user-images.githubusercontent.com/40513035/152883639-181ee5f8-093b-409b-bdcb-de3b611559c9.png
   module DocumentsListItemSettings
     include PageObject
+    include DocumentsCopy
+    include DocumentsMoveTo
+    include DocumentsMoveToTrash
+    include DocumentsSharingSettings
 
     span(:setting_favorite, xpath: "//span[text() = 'Mark as favorite']") # add_id
     span(:setting_delete, xpath: "//span[text() = 'Delete']") # add_id

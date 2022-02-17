@@ -11,7 +11,7 @@ module TestingAppServer
     include TopToolbar
     include PageObject
 
-    div(:header_recent, xpath: "//div[@title='Recent']") # add_id
+    element(:header_recent, xpath: "//h1[@title='Recent']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
