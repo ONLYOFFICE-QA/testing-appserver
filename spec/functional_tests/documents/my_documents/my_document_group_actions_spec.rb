@@ -60,11 +60,11 @@ describe 'Document file actions' do
   end
 
   it '[My Documents] `Copy` to Common group button works' do
-    @my_documents_page.check_file_checkbox(move_document)
+    @my_documents_page.check_file_checkbox(document_name)
     @my_documents_page.group_menu_copy_to(:common)
-    expect(@my_documents_page).to be_file_present(move_document)
+    expect(@my_documents_page).to be_file_present(document_name)
     common_documents = @my_documents_page.documents_navigation(:common)
-    expect(common_documents).to be_file_present(move_document)
+    expect(common_documents).to be_file_present(document_name)
   end
 
   it '[My Documents] `Delete` group button works' do
