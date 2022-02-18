@@ -78,19 +78,19 @@ describe 'Documents filter My documents' do
 
   it '[My Documents] `Select all Images` works' do
     @my_documents_page.select_files_filter(:images)
-    expect(@my_documents_page).to be_file_checked(picture_name)
+    expect(@my_documents_page).to be_file_checkbox_present(picture_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [picture_name])
   end
 
   it '[My Documents] `Select all Archives` works' do
     @my_documents_page.select_files_filter(:archives)
-    expect(@my_documents_page).to be_file_checked(archive_name)
+    expect(@my_documents_page).to be_file_checkbox_present(archive_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files_and_folders - [archive_name])
   end
 
   it '[My Documents] `Select all Folders` works' do
     @my_documents_page.select_files_filter(:folders)
-    expect(@my_documents_page).to be_file_checked(folder_name)
+    expect(@my_documents_page).to be_file_checkbox_present(folder_name)
     expect(@my_documents_page).to be_all_files_not_checked(all_files)
   end
 
