@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../helper/download_helper'
+require_relative '../../../top_toolbar/top_toolbar'
 require_relative 'document_creation_field'
 require_relative 'documents_filter'
 require_relative 'documents_helper'
@@ -22,6 +23,7 @@ module TestingAppServer
     include DocumentsListItem
     include DocumentsNavigation
     include DocumentsSelectAllFilter
+    include TopToolbar
 
     def create_file_from_action(document_type, title)
       actions_documents(document_type)

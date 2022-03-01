@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/documents_modules'
 
 module TestingAppServer
@@ -8,7 +7,6 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/149157614-12738cec-99b1-4045-a638-b282a6053adb.png
   class DocumentsRecent
     include DocumentsModules
-    include TopToolbar
     include PageObject
 
     element(:header_recent, xpath: "//h1[@title='Recent']") # add_id

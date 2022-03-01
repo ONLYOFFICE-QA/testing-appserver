@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/documents_modules'
 
 module TestingAppServer
@@ -8,7 +7,6 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/149161300-5155a2ba-d22b-4e80-8a75-ac9c171a4b23.png
   class DocumentsSharedWithMe
     include DocumentsModules
-    include TopToolbar
     include PageObject
 
     element(:header_shared_with_me, xpath: "//h1[@title='Shared with me']") # add_id

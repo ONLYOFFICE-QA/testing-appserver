@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/documents_modules'
 
 module TestingAppServer
@@ -8,7 +7,6 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/149121217-17e31452-3157-42c1-b69a-e1f820954cea.png
   class DocumentsCommon
     include DocumentsModules
-    include TopToolbar
     include PageObject
 
     element(:header_common, xpath: "//h1[@title='Common']") # add_id

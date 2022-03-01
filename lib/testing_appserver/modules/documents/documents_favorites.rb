@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/documents_modules'
 
 module TestingAppServer
@@ -8,7 +7,6 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/149155311-e23551ed-fb57-4b95-92a4-d29e554d0444.png
   class DocumentsFavorites
     include DocumentsModules
-    include TopToolbar
     include PageObject
 
     element(:header_favorites, xpath: "//h1[@title='Favorites']") # add_id
