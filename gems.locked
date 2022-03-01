@@ -3,7 +3,7 @@ GEM
   specs:
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.558.0)
+    aws-partitions (1.559.0)
     aws-sdk-core (3.127.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -41,7 +41,7 @@ GEM
     onlyoffice_api (1.0.1)
       httparty (~> 0.16)
     onlyoffice_bugzilla_helper (0.6.1)
-    onlyoffice_documentserver_testing_framework (2.3.0)
+    onlyoffice_documentserver_testing_framework (2.4.1)
       onlyoffice_logger_helper (~> 1)
       onlyoffice_webdriver_wrapper (~> 1)
     onlyoffice_file_helper (0.5.0)
@@ -56,7 +56,7 @@ GEM
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
       onlyoffice_logger_helper (~> 1)
-    onlyoffice_webdriver_wrapper (1.2.0)
+    onlyoffice_webdriver_wrapper (1.3.0)
       headless (~> 2)
       onlyoffice_file_helper (~> 0)
       onlyoffice_logger_helper (~> 1)
@@ -136,7 +136,7 @@ DEPENDENCIES
   onlyoffice_file_helper
   onlyoffice_tcm_helper
   onlyoffice_testrail_wrapper
-  onlyoffice_webdriver_wrapper (~> 1.2)
+  onlyoffice_webdriver_wrapper (~> 1.3)
   overcommit
   page-object
   palladium
