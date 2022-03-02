@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../top_toolbar/top_toolbar'
 require_relative 'modules/documents_modules'
 
 module TestingAppServer
@@ -8,7 +7,6 @@ module TestingAppServer
   # https://user-images.githubusercontent.com/40513035/149161588-37caa025-fae6-44c6-a80d-2d9550e2d66b.png
   class DocumentsTrash
     include DocumentsModules
-    include TopToolbar
     include PageObject
 
     element(:header_trash, xpath: "//h1[@title='Trash']") # add_id
