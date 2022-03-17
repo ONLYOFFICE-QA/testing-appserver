@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'pop_up_windows/documents_form_template_from_file'
-
 module TestingAppServer
   # AppServer Documents module side bar
   # https://user-images.githubusercontent.com/40513035/143567448-7678bdd2-8950-4551-98dd-490eff6cae8a.png
