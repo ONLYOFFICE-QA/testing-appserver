@@ -10,6 +10,9 @@ new_document = "New_Document_#{SecureRandom.hex(5)}"
 new_spreadsheet = "New_Spreadsheet_#{SecureRandom.hex(5)}"
 new_presentation = "New_Presentation_#{SecureRandom.hex(5)}"
 new_folder = "New_Folder_#{SecureRandom.hex(5)}"
+new_form_blank = "New_Form_Blank_#{SecureRandom.hex(5)}"
+new_form_document = "New_Document_#{SecureRandom.hex(5)}"
+new_form_fom_file = "New_Form_From_File_#{SecureRandom.hex(5)}"
 
 describe 'My Documents Actions menu' do
   before do
@@ -76,6 +79,48 @@ describe 'My Documents Actions menu' do
     it '[My Documents] Created from Actions menu New Presentation opens correctly' do
       skip('Console errors in the document page')
       expect(@documents_page.check_opened_file_name).to eq("#{new_presentation}.pptx")
+    end
+  end
+
+  describe 'Form Template Blank' do
+    before do
+      @documents_page.create_file_from_action(:form_blank, new_form_blank)
+    end
+
+    after do
+      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_form_blank}.docxf"))
+    end
+
+    it '[My Documents] Created from Actions menu Blank Form template exist in list' do
+      expect(api_admin.documents).to be_document_exist("#{new_form_blank}.docxf")
+    end
+
+    it '[My Documents] Created from Actions menu Blank Form template opens correctly' do
+      skip('Console errors in the document page')
+      expect(@documents_page.check_opened_file_name).to eq("#{new_form_blank}.docxf")
+    end
+  end
+
+  describe 'Form Template From File' do
+    before do
+      TestingAppServer::SampleFilesLocation.upload_to_tmp_folder("#{new_form_document}.docx")
+      api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + "#{new_form_document}.docx")
+      @documents_page.create_file_from_action(:form_from_file, new_form_fom_file, new_form_document)
+    end
+
+    after do
+      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_form_fom_file}.docxf"))
+      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title("#{new_form_document}.docx"))
+    end
+
+    it '[My Documents] Created from Actions menu Form Template From File exist in list' do
+      pending('500 (Internal Server Error) for Form Template From File creation')
+      expect(api_admin.documents).to be_document_exist("#{new_form_fom_file}.docxf")
+    end
+
+    it '[My Documents] Created from Actions menu Form Template From File opens correctly' do
+      skip('Console errors in the document page')
+      expect(@documents_page.check_opened_file_name).to eq("#{new_form_fom_file}.docxf")
     end
   end
 

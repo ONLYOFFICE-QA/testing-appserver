@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'pop_up_windows/documents_form_template_from_file'
+
 module TestingAppServer
   # AppServer Documents module side bar
   # https://user-images.githubusercontent.com/40513035/143567448-7678bdd2-8950-4551-98dd-490eff6cae8a.png
@@ -7,15 +9,19 @@ module TestingAppServer
     include PageObject
 
     # actions
-    div(:actions, xpath: "//p[contains(@class, 'main-button_text')]/../../div") # add_id
-    span(:actions_new_document, xpath: "//span[text()='New Document']") # add_id
-    span(:actions_new_spreadsheet, xpath: "//span[text()='New Spreadsheet']") # add_id
-    span(:actions_new_presentation, xpath: "//span[text()='New Presentation']") # add_id
-    span(:actions_form_template, xpath: "//span[text()='Form template']") # add_id
-    span(:actions_new_folder, xpath: "//span[text()='New Folder']") # add_id
-    span(:actions_upload_files, xpath: "//span[text()='Upload files']") # add_id
-    span(:actions_upload_folders, xpath: "//span[text()='Upload folder']") # add_id
+    div(:actions, xpath: "(//div[contains(@class, 'files-main-button')])[1]")
+    list_item(:actions_new_document, xpath: "//li[contains(@class, 'main-button_new-document')]")
+    list_item(:actions_new_spreadsheet, xpath: "//li[contains(@class, 'main-button_new-spreadsheet')]")
+    list_item(:actions_new_presentation, xpath: "//li[contains(@class, 'main-button_new-presentation')]")
+    list_item(:actions_new_folder, xpath: "//li[contains(@class, 'main-button_new-folder')]")
+    list_item(:actions_upload_files, xpath: "//li[contains(@class, 'main-button_upload-files')]")
+    list_item(:actions_upload_folders, xpath: "//li[contains(@class, 'main-button_upload-folders')]")
     text_field(:file_uploader, xpath: "//input[@id='customFileInput']")
+
+    list_item(:actions_form_template, xpath: "//li[contains(@class, 'main-button_new-form')]")
+    list_item(:actions_form_blank, xpath: "//li[contains(@class, 'main-button_new-form-from-blank')]")
+    list_item(:actions_form_from_file, xpath: "//li[contains(@class, 'main-button_new-form-from-file')]")
+
     div(:progress_bar, xpath: "//div[contains(@class, 'layout-progress-bar')]")
 
     def actions_enabled?
@@ -35,10 +41,16 @@ module TestingAppServer
 
     def actions_documents(action)
       open_documents_actions
+      open_template_options if action.start_with?('form')
       instance_eval("actions_#{action}_element.click", __FILE__, __LINE__) # choose action from documents menu
-      return if (action == :upload_files) || (action == :upload_folders)
+      return if (action == :upload_files) || (action == :upload_folders) || (action == :form_from_file)
 
       @instance.webdriver.wait_until { file_currently_editing? }
+    end
+
+    def open_template_options
+      actions_form_template_element.click
+      @instance.webdriver.wait_until { actions_form_blank_element.present? }
     end
 
     def actions_upload_file(file_path)

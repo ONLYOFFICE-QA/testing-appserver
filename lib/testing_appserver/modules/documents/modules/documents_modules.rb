@@ -3,6 +3,7 @@
 require_relative '../../../helper/download_helper'
 require_relative '../../../top_toolbar/top_toolbar'
 require_relative 'document_creation_field'
+require_relative 'pop_up_windows/documents_form_template_from_file'
 require_relative 'documents_filter'
 require_relative 'documents_helper'
 require_relative 'documents_actions'
@@ -16,6 +17,7 @@ module TestingAppServer
   module DocumentsModules
     include AppServerDownloadHelper
     include DocumentsCreationField
+    include DocumentsFormTemplateFromFile
     include DocumentsFilter
     include DocumentsHelper
     include DocumentsActions
@@ -25,8 +27,9 @@ module TestingAppServer
     include DocumentsSelectAllFilter
     include TopToolbar
 
-    def create_file_from_action(document_type, title)
+    def create_file_from_action(document_type, title, form_template = nil)
       actions_documents(document_type)
+      choose_file_for_form_template(form_template) if document_type == :form_from_file
       add_name_to_file(title)
       @instance.webdriver.switch_to_main_tab
       @instance.webdriver.wait_until { file_present?(title) }
