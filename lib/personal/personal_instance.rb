@@ -12,6 +12,7 @@ require_relative 'personal_user_data'
 require_relative 'personal_main_pager'
 require_relative 'personal_test_manager'
 require_relative '../testing_appserver/data/helper_files/helper_files'
+require_relative '../testing_appserver/data/general_data'
 require_relative '../testing_appserver/helper/api/api_helper'
 
 include OnlyofficeDocumentserverTestingFramework

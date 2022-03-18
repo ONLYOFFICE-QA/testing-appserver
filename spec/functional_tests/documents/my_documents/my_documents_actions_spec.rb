@@ -6,13 +6,13 @@ test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FIL
 
 admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
-new_document = "New_Document_#{SecureRandom.hex(5)}"
-new_spreadsheet = "New_Spreadsheet_#{SecureRandom.hex(5)}"
-new_presentation = "New_Presentation_#{SecureRandom.hex(5)}"
-new_folder = "New_Folder_#{SecureRandom.hex(5)}"
-new_form_blank = "New_Form_Blank_#{SecureRandom.hex(5)}"
-new_form_document = "New_Document_#{SecureRandom.hex(5)}"
-new_form_fom_file = "New_Form_From_File_#{SecureRandom.hex(5)}"
+new_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
+new_spreadsheet = TestingAppServer::GeneralData.generate_random_name('New_Spreadsheet')
+new_presentation = TestingAppServer::GeneralData.generate_random_name('New_Presentation')
+new_folder = TestingAppServer::GeneralData.generate_random_name('New_Folder')
+new_form_blank = TestingAppServer::GeneralData.generate_random_name('New_Form_Blank')
+new_form_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
+new_form_fom_file = TestingAppServer::GeneralData.generate_random_name('New_Form_From_File')
 
 describe 'My Documents Actions menu' do
   before do

@@ -27,7 +27,7 @@ module TestingAppServer
     include DocumentsSelectAllFilter
     include TopToolbar
 
-    def create_file_from_action(document_type, title, form_template = nil)
+    def create_file_from_action(document_type, title, form_template: nil)
       actions_documents(document_type)
       choose_file_for_form_template(form_template) if document_type == :form_from_file
       add_name_to_file(title)
