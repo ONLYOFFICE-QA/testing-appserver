@@ -8,6 +8,7 @@ require_relative 'documents_private_room'
 require_relative 'documents_recent'
 require_relative 'documents_shared_with_me'
 require_relative 'documents_trash'
+require_relative 'settings/connected_clouds'
 
 module TestingAppServer
   # AppServer My Documents

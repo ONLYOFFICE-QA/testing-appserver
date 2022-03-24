@@ -66,5 +66,15 @@ module TestingAppServer
       @instance.webdriver.driver.find_element(:xpath, share_button_xpath).click
       add_share_user(user_name)
     end
+
+    def folder_file_xpath(title)
+      "//div[contains(@class, 'files-item')]/a[@title='#{title}']"
+    end
+
+    def open_folder(folder_title)
+      @instance.webdriver.driver.find_element(:xpath, folder_file_xpath(folder_title)).click
+      header_title = "//div[@class='header-container']//h1[@title='#{folder_title}']"
+      @instance.webdriver.wait_until { @instance.webdriver.element_visible?(header_title) }
+    end
   end
 end

@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'pop_up_windows/connecting_account_sign_in'
+
 module TestingAppServer
   # AppServer Documents left side bar navigation module
   # https://user-images.githubusercontent.com/40513035/149236384-9e6fbd2f-fb94-4a6a-939c-b79b2c2f5ef8.png
   module DocumentsNavigation
     include PageObject
+    include ConnectingAccountSignIn
 
     list_item(:my_documents_folder, xpath: "//li[contains (@class, 'tree-node-my')]")
     list_item(:shared_with_me_folder, xpath: "//li[contains (@class, 'tree-node-share')]")
@@ -14,7 +17,15 @@ module TestingAppServer
     list_item(:common_folder, xpath: "//li[contains (@class, 'tree-node-common')]")
     list_item(:trash_folder, xpath: "//li[contains (@class, 'tree-node-trash')]")
 
+    # Settings
+    list_item(:documents_settings_folder, xpath: "//li[contains(@class, 'tree-settings')]")
+    list_item(:connected_clouds_folder, xpath: "//li[contains(@class, 'connected-clouds')]")
+
+    div(:webdav_account, xpath: "//div[@data-key='WebDav']")
+    div(:add_account_more, xpath: "//div[@class='tree-thirdparty-list']/div[contains(@class, 'icon')]")
+
     def documents_navigation(folder)
+      open_settings if folder == :connected_clouds
       instance_eval("#{folder}_folder_element.click", __FILE__, __LINE__) # choose action from documents menu
 
       case folder
@@ -32,7 +43,30 @@ module TestingAppServer
         DocumentsCommon.new(@instance)
       when :trash
         DocumentsTrash.new(@instance)
+      when :connected_clouds
+        ConnectedClouds.new(@instance)
       end
+    end
+
+    def open_settings
+      documents_settings_folder_element.click unless connected_clouds_folder_element.visible?
+    end
+
+    def add_account(type, account_data, folder_title, common: false)
+      if type == :webdav
+        webdav_account_element.click
+      else
+        choose_account_from_more(type)
+      end
+      send_account_form(account_data, folder_title, common)
+      ConnectedClouds.new(@instance)
+    end
+
+    def choose_account_from_more(type)
+      add_account_more_element.click
+      account_img_xpath = "//img[contains(@src, '#{type}')]"
+      @instance.webdriver.wait_until { @instance.webdriver.element_visible?(account_img_xpath) }
+      @instance.webdriver.driver.find_element(:xpath, account_img_xpath).click
     end
   end
 end
