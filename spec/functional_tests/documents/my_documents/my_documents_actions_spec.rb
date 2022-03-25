@@ -105,7 +105,7 @@ describe 'My Documents Actions menu' do
     before do
       TestingAppServer::SampleFilesLocation.upload_to_tmp_folder("#{new_form_document}.docx")
       api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + "#{new_form_document}.docx")
-      @documents_page.create_file_from_action(:form_from_file, new_form_fom_file, new_form_document)
+      @documents_page.create_file_from_action(:form_from_file, new_form_fom_file, form_template: new_form_document)
     end
 
     after do
