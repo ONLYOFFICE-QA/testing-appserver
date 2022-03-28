@@ -6,7 +6,7 @@ test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basena
 
 admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
-new_document = "New_Document_#{SecureRandom.hex(5)}"
+new_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
 
 describe 'Personal My Documents Actions menu' do
   before do

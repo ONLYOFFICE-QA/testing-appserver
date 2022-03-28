@@ -13,12 +13,12 @@ user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
 api_admin.people.add_user(user) unless api_admin.people.user_with_email_exist?(user.mail)
 
 # create files title
-document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
-spreadsheet_name = "My_Spreadsheet_#{SecureRandom.hex(7)}.xlsx"
-presentation_name = "My_Presentation_#{SecureRandom.hex(7)}.pptx"
-archive_name = "My_Archive_#{SecureRandom.hex(7)}.zip"
-picture_name = "My_Image_#{SecureRandom.hex(7)}.jpg"
-audio_name = "My_Audio_#{SecureRandom.hex(7)}.mp3"
+document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
+spreadsheet_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Spreadsheet')}.xlsx"
+presentation_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Presentation')}.pptx"
+archive_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Archive')}.zip"
+picture_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Image')}.jpg"
+audio_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Audio')}.mp3"
 all_files = [document_name, spreadsheet_name, presentation_name, archive_name, picture_name, audio_name]
 
 # upload files to temporary folder and portal

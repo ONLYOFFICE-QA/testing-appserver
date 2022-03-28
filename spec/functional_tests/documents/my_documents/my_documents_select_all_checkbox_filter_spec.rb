@@ -9,12 +9,12 @@ admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 # create an upload files and folders to portal
-document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
-spreadsheet_name = "My_Spreadsheet_#{SecureRandom.hex(7)}.xlsx"
-presentation_name = "My_Presentation_#{SecureRandom.hex(7)}.pptx"
-audio_name = "My_Audio_#{SecureRandom.hex(7)}.mp3"
-archive_name = "My_Archive_#{SecureRandom.hex(7)}.zip"
-picture_name = "My_Image_#{SecureRandom.hex(7)}.jpg"
+document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
+spreadsheet_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Spreadsheet')}.xlsx"
+presentation_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Presentation')}.pptx"
+audio_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Audio')}.mp3"
+archive_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Archive')}.zip"
+picture_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Image')}.jpg"
 all_files = [document_name, spreadsheet_name, presentation_name, audio_name, archive_name, picture_name]
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
