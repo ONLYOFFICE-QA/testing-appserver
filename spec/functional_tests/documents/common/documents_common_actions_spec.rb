@@ -12,10 +12,10 @@ user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
                                       pwd: TestingAppServer::PrivateData.new.decrypt['user_portal_pwd'], type: :user)
 api_admin.people.add_user(user) unless api_admin.people.user_with_email_exist?(user.mail)
 
-new_document = "New_Document_#{SecureRandom.hex(5)}"
-new_spreadsheet = "New_Spreadsheet_#{SecureRandom.hex(5)}"
-new_presentation = "New_Presentation_#{SecureRandom.hex(5)}"
-new_folder = "New_Folder_#{SecureRandom.hex(5)}"
+new_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
+new_spreadsheet = TestingAppServer::GeneralData.generate_random_name('New_Spreadsheet')
+new_presentation = TestingAppServer::GeneralData.generate_random_name('New_Presentation')
+new_folder = TestingAppServer::GeneralData.generate_random_name('New_Folder')
 
 describe 'Documents Common' do
   before do

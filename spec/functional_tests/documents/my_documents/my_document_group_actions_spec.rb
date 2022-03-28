@@ -9,9 +9,9 @@ admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 # create an upload files and folders to portal
-document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
-move_document = "My_Document_#{SecureRandom.hex(7)}.docx"
-delete_document = "My_Document_#{SecureRandom.hex(7)}.docx"
+document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
+move_document = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
+delete_document = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
 all_files = [document_name, move_document, delete_document]
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)

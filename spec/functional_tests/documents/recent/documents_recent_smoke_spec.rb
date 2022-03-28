@@ -7,9 +7,9 @@ test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FIL
 admin = TestingAppServer::UserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
-new_document = "New_Document_#{SecureRandom.hex(5)}"
-new_spreadsheet = "New_Spreadsheet_#{SecureRandom.hex(5)}"
-new_presentation = "New_Presentation_#{SecureRandom.hex(5)}"
+new_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
+new_spreadsheet = TestingAppServer::GeneralData.generate_random_name('New_Spreadsheet')
+new_presentation = TestingAppServer::GeneralData.generate_random_name('New_Presentation')
 all_files = ["#{new_document}.docx", "#{new_spreadsheet}.xlsx", "#{new_presentation}.pptx"]
 
 # create recent files
