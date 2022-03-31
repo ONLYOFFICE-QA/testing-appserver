@@ -27,7 +27,7 @@ module TestingAppServer
 
     def converted_file(file_title, file_format, format_to_convert)
       format_to_convert = ".#{file_format}" if format_to_convert == 'original'
-      file_without_extension = file_title.split('.')[0]
+      file_without_extension = File.basename(file_title, '.*')
       "#{file_without_extension}#{format_to_convert}"
     end
   end

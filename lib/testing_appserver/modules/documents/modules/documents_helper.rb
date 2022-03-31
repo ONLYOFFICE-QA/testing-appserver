@@ -101,7 +101,7 @@ module TestingAppServer
     end
 
     def file_by_extension(files_array, extension)
-      files_array.each { |file| return file if file.include?(extension.to_s) }
+      files_array.each { |file| return file if File.extname(file).include?(extension.to_s) }
     end
 
     private
