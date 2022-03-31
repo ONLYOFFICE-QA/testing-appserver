@@ -25,5 +25,13 @@ module TestingAppServer
       ['New_Folder_2_60169265', 'New_Folder_1_60162991', 'имя с пробелом_3.pptx', 'ann_test.xlsx', 'Collaborative.docx',
        'zip_with_txt.zip', 'э_picture_2.png']
     end
+
+    def self.download_formats
+      {
+        pptx: ['original', '.odp', '.pdf'],
+        xlsx: ['original', '.csv', '.ods', '.pdf'],
+        docx: ['original', '.docxf', '.odt', '.pdf', '.rtf', '.txt']
+      }
+    end
   end
 end
