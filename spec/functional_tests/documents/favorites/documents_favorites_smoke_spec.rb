@@ -31,7 +31,7 @@ end
 main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
 my_documents = main_page.top_toolbar(:documents)
 all_files.each do |file|
-  my_documents.mark_file_as_favorite(file)
+  my_documents.file_settings(file, :favorite)
 end
 @test.webdriver.quit
 

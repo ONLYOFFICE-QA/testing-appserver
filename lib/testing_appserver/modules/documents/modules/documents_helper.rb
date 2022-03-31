@@ -100,6 +100,10 @@ module TestingAppServer
       upload_file_to_folder(id_folder, file_path)
     end
 
+    def file_by_extension(files_array, extension)
+      files_array.each { |file| return file if file.include?(extension.to_s) }
+    end
+
     private
 
     def current_title_exist?(title, item_list)
