@@ -18,10 +18,10 @@ module TestingAppServer
     text_field(:email, xpath: "//input[@name='email']")
     label(:activation_link, xpath: "(//input[@name='passwordType']/../../label)[1]")
     label(:temporary_password, xpath: "(//input[@name='passwordType']/../../label)[2]")
-    div(:generate_password, xpath: "(//div[@class = 'password-field-wrapper']/div)[2]")
+    div(:generate_password, xpath: "//div[contains(@class, 'password-input_refresh')]")
     text_field(:password, xpath: "//input[@name='password']")
 
-    button(:save_form, xpath: "//button[@tabindex='10']") # add_id
+    button(:save_form, xpath: "//button[contains(@class, 'create-user_save-btn')]")
 
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 

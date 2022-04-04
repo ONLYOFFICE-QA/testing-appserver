@@ -6,13 +6,13 @@ module TestingAppServer
   module PeopleSideBar
     include PageObject
 
-    link(:groups_link, xpath: "//span[@class='rc-tree-title']/a[contains(text(), 'Groups')]") # add_id
+    element(:groups_menu, xpath: "//ul[contains(@class, 'people-tree-menu')]")
 
     # actions
-    div(:actions, xpath: "(//div[contains(@class, 'main-button')])[1]")
-    span(:actions_user, xpath: "//span[text()='User']") # add_id
-    span(:actions_guest, xpath: "//span[text()='Guest']") # add_id
-    span(:actions_group, xpath: "//span[text()='Group']") # add_id
+    div(:actions, xpath: "(//div[contains(@class, 'people_main-button')])[1]")
+    list_item(:actions_user, xpath: "//li[contains(@class, 'main-button_create-user')]")
+    list_item(:actions_guest, xpath: "//li[contains(@class, 'main-button_create-guest')]")
+    list_item(:actions_group, xpath: "//li[contains(@class, 'main-button_create-group')]")
 
     def open_people_actions
       actions_element.click unless actions_user_element.present?
