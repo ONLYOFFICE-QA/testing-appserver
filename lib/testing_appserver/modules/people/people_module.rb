@@ -24,7 +24,7 @@ module TestingAppServer
     end
 
     def wait_to_load
-      @instance.webdriver.wait_until { groups_link_element.present? && people_list_element.present? }
+      @instance.webdriver.wait_until { groups_menu_element.present? && people_list_element.present? }
     end
 
     def user_not_exist?(full_name)

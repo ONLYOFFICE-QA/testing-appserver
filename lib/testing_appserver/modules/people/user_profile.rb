@@ -12,16 +12,16 @@ module TestingAppServer
     include PeopleSideBar
     include TopToolbar
 
-    button(:edit_profile, xpath: "//button[@title='Edit profile']") # add_id
-    link(:profile_email, xpath: "//a[contains(@class, 'email-link')]") # add_id
+    button(:edit_profile, xpath: "//button[contains(@class, 'edit-profile-button')]")
+    link(:profile_email, xpath: "//a[contains(@class, 'email-link')]")
     h1(:profile_full_name_header, xpath: "//h1[contains(@class, 'header-headline')]")
 
     # profile actions menu
     div(:profile_actions_menu, xpath: "//div[contains(@class, 'hidingHeader')]//div[contains(@class, 'action-button')]")
-    div(:profile_actions_disable, xpath: "//div[@label = 'Disable']") # add_id
-    div(:profile_actions_delete, xpath: "//div[@label = 'Delete profile']") # add_id
+    div(:profile_actions_disable, xpath: "//div[contains(@class, 'menu_disable')]")
+    div(:profile_actions_delete, xpath: "//div[contains(@class, 'menu_delete-profile')]")
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
-    button(:confirm_deletion, xpath: "//button[@tabindex='-1']") # add_id
+    button(:confirm_deletion, xpath: "//button[contains(@class, 'delete-profile_button-delete')]")
 
     def initialize(instance)
       super(instance.webdriver.driver)
