@@ -7,8 +7,8 @@ module TestingAppServer
     include PageObject
 
     window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
-    span(:copy_to_my_documents, xpath: "#{window_xpath}//span[@title ='My documents']") # add_id
-    span(:copy_to_common, xpath: "#{window_xpath}//span[@title ='Common']") # add_id
+    span(:copy_to_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
+    span(:copy_to_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
     button(:confirm_copy, xpath: "#{window_xpath}//button[text()='Copy']") # add_id
     div(:loading_process, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")

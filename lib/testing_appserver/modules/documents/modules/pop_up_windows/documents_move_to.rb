@@ -6,8 +6,9 @@ module TestingAppServer
   module DocumentsMoveTo
     include PageObject
 
-    list_item(:move_my_documents, xpath: "(//li[contains(@class, 'tree-node-my')])[2]/span[contains(@class, 'content')]")
-    list_item(:move_common, xpath: "(//li[contains(@class, 'tree-node-common')])[2]/span[contains(@class, 'content')]") # add_id
+    window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
+    span(:move_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
+    span(:move_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
 
     button(:confirm_move, xpath: "//button[text()='Move']")
     div(:moving_process_icon, xpath: "//div[contains(@class, 'layout-progress-bar')]")
