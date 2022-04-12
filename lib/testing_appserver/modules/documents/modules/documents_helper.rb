@@ -104,7 +104,9 @@ module TestingAppServer
       files_array.each { |file| return file if File.extname(file).include?(extension.to_s) }
     end
 
-    def open_external_link(link)
+    # @param link [String] Link to the document
+    # @return [String] Document title
+    def external_link_document_title(link)
       @test = PersonalTestInstance.new
       @test.webdriver.open(link)
       @test.init_online_documents

@@ -22,13 +22,12 @@ module TestingAppServer
       false
     end
 
-    def file_copied?(file_name)
+    def file_copies_count(file_name)
       counter = 0
       item_title_elements.each do |current_element|
         counter += 1 if @instance.webdriver.get_attribute(current_element, 'title').include?(file_name)
-        return true if counter == 2
       end
-      false
+      counter
     end
 
     def files_present?(files)

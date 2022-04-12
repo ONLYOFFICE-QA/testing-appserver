@@ -134,7 +134,7 @@ module TestingAppServer
       settings_version
       setting_finalize_version_element.click
       @instance.webdriver.wait_until { !setting_version_history_element.present? }
-      sleep 2 # wait for version to change
+      OnlyofficeLoggerHelper.sleep_and_log('Waiting or version to change', 2)
     end
 
     def edit_file_title
