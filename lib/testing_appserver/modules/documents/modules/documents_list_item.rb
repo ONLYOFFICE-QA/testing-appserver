@@ -22,6 +22,15 @@ module TestingAppServer
       false
     end
 
+    def file_copied?(file_name)
+      counter = 0
+      item_title_elements.each do |current_element|
+        counter += 1 if @instance.webdriver.get_attribute(current_element, 'title').include?(file_name)
+        return true if counter == 2
+      end
+      false
+    end
+
     def files_present?(files)
       files.each do |file|
         return false unless file_present?(file)
@@ -75,6 +84,15 @@ module TestingAppServer
       @instance.webdriver.driver.find_element(:xpath, folder_file_xpath(folder_title)).click
       header_title = "//div[@class='header-container']//h1[@title='#{folder_title}']"
       @instance.webdriver.wait_until { @instance.webdriver.element_visible?(header_title) }
+    end
+
+    def file_version_xpath(title)
+      "//a[@title='#{title}']/../..//div[contains(@class, 'badge-version')]"
+    end
+
+    def file_version(title)
+      version_element = @instance.webdriver.driver.find_element(:xpath, file_version_xpath(title))
+      @instance.webdriver.get_attribute(version_element, 'label').split('.')[-1].to_i
     end
   end
 end

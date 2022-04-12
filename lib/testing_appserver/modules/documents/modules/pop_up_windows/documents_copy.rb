@@ -15,11 +15,20 @@ module TestingAppServer
 
     def copy_to_folder(folder)
       @instance.webdriver.wait_until { copy_to_my_documents_element.present? }
-      instance_eval("copy_to_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      if %i[common my_documents].include?(folder)
+        instance_eval("copy_to_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      else
+        select_folder(folder)
+      end
       confirm_copy_element.click
       @instance.webdriver.wait_until { loading_process_element.present? }
       @instance.webdriver.wait_until { success_toast_element.present? }
       @instance.webdriver.wait_until { !success_toast_element.present? }
+    end
+
+    def select_folder(folder)
+      folder_xpath = "//span[text()='#{folder}']"
+      @instance.webdriver.driver.find_element(:xpath, folder_xpath).click
     end
   end
 end
