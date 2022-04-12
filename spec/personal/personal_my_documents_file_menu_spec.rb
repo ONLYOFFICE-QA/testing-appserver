@@ -35,7 +35,7 @@ describe 'Personal My Documents File Menu' do
       skip('Console error GET https://personal.teamlab.info/api/2.0/people/@self.json 401 when open external link')
       @documents_page.file_settings(@new_document, :sharing_settings)
       external_link = @documents_page.copy_external_link
-      expect(@documents_page.external_link_document_title(external_link)).to eq(@new_document)
+      expect(@documents_page.external_link_file_title(external_link)).to eq(@new_document)
     end
 
     describe 'Version' do
