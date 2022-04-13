@@ -31,5 +31,9 @@ describe 'Personal My Documents Actions menu' do
     it '[Personal][My Documents] Created from Actions menu New Document exist in list' do
       expect(api_admin.documents).to be_document_exist("#{new_document}.docx")
     end
+
+    it '[Personal][My Documents] Created from Actions menu New Document opens correctly' do
+      expect(@documents_page.check_opened_file_name).to eq("#{new_document}.docx")
+    end
   end
 end

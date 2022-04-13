@@ -104,6 +104,16 @@ module TestingAppServer
       files_array.each { |file| return file if File.extname(file).include?(extension.to_s) }
     end
 
+    # @param link [String] Link to the file
+    # @return [String] File title
+    def external_link_file_title(link)
+      @test = PersonalTestInstance.new
+      @test.webdriver.open(link)
+      @test.init_online_documents
+      @test.doc_instance.management.wait_for_operation_with_round_status_canvas
+      @test.doc_instance.doc_editor.top_toolbar.title_row.document_name
+    end
+
     private
 
     def current_title_exist?(title, item_list)

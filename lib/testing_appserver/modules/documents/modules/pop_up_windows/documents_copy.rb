@@ -7,19 +7,28 @@ module TestingAppServer
     include PageObject
 
     window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
-    span(:copy_to_my_documents, xpath: "#{window_xpath}//span[@title ='My documents']") # add_id
-    span(:copy_to_common, xpath: "#{window_xpath}//span[@title ='Common']") # add_id
+    span(:copy_to_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
+    span(:copy_to_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
     button(:confirm_copy, xpath: "#{window_xpath}//button[text()='Copy']") # add_id
     div(:loading_process, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
     def copy_to_folder(folder)
       @instance.webdriver.wait_until { copy_to_my_documents_element.present? }
-      instance_eval("copy_to_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      if %i[common my_documents].include?(folder)
+        instance_eval("copy_to_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      else
+        select_folder(folder)
+      end
       confirm_copy_element.click
       @instance.webdriver.wait_until { loading_process_element.present? }
       @instance.webdriver.wait_until { success_toast_element.present? }
       @instance.webdriver.wait_until { !success_toast_element.present? }
+    end
+
+    def select_folder(folder)
+      folder_xpath = "//span[text()='#{folder}']"
+      @instance.webdriver.driver.find_element(:xpath, folder_xpath).click
     end
   end
 end

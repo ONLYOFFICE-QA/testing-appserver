@@ -6,7 +6,9 @@ module TestingAppServer
   module DocumentsMoveTo
     include PageObject
 
-    list_item(:move_common, xpath: "(//li[contains(@class, 'tree-node-common')])[2]") # add_id
+    window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
+    span(:move_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
+    span(:move_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
 
     button(:confirm_move, xpath: "//button[text()='Move']")
     div(:moving_process_icon, xpath: "//div[contains(@class, 'layout-progress-bar')]")
@@ -14,11 +16,20 @@ module TestingAppServer
 
     def move_to_folder(folder)
       @instance.webdriver.wait_until { confirm_move_element.present? }
-      instance_eval("move_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      if %i[common my_documents].include?(folder)
+        instance_eval("move_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
+      else
+        select_folder(folder)
+      end
       confirm_move_element.click
       @instance.webdriver.wait_until { moving_process_icon_element.present? }
       @instance.webdriver.wait_until { success_move_toast_element.present? }
       @instance.webdriver.wait_until { !success_move_toast_element.present? }
+    end
+
+    def select_folder(folder)
+      folder_xpath = "//span[text()='#{folder}']"
+      @instance.webdriver.driver.find_element(:xpath, folder_xpath).click
     end
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
+gem 'clipboard'
 gem 'onlyoffice_api'
 gem 'onlyoffice_documentserver_testing_framework'
 gem 'onlyoffice_file_helper'

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'clipboard'
+
 module TestingAppServer
   # AppServer Documents Sharing Settings
   # https://user-images.githubusercontent.com/40513035/152301975-f12dc76e-d6cf-4f40-b202-e127c68200a5.png
@@ -16,12 +18,16 @@ module TestingAppServer
     div(:people_selector, xpath: "//div[contains(@class, 'options_list')]")
     button(:add_member, xpath: "//button[contains(@class, 'add_members_btn')]")
 
+    # external link
+    element(:enable_external_link, xpath: "//label[contains(@class, 'sharing-row__toggle-button')]")
+    element(:copy_link, xpath: "//*[@title='Copy external link']")
+
     def add_share_user(user_name)
       sleep 1
       plus_share_element.click
       @instance.webdriver.wait_until { add_users_element.present? }
       add_user(user_name)
-      save_sharing_element.click
+      save_sharing
     end
 
     def add_user(user_name)
@@ -38,6 +44,21 @@ module TestingAppServer
       user_checkbox_xpath = "//span[@title='#{user_name}']/../../label"
       user_checkbox_element = @instance.webdriver.driver.find_element(:xpath, user_checkbox_xpath)
       user_checkbox_element.click
+    end
+
+    def copy_external_link
+      @instance.webdriver.wait_until { enable_external_link_element.present? }
+      enable_external_link_element.click
+      sleep 1
+      copy_link_element.click
+      @instance.webdriver.wait_until { success_toast_element.present? }
+      save_sharing
+      Clipboard.paste
+    end
+
+    def save_sharing
+      save_sharing_element.click
+      @instance.webdriver.wait_until { !save_sharing_element.present? }
     end
   end
 end
