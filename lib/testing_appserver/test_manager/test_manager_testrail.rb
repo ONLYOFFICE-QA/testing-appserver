@@ -11,7 +11,6 @@ module TestingAppServer
       @testrail = TestrailHelper.new(params[:product_name], params[:suite_name],
                                      params[:plan_name_testrail]) do |testrail_conf|
         testrail_conf.add_all_suites = true
-        testrail_conf.search_plan_by_substring = false
       end
     end
   end
