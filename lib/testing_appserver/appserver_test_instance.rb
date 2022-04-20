@@ -23,11 +23,13 @@ module TestingAppServer
   # Instance of browser to perform actions
   class AppserverTestInstance
     attr_accessor :webdriver, :doc_instance, :user
+    attr_reader :product
 
     def initialize(user, browser = :chrome)
       @user = user
       @webdriver = WebDriver.new(browser, record_video: false)
       @webdriver.open(UserData::DEFAULT_PORTAL)
+      @product = :appserver
     end
 
     def init_online_documents

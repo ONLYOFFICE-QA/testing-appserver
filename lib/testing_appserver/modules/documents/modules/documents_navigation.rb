@@ -23,6 +23,7 @@ module TestingAppServer
 
     div(:webdav_account, xpath: "//div[@data-key='WebDav']")
     div(:add_account_more, xpath: "//div[@class='tree-thirdparty-list']/div[contains(@class, 'icon')]")
+    element(:cancel_add_account, xpath: "//*[contains(@class, 'modal-dialog-button_close')]")
 
     def documents_navigation(folder)
       open_settings if folder == :connected_clouds
@@ -59,6 +60,15 @@ module TestingAppServer
         choose_account_from_more(type)
       end
       send_account_form(account_data, folder_title, common)
+      ConnectedClouds.new(@instance)
+    end
+
+    # there is no Settings -> Connected clouds link
+    # it is possible navigate to Connected clouds by Account create canceling
+    def open_connected_clouds_for_personal
+      add_account_more_element.click
+      @instance.webdriver.wait_until { cancel_add_account_element.present? }
+      cancel_add_account_element.click
       ConnectedClouds.new(@instance)
     end
 

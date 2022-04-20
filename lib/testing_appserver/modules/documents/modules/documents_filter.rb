@@ -81,23 +81,38 @@ module TestingAppServer
 
     def all_search_filters_present?
       open_filter_menu
-      documents_and_user_filters_present? && media_files_and_archives_filters_present? &&
-        folders_files_subfolders_filters_present?
+      documents_filters_present? && media_files_and_archives_filters_present? &&
+        folders_files_subfolders_filters_present? && documents_user_and_groups_filters_present?
+    end
+
+    def docx_xlsx_pptx_filters_present?
+      open_filter_menu
+      documents_filters_present?
+    end
+
+    def all_files_filters_present?
+      open_filter_menu
+      documents_filters_present? && media_files_and_archives_filters_present? &&
+        !documents_user_and_groups_filters_present? && !folders_files_subfolders_filters_present?
     end
 
     def all_search_filters_for_recent_present?
       open_filter_menu
-      documents_and_user_filters_present?
+      documents_filters_present? && documents_user_and_groups_filters_present?
     end
 
-    def all_search_favorites_for_recent_present?
+    def all_search_filters_for_favorites_present?
       open_filter_menu
-      documents_and_user_filters_present? && media_files_and_archives_filters_present?
+      documents_filters_present? && media_files_and_archives_filters_present? &&
+        documents_user_and_groups_filters_present?
     end
 
-    def documents_and_user_filters_present?
-      documents_filter_element.present? && presentations_filter_element.present? &&
-        spreadsheets_filter_element.present? && users_filter_element.present? && groups_filter_element.present?
+    def documents_filters_present?
+      documents_filter_element.present? && presentations_filter_element.present? && spreadsheets_filter_element.present?
+    end
+
+    def documents_user_and_groups_filters_present?
+      users_filter_element.present? && groups_filter_element.present?
     end
 
     def media_files_and_archives_filters_present?

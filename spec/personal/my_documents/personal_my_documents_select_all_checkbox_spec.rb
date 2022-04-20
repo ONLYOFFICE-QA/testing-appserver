@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
 # api initialization
-admin = TestingAppServer::UserData.new
+admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 # create an upload files and folders to portal
@@ -24,7 +24,7 @@ folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_by_folder_type(folder_name)
 all_files_and_folders = all_files + [folder_name]
 
-describe 'Documents filter My documents' do
+describe 'Documents filter for Personal' do
   after :all do
     api_admin.documents.delete_files_by_title(all_files)
     api_admin.documents.delete_folders_by_title([folder_name])
@@ -32,8 +32,8 @@ describe 'Documents filter My documents' do
   end
 
   before do
-    main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @my_documents_page = main_page.main_page(:documents)
+    @test = TestingAppServer::PersonalTestInstance.new(admin)
+    @documents_page = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
   end
 
   after do |example|
@@ -43,6 +43,6 @@ describe 'Documents filter My documents' do
 
   it_behaves_like 'documents_select_all_checkbox', 'My Documents', all_files_and_folders, document_name,
                   spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name do
-    let(:documents_page) { @my_documents_page }
+    let(:documents_page) { @documents_page }
   end
 end

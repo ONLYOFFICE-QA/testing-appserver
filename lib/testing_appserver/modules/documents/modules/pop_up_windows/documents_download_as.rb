@@ -18,7 +18,7 @@ module TestingAppServer
       @instance.webdriver.wait_until { @instance.webdriver.element_visible?(format_dropdown('original')) }
     end
 
-    def choose_file_for_form_template(format)
+    def choose_format_to_convert(format)
       open_dropdown_formats
       @instance.webdriver.driver.find_element(:xpath, format_dropdown(format)).click
       download_save_element.click

@@ -94,6 +94,7 @@ module TestingAppServer
       move_or_copy_menu
       setting_create_a_copy_element.click
       @instance.webdriver.wait_until { success_toast_element.present? }
+      @instance.webdriver.wait_until { !success_toast_element.present? }
     end
 
     def copy_file(folder)
@@ -150,7 +151,7 @@ module TestingAppServer
     def download_file_as(format)
       setting_download_as_element.click
       @instance.webdriver.wait_until { chose_format_element.present? }
-      choose_file_for_form_template(format)
+      choose_format_to_convert(format)
     end
 
     def mark_file_as_favorite
