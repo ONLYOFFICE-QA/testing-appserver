@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
 # api initialization
-admin = TestingAppServer::UserData.new
+admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 # create an upload files and folders to portal
@@ -20,7 +20,7 @@ end
 folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_by_folder_type(folder_name)
 
-describe 'Document file actions' do
+describe 'Personal Document file actions' do
   after :all do
     api_admin.documents.delete_files_by_title([document_name])
     api_admin.documents.delete_files_by_title([move_document, document_name], :common)
@@ -30,8 +30,8 @@ describe 'Document file actions' do
   end
 
   before do
-    main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @my_documents_page = main_page.main_page(:documents)
+    @test = TestingAppServer::PersonalTestInstance.new(admin)
+    @documents_page = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
   end
 
   after do |example|
@@ -39,19 +39,12 @@ describe 'Document file actions' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_group_actions', 'AppServer', document_name, move_document, delete_document, folder_name do
-    let(:documents_page) { @my_documents_page }
+  it_behaves_like 'documents_group_actions', 'Personal', document_name, move_document, delete_document, folder_name do
+    let(:documents_page) { @documents_page }
   end
 
-  it '[AppServer][My Documents] `Share` group button opens Share window' do
-    @my_documents_page.check_file_checkbox(document_name)
-    @my_documents_page.group_menu_share_file
-    expect(@my_documents_page.plus_share_element).to be_present
-  end
-
-  it '[AppServer][My Documents] All group filters for Folder present: Share, Download, Move to, Copy, Delete' do
-    @my_documents_page.check_file_checkbox(folder_name)
-    expect(@my_documents_page).to be_all_group_actions_for_folder_present
-    expect(@my_documents_page.group_menu_download_as_file_element).not_to be_present
+  it '[Personal][My Documents] All group filters for document present' do
+    @documents_page.check_file_checkbox(document_name)
+    expect(@documents_page).to be_personal_group_actions_present
   end
 end

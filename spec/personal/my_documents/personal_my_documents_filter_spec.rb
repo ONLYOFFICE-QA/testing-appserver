@@ -2,15 +2,11 @@
 
 require 'spec_helper'
 
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
 # api initialization
-admin = TestingAppServer::UserData.new
+admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
-user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
-                                      mail: TestingAppServer::PrivateData.new.decrypt['user_mail'],
-                                      pwd: TestingAppServer::PrivateData.new.decrypt['user_portal_pwd'], type: :user)
-api_admin.people.add_user(user) unless api_admin.people.user_with_email_exist?(user.mail)
 
 # create an upload files to temporary folder
 document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
@@ -31,20 +27,17 @@ folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_by_folder_type(folder_name)
 api_admin.documents.upload_to_folder(folder_name,
                                      TestingAppServer::SampleFilesLocation.path_to_tmp_file + document_name_folder)
-admin_group = api_admin.people.add_group_with_manager_names(Faker::Food.fruits, manager: admin.full_name)
-user_group = api_admin.people.add_group_with_manager_names(Faker::Food.vegetables, manager: user.full_name)
 
 describe 'Documents filter My documents' do
   after :all do
     api_admin.documents.delete_files_by_title(all_files)
     api_admin.documents.delete_folders_by_title([folder_name])
-    api_admin.people.delete_groups([admin_group['id'], user_group['id']])
     all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do
-    main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @my_documents_page = main_page.main_page(:documents)
+    @test = TestingAppServer::PersonalTestInstance.new(admin)
+    @my_documents_page = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
   end
 
   after do |example|
@@ -52,21 +45,16 @@ describe 'Documents filter My documents' do
     @test.webdriver.quit
   end
 
-  describe 'Check filter My documents' do
-    it_behaves_like 'docx_xlsx_pptx_filter', 'Appserver', 'My Documents', all_files, folder_name do
+  describe 'Check filter My documents for Personal' do
+    it_behaves_like 'docx_xlsx_pptx_filter', 'Personal', 'My Documents', all_files, folder_name do
       let(:documents_page) { @my_documents_page }
     end
 
-    it_behaves_like 'documents_users_groups_filter', 'Appserver', 'My Documents', all_files, folder_name, admin, user,
-                    admin_group, user_group do
+    it_behaves_like 'documents_img_media_archives_filter', 'Personal', 'My Documents', all_files, folder_name do
       let(:documents_page) { @my_documents_page }
     end
 
-    it_behaves_like 'documents_img_media_archives_filter', 'Appserver', 'My Documents', all_files, folder_name do
-      let(:documents_page) { @my_documents_page }
-    end
-
-    it_behaves_like 'documents_folder_filter', 'Appserver', 'My Documents', all_files, folder_name, document_name,
+    it_behaves_like 'documents_folder_filter', 'Personal', 'My Documents', all_files, folder_name, document_name,
                     document_name_folder do
       let(:documents_page) { @my_documents_page }
     end

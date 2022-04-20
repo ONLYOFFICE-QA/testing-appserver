@@ -2,16 +2,10 @@
 
 require 'spec_helper'
 
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
-# api initialization
-admin = TestingAppServer::UserData.new
+admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
-
-user = TestingAppServer::UserData.new(first_name: 'John', last_name: 'Smith',
-                                      mail: TestingAppServer::PrivateData.new.decrypt['user_mail'],
-                                      pwd: TestingAppServer::PrivateData.new.decrypt['user_portal_pwd'], type: :user)
-api_admin.people.add_user(user) unless api_admin.people.user_with_email_exist?(user.mail)
 
 # create files title
 document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
@@ -29,22 +23,23 @@ all_files.each do |file|
 end
 
 # mark documents as favorite
-main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-my_documents = main_page.top_toolbar(:documents)
+@test = TestingAppServer::PersonalTestInstance.new(admin)
+my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
 all_files.each do |file|
   my_documents.file_settings(file, :favorite)
 end
 @test.webdriver.quit
 
-describe 'Documents Favorites' do
+describe 'Documents Favorites for Personal' do
   after :all do
     api_admin.documents.delete_files_by_title(all_files)
     all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do
-    main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @favorites = main_page.top_toolbar(:documents).documents_navigation(:favorites)
+    @test = TestingAppServer::PersonalTestInstance.new(admin)
+    my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
+    @favorites = my_documents.documents_navigation(:favorites)
   end
 
   after do |example|
@@ -52,14 +47,14 @@ describe 'Documents Favorites' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_favorite_smoke', 'AppServer', all_files
+  it_behaves_like 'documents_favorite_smoke', 'Personal', all_files
 
-  it '[AppServer][Favorites] Search field Filters are present' do
-    expect(@favorites).to be_all_search_filters_for_favorites_present
+  it '[Personal][Favorites] Search field Filters are present' do
+    expect(@favorites).to be_all_files_filters_present
   end
 
-  it '[AppServer][Favorites] All group actions present: Share, Download, Download as, Copy, Delete' do
+  it '[Personal][Favorites] All group actions present: Download, Download as, Copy, Delete' do
     @favorites.check_file_checkbox(document_name)
-    expect(@favorites).to be_all_group_actions_for_favorites_present
+    expect(@favorites).to be_personal_all_group_actions_for_favorites_present
   end
 end

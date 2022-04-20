@@ -2,15 +2,15 @@
 
 require 'spec_helper'
 
-test_manager = TestingAppServer::TestManager.new(suite_name: File.basename(__FILE__))
+test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
 # api initialization
-admin = TestingAppServer::UserData.new
+admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 # add WebDav account
-main_page, test = TestingAppServer::AppServerHelper.new.init_instance
-my_documents_page = main_page.main_page(:documents)
+test = TestingAppServer::PersonalTestInstance.new(admin)
+my_documents_page = TestingAppServer::PersonalSite.new(test).personal_login(admin.mail, admin.pwd)
 webdav_data = TestingAppServer::GeneralData.documents_accounts[:webdav]
 folder_title = TestingAppServer::GeneralData.generate_random_name('Account_folder')
 _connected_clouds_page = my_documents_page.add_account(:webdav, webdav_data, folder_title)
@@ -18,8 +18,8 @@ test.webdriver.quit
 
 describe 'Document file actions' do
   before do
-    main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
-    @my_documents_page = main_page.main_page(:documents)
+    @test = TestingAppServer::PersonalTestInstance.new(admin)
+    @my_documents_page = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
   end
 
   after :all do
@@ -32,7 +32,7 @@ describe 'Document file actions' do
   end
 
   describe 'WebDav' do
-    it_behaves_like 'documents_account_creation', 'AppServer', 'WebDav', folder_title,
+    it_behaves_like 'documents_account_creation', 'Personal', 'WebDav', folder_title,
                     TestingAppServer::GeneralData.webdav_accounts_files do
       let(:my_documents_page) { @my_documents_page }
     end
