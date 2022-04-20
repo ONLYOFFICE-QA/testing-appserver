@@ -52,13 +52,13 @@ describe 'Documents Favorites' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_favorite_smoke', 'AppServer', all_files
+  it_behaves_like 'documents_favorite_smoke', all_files
 
-  it '[AppServer][Favorites] Search field Filters are present' do
+  it '[Favorites] Search field Filters are present' do
     expect(@favorites).to be_all_search_filters_for_favorites_present
   end
 
-  it '[AppServer][Favorites] All group actions present: Share, Download, Download as, Copy, Delete' do
+  it '[Favorites] All group actions present: Share, Download, Download as, Copy, Delete' do
     @favorites.check_file_checkbox(document_name)
     expect(@favorites).to be_all_group_actions_for_favorites_present
   end

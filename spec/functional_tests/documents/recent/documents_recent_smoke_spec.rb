@@ -36,13 +36,13 @@ describe 'Documents Recent' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_recent_smoke', 'AppServer', new_document, new_spreadsheet, new_presentation
+  it_behaves_like 'documents_recent_smoke', new_document, new_spreadsheet, new_presentation
 
-  it '[AppServer][Recent] Search field Filters are present' do
+  it '[Recent] Search field Filters are present' do
     expect(@recent).to be_all_search_filters_for_recent_present
   end
 
-  it '[AppServer][Recent] All group filters fore Recent present: Share, Download, Download as, Copy' do
+  it '[Recent] All group filters fore Recent present: Share, Download, Download as, Copy' do
     @recent.check_file_checkbox("#{new_document}.docx")
     expect(@recent).to be_all_group_actions_for_resent_present
   end

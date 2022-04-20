@@ -18,5 +18,5 @@ describe 'My Documents Actions menu' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_actions_button', 'AppServer', 'My Documents', api_admin
+  it_behaves_like 'documents_actions_button', 'My Documents', api_admin
 end

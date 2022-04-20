@@ -46,15 +46,15 @@ describe 'Documents filter My documents' do
   end
 
   describe 'Check filter My documents for Personal' do
-    it_behaves_like 'docx_xlsx_pptx_filter', 'Personal', 'My Documents', all_files, folder_name do
+    it_behaves_like 'docx_xlsx_pptx_filter', 'My Documents', all_files, folder_name do
       let(:documents_page) { @my_documents_page }
     end
 
-    it_behaves_like 'documents_img_media_archives_filter', 'Personal', 'My Documents', all_files, folder_name do
+    it_behaves_like 'documents_img_media_archives_filter', 'My Documents', all_files, folder_name do
       let(:documents_page) { @my_documents_page }
     end
 
-    it_behaves_like 'documents_folder_filter', 'Personal', 'My Documents', all_files, folder_name, document_name,
+    it_behaves_like 'documents_folder_filter', 'My Documents', all_files, folder_name, document_name,
                     document_name_folder do
       let(:documents_page) { @my_documents_page }
     end

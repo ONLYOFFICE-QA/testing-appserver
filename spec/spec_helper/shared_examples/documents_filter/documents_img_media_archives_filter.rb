@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-shared_examples_for 'documents_img_media_archives_filter' do |product, folder, files_array, folder_name|
-  it "[#{product}][#{folder}] `Images` filter works" do
+shared_examples_for 'documents_img_media_archives_filter' do |folder, files_array, folder_name|
+  it "[#{folder}] `Images` filter works" do
     documents_page.set_filter(:images)
     images = TestingAppServer::SampleFilesLocation.files_by_extension(files_array, :jpg)
     expect(documents_page).to be_files_present(images)
@@ -9,7 +9,7 @@ shared_examples_for 'documents_img_media_archives_filter' do |product, folder, f
     expect(documents_page).not_to be_file_present(folder_name)
   end
 
-  it "[#{product}][#{folder}] `Media` filter works" do
+  it "[#{folder}] `Media` filter works" do
     documents_page.set_filter(:media)
     audios = TestingAppServer::SampleFilesLocation.files_by_extension(files_array, :mp3)
     expect(documents_page).to be_files_present(audios)
@@ -17,7 +17,7 @@ shared_examples_for 'documents_img_media_archives_filter' do |product, folder, f
     expect(documents_page).not_to be_file_present(folder_name)
   end
 
-  it "[#{product}][#{folder}] `Archives` filter works" do
+  it "[#{folder}] `Archives` filter works" do
     documents_page.set_filter(:archives)
     archives = TestingAppServer::SampleFilesLocation.files_by_extension(files_array, :zip)
     expect(documents_page).to be_files_present(archives)

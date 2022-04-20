@@ -39,7 +39,7 @@ describe 'Personal Document file actions' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_group_actions', 'Personal', document_name, move_document, delete_document, folder_name do
+  it_behaves_like 'documents_group_actions', document_name, move_document, delete_document, folder_name do
     let(:documents_page) { @documents_page }
   end
 

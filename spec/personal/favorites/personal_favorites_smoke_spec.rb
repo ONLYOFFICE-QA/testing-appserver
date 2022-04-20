@@ -47,7 +47,7 @@ describe 'Documents Favorites for Personal' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_favorite_smoke', 'Personal', all_files
+  it_behaves_like 'documents_favorite_smoke', all_files
 
   it '[Personal][Favorites] Search field Filters are present' do
     expect(@favorites).to be_all_files_filters_present

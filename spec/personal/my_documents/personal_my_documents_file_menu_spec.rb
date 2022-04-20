@@ -39,7 +39,7 @@ describe 'Personal My Documents File Menu' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_file_menu', 'Personal', 'My Documents', api_admin, new_document, version_document, move_document, copy_document,
+  it_behaves_like 'documents_file_menu', 'My Documents', api_admin, new_document, version_document, move_document, copy_document,
                   create_copy_document, rename_document, delete_document, folder_name do
     let(:documents_page) { @documents_page }
   end

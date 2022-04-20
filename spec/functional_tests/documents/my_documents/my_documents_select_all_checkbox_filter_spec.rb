@@ -41,7 +41,7 @@ describe 'Documents filter My documents' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_select_all_checkbox', 'AppServer', 'My Documents', all_files_and_folders, document_name,
+  it_behaves_like 'documents_select_all_checkbox', 'My Documents', all_files_and_folders, document_name,
                   spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name do
     let(:documents_page) { @my_documents_page }
   end

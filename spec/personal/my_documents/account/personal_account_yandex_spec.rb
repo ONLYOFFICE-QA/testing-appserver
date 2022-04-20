@@ -32,7 +32,7 @@ describe 'Document file actions' do
   end
 
   describe 'Yandex' do
-    it_behaves_like 'documents_account_creation', 'Personal', 'Yandex', folder_title,
+    it_behaves_like 'documents_account_creation', 'Yandex', folder_title,
                     TestingAppServer::GeneralData.yandex_accounts_files do
       let(:my_documents_page) { @my_documents_page }
     end

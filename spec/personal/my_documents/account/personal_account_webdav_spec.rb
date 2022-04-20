@@ -32,7 +32,7 @@ describe 'Document file actions' do
   end
 
   describe 'WebDav' do
-    it_behaves_like 'documents_account_creation', 'Personal', 'WebDav', folder_title,
+    it_behaves_like 'documents_account_creation', 'WebDav', folder_title,
                     TestingAppServer::GeneralData.webdav_accounts_files do
       let(:my_documents_page) { @my_documents_page }
     end

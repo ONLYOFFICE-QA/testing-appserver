@@ -39,17 +39,17 @@ describe 'Document file actions' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_group_actions', 'AppServer', document_name, move_document, delete_document, folder_name do
+  it_behaves_like 'documents_group_actions', document_name, move_document, delete_document, folder_name do
     let(:documents_page) { @my_documents_page }
   end
 
-  it '[AppServer][My Documents] `Share` group button opens Share window' do
+  it '[My Documents] `Share` group button opens Share window' do
     @my_documents_page.check_file_checkbox(document_name)
     @my_documents_page.group_menu_share_file
     expect(@my_documents_page.plus_share_element).to be_present
   end
 
-  it '[AppServer][My Documents] All group filters for Folder present: Share, Download, Move to, Copy, Delete' do
+  it '[My Documents] All group filters for Folder present: Share, Download, Move to, Copy, Delete' do
     @my_documents_page.check_file_checkbox(folder_name)
     expect(@my_documents_page).to be_all_group_actions_for_folder_present
     expect(@my_documents_page.group_menu_download_as_file_element).not_to be_present
