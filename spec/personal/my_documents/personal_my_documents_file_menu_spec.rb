@@ -34,7 +34,7 @@ describe 'Personal My Documents File Menu' do
     all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
-  after do |_example|
+  after do |example|
     test_manager.add_result(example, @test)
     @test.webdriver.quit
   end
