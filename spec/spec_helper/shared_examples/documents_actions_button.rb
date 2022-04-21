@@ -79,6 +79,7 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
       @new_form_from_file = TestingAppServer::GeneralData.generate_random_name('New_Form_From_File')
       TestingAppServer::SampleFilesLocation.upload_to_tmp_folder("#{@new_form_document}.docx")
       api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + "#{@new_form_document}.docx")
+      pending('500 (Internal Server Error) for Form Template From File creation') if @test.product == :appserver
       @documents_page.create_file_from_action(:form_from_file, @new_form_from_file, form_template: @new_form_document)
     end
 
@@ -88,7 +89,6 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
     end
 
     it "[#{folder}] Created from Actions menu `Form Template` From File exist in list" do
-      pending('500 (Internal Server Error) for Form Template From File creation') if @test.product == :appserver
       expect(api_admin.documents).to be_document_exist("#{@new_form_from_file}.docxf")
     end
 
