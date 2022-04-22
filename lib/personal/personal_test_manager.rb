@@ -43,7 +43,7 @@ module TestingAppServer
 
     def test_plan_name
       # TODO: add version and build date using api after bug fix: https://bugzilla.onlyoffice.com/show_bug.cgi?id=54664
-      if ENV.fetch('SPEC_REGION', 'unknwon').include?('com')
+      if ENV.fetch('SPEC_REGION', 'unknown').include?('com')
         appserver_version, docs_version, portal = portal_appserver_and_documents_version
         "#{portal} Appserver Version: #{appserver_version}, Docs Version: #{docs_version}"
       else
