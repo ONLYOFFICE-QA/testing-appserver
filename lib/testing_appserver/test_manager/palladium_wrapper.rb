@@ -20,7 +20,7 @@ module TestingAppServer
     end
 
     def palladium_token
-      @palladium_token ||= File.read("#{ENV['HOME']}/.palladium/token")
+      @palladium_token ||= File.read("#{Dir.home}/.palladium/token")
     end
   end
 end
