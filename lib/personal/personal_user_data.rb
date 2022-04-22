@@ -21,7 +21,7 @@ module TestingAppServer
 
     # @return [String] server on which test are performed
     def default_server
-      return 'https://personal.onlyoffice.com' if ENV['SPEC_REGION']&.include?('com')
+      return 'https://personal.onlyoffice.com' if ENV.fetch('SPEC_REGION', 'unknown').include?('com')
 
       'https://personal.teamlab.info'
     end
