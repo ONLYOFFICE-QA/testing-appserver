@@ -12,6 +12,11 @@ module TestingAppServer
       @instance.doc_instance.doc_editor.top_toolbar.title_row.document_name
     end
 
+    def document_in_view_mode?
+      @instance.webdriver.choose_tab(2)
+      @instance.doc_instance.management.viewer?
+    end
+
     def document_exist?(document_title)
       files_list = all_my_documents_files(filter_type(document_title))
       current_title_exist?(document_title, files_list)
