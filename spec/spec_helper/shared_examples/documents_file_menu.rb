@@ -15,7 +15,7 @@ shared_examples_for 'documents_file_menu' do |folder, api_admin, new_document, v
     end
 
     it "[#{folder}][File Menu] `Share external link` works" do
-      skip('Console error GET https://personal.teamlab.info/api/2.0/people/@self.json 401 when open external link')
+      pending('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56438')
       documents_page.file_settings(new_document, :sharing_settings)
       external_link = documents_page.copy_external_link
       expect(documents_page.external_link_file_title(external_link)).to eq(new_document)
