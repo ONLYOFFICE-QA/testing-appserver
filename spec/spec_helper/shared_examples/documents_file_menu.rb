@@ -8,6 +8,12 @@ shared_examples_for 'documents_file_menu' do |folder, api_admin, new_document, v
       expect(documents_page.file_settings(new_document, :edit)).to eq(new_document)
     end
 
+    it "[#{folder}][File Menu] `Preview` file works" do
+      skip('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56438') if @test.product == :appserver
+      expect(documents_page.file_settings(new_document, :preview)).to eq(new_document)
+      expect(documents_page).to be_document_in_view_mode
+    end
+
     it "[#{folder}][File Menu] `Share external link` works" do
       skip('Console error GET https://personal.teamlab.info/api/2.0/people/@self.json 401 when open external link')
       documents_page.file_settings(new_document, :sharing_settings)
