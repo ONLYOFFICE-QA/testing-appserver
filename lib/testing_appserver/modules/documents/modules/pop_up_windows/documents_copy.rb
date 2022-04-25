@@ -22,8 +22,7 @@ module TestingAppServer
       end
       confirm_copy_element.click
       @instance.webdriver.wait_until { loading_process_element.present? }
-      @instance.webdriver.wait_until { success_toast_element.present? }
-      @instance.webdriver.wait_until { !success_toast_element.present? }
+      OnlyofficeLoggerHelper.sleep_and_log('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56832', 3)
     end
 
     def select_folder(folder)

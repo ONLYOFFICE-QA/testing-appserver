@@ -23,8 +23,7 @@ module TestingAppServer
       end
       confirm_move_element.click
       @instance.webdriver.wait_until { moving_process_icon_element.present? }
-      @instance.webdriver.wait_until { success_move_toast_element.present? }
-      @instance.webdriver.wait_until { !success_move_toast_element.present? }
+      OnlyofficeLoggerHelper.sleep_and_log('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56832', 3)
     end
 
     def select_folder(folder)
