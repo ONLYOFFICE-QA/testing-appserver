@@ -20,8 +20,8 @@ module TestingAppServer
     end
 
     def appserver_and_docs_version
-      appserver_version = appserver_version_element.text[2..-1]
-      docs_version = docs_version_element.text[2..-1]
+      appserver_version = appserver_version_element.text[2..]
+      docs_version = docs_version_element.text[2..]
       [appserver_version, docs_version]
     end
   end
