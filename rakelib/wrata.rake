@@ -30,7 +30,7 @@ namespace(:wrata) do
     test_files = all_files.select { |spec| spec.start_with?(args[:path]) }
     test_files.each do |test|
       api.add_to_queue("~/RubymineProjects/testing-appserver/#{test}",
-                       location: location,
+                       location:,
                        branch: 'master')
     end
   end
@@ -39,7 +39,7 @@ namespace(:wrata) do
   task :run_appserver_tests, [:location] => :ensure_user do |_, args|
     location = args[:location] || 'default'
     Rake::Task['wrata:wrata_turn_on_servers'].execute(count: 1)
-    Rake::Task['wrata:add_tests_to_queue'].execute(location: location, path: 'spec/functional_tests')
+    Rake::Task['wrata:add_tests_to_queue'].execute(location:, path: 'spec/functional_tests')
     puts('One test node is setup. Please check that test are run fine on it')
   end
 end
