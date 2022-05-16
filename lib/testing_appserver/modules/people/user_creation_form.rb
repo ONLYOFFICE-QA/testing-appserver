@@ -21,7 +21,9 @@ module TestingAppServer
     div(:generate_password, xpath: "//div[contains(@class, 'password-input_refresh')]")
     text_field(:password, xpath: "//input[@name='password']")
 
-    button(:save_form, xpath: "//button[contains(@class, 'create-user_save-btn')]")
+    text_field(:location, xpath: "//input[@name='location']")
+
+    element(:save_form, xpath: "//*[contains(@class, 'create-user_save-btn') or text()='Save']")
 
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
@@ -35,15 +37,24 @@ module TestingAppServer
       @instance.webdriver.wait_until { first_name_element.present? }
     end
 
+    def edit_user_location(location)
+      self.location = location
+      save_edit_form
+    end
+
     def create_new_user(params = {})
       fill_user_form(params)
       @instance.webdriver.move_to_element_by_locator(save_form_element.selector[:xpath])
+      save_edit_form
+    end
+
+    private
+
+    def save_edit_form
       save_form_element.click
       @instance.webdriver.wait_until { success_toast_element.present? }
       UserProfile.new(@instance)
     end
-
-    private
 
     def fill_user_form(params = {})
       self.first_name = params.first_name

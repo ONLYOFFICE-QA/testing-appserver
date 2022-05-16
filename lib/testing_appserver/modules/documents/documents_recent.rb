@@ -9,7 +9,7 @@ module TestingAppServer
     include DocumentsModules
     include PageObject
 
-    element(:header_recent, xpath: "//h1[@title='Recent']") # add_id
+    element(:header_recent, xpath: "//h1[@title='Recent' or text()='Recent']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

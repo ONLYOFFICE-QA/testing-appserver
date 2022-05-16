@@ -36,13 +36,17 @@ module TestingAppServer
     end
 
     def all_top_toolbar_modules_present?
+      all_top_toolbar_modules_navigation_present? &&
+        owner_icon_element.present?
+    end
+
+    def all_top_toolbar_modules_navigation_present?
       top_toolbar_documents_element.present? &&
         top_toolbar_people_element.present? &&
         top_toolbar_projects_element.present? &&
         top_toolbar_calendar_element.present? &&
         top_toolbar_mail_element.present? &&
-        top_toolbar_crm_element.present? &&
-        owner_icon_element.present?
+        top_toolbar_crm_element.present?
     end
   end
 end

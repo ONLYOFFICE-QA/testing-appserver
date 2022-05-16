@@ -9,7 +9,7 @@ module TestingAppServer
     include DocumentsModules
     include PageObject
 
-    element(:header_trash, xpath: "//h1[@title='Trash']") # add_id
+    element(:header_trash, xpath: "//h1[@title='Trash' or text()='Trash']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
