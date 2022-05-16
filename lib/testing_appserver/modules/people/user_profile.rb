@@ -14,6 +14,7 @@ module TestingAppServer
 
     button(:edit_profile, xpath: "//button[contains(@class, 'edit-profile-button')]")
     link(:profile_email, xpath: "//a[contains(@class, 'email-link')]")
+    div(:profile_location, xpath: "//div[contains(@class, 'profile-info_location')]")
     h1(:profile_full_name_header, xpath: "//h1[contains(@class, 'header-headline')]")
 
     # profile actions menu
@@ -35,6 +36,14 @@ module TestingAppServer
 
     def profile_full_name
       profile_full_name_header_element.text
+    end
+
+    def profile_full_email
+      profile_email_element.text
+    end
+
+    def profile_location
+      profile_location_element.text
     end
 
     def delete_person_from_profile
@@ -65,6 +74,11 @@ module TestingAppServer
     def open_profile_actions
       profile_actions_menu_element.click
       @instance.webdriver.wait_until { profile_actions_disable_element.present? || profile_actions_delete_element.present? }
+    end
+
+    def edit_user
+      edit_profile_element.click
+      UserCreationForm.new(@instance)
     end
   end
 end

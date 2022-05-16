@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'modules/documents_modules'
+require_relative '../../../personal/personal_main_pager'
 
 require_relative 'documents_common'
 require_relative 'documents_favorites'
@@ -17,7 +18,7 @@ module TestingAppServer
     include DocumentsModules
     include PageObject
 
-    element(:header_my_documents, xpath: "//h1[@title='My documents']") # add_id
+    element(:header_my_documents, xpath: "//h1[@title='My documents' or text()='My documents']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)

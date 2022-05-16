@@ -11,10 +11,11 @@ module TestingAppServer
 
     div(:owner_icon, xpath: "//div[contains(@class, 'icon-profile-menu')]")
 
+    div(:profile, xpath: "//div[@label = 'Profile']") # add_id
     div(:debug_info, xpath: "//div[@label = 'Debug Info']") # add_id
     div(:about_this_program, xpath: "//div[@label='About this program']") # add_id
     div(:settings, xpath: "//div[@label='Settings']") # add_id
-    div(:sign_out, xpath: "//div[@label='Sign Out']") # add_id
+    div(:sign_out, xpath: "//div[text()='Sign Out']") # add_id
 
     def open_profile_menu
       return if debug_info_element.present?
@@ -26,12 +27,16 @@ module TestingAppServer
     def select_from_profile_menu(selected_item)
       instance_eval("#{selected_item}_element.click", __FILE__, __LINE__) # choose module from tool bar profile menu
       case selected_item
+      when :profile
+        UserProfile.new(@instance)
       when :debug_info
         DebugInfo.new(@instance)
       when :about_this_program
         AboutThisProgram.new(@instance)
       when :settings
         SettingsModule.new(@instance)
+      when :sign_out
+        PersonalSite.new(@instance)
       end
     end
 
