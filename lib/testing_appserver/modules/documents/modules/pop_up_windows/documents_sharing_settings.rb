@@ -11,7 +11,8 @@ module TestingAppServer
     div(:plus_share, xpath: "//div[contains(@class, 'sharing_panel-plus-icon')]")
     div(:add_users, xpath: "//div[@label='Add users']") # add_id
     div(:add_groups, xpath: "//div[@label='Add groups']") # add_id
-    button(:save_sharing, xpath: "//button[contains(@class, 'sharing_panel-button')]")
+    button(:save_sharing, xpath: "//button[contains(@class, 'sharing_panel-button')
+                                          or contains(@class, 'save-button')]") # change_for_1_2
 
     # People Selector
     span(:people_selector_loading, xpath: "//span[contains(text(), 'Loading')]") # add_id
@@ -19,8 +20,9 @@ module TestingAppServer
     button(:add_member, xpath: "//button[contains(@class, 'add_members_btn')]")
 
     # external link
-    element(:enable_external_link, xpath: "//label[contains(@class, 'sharing-row__toggle-button')]")
-    element(:copy_link, xpath: "//*[@title='Copy external link']")
+    element(:enable_external_link, xpath: "//label[contains(@class, 'sharing-row__toggle-button')
+                                                    or contains(@class, 'external-link__toggler')]") # change_for_1_2
+    element(:copy_link, xpath: "//*[@title='Copy external link' or contains(@class, 'external-link__copy')]") # change_for_1_2
 
     def add_share_user(user_name)
       sleep 1
