@@ -2,15 +2,16 @@
 
 module TestingAppServer
   # AppServer Move To window
-  # https://user-images.githubusercontent.com/40513035/154021462-4a22f427-954f-48f1-a9d0-70de3f53b2a9.png
+  # https://user-images.githubusercontent.com/40513035/169239996-b3417b4b-156d-4dd2-bf1b-39663cf7fdc6.png
   module DocumentsMoveTo
     include PageObject
 
-    window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
+    window_xpath = "//*[contains(@class,'modal-dialog')]"
     span(:move_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
     span(:move_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
+    span(:my_documents_dropdown, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'switcher')]")
 
-    button(:confirm_move, xpath: "//button[text()='Move']")
+    div(:confirm_move, xpath: "//div[text()='Move here']")
     div(:moving_process_icon, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_move_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
@@ -27,7 +28,9 @@ module TestingAppServer
     end
 
     def select_folder(folder)
+      my_documents_dropdown_element.click
       folder_xpath = "//span[text()='#{folder}']"
+      @instance.webdriver.wait_until { @instance.webdriver.element_visible?(folder_xpath) }
       @instance.webdriver.driver.find_element(:xpath, folder_xpath).click
     end
   end

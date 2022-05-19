@@ -38,7 +38,7 @@ module TestingAppServer
     end
 
     def file_image_xpath(file_name)
-      "//a[@title='#{file_name}']/../..//div[contains(@class, 'table-container_row-checkbox-wrapper')]"
+      "//div[@data-title='#{file_name}' and contains(@class, 'files-item')]//div[contains(@class, 'element-wrapper')]"
     end
 
     def check_file_checkbox(file_name)
@@ -48,7 +48,7 @@ module TestingAppServer
     end
 
     def file_checkbox_xpath(file_name)
-      "//a[@title='#{file_name}']/../..//label[contains(@class, 'table-container_row-checkbox')]"
+      "//div[@data-title='#{file_name}' and contains(@class, 'files-item')]//label[contains(@class, 'row-checkbox')]"
     end
 
     def file_checkbox_present?(file_name)
@@ -81,7 +81,7 @@ module TestingAppServer
 
     def open_folder(folder_title)
       @instance.webdriver.driver.find_element(:xpath, folder_file_xpath(folder_title)).click
-      header_title = "//div[@class='header-container']//h1[@title='#{folder_title}']"
+      header_title = "//div[@class='header-container']//h1[text()='#{folder_title}']"
       @instance.webdriver.wait_until { @instance.webdriver.element_visible?(header_title) }
     end
 
