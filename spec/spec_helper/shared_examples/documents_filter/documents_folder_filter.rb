@@ -7,7 +7,7 @@ shared_examples_for 'documents_folder_filter' do |folder, files_array, folder_na
     expect(documents_page).not_to be_files_present(files_array)
   end
 
-  it "[#{folder}] `Media` filter works" do
+  it "[#{folder}] `All Files` filter works" do
     documents_page.set_filter(:all_files)
     expect(documents_page).to be_files_present(files_array)
     expect(documents_page).not_to be_file_present(folder_name)

@@ -2,22 +2,24 @@
 
 module TestingAppServer
   # AppServer Documents filter
-  # https://user-images.githubusercontent.com/40513035/145948844-ed1b4a67-0a0c-42e7-9daa-36f26ac4eaf5.png
+  # https://user-images.githubusercontent.com/40513035/169212451-3ef333d8-0e43-4000-bb25-1c709ba233f7.png
   module DocumentsFilter
     include PageObject
 
-    div(:add_filter, xpath: "//div[contains(@class,'section-header_filter')]//div[@id='filter-button']")
+    div(:open_filter, xpath: "(//div[contains(@class, 'section-header_filter')]/div/div)[2]")
 
     # type filter
-    div(:folders_filter, xpath: "(//div[@label='Folders'])[1]") # add_id
-    div(:documents_filter, xpath: "//div[@label='Documents']") # add_id
-    div(:presentations_filter, xpath: "//div[@label='Presentations']") # add_id
-    div(:spreadsheets_filter, xpath: "//div[@label='Spreadsheets']") # add_id
-    div(:images_filter, xpath: "//div[@label='Images']") # add_id
-    div(:media_filter, xpath: "//div[@label='Media']") # add_id
-    div(:archives_filter, xpath: "//div[@label='Archives']") # add_id
-    div(:all_files_filter, xpath: "//div[@label='All files']") # add_id
-    div(:no_subfolders_filter, xpath: "//div[@label='No subfolders']") # add_id
+    div(:folders_filter, xpath: "//div[@name='folders-2']") # add_id
+    div(:documents_filter, xpath: "//div[@name='documents-3']") # add_id
+    div(:presentations_filter, xpath: "//div[@name='presentations-4']") # add_id
+    div(:spreadsheets_filter, xpath: "//div[@name='spreadsheets-5']") # add_id
+    div(:images_filter, xpath: "//div[@name='images-7']") # add_id
+    div(:media_filter, xpath: "//div[@name='media-12']") # add_id
+    div(:archives_filter, xpath: "//div[@name='archives-10']") # add_id
+    div(:all_files_filter, xpath: "//div[@name='all files-1']") # add_id
+    div(:no_subfolders_filter, xpath: "//*[text()='No subfolders']/following-sibling::div") # add_id change_for_1_2
+
+    div(:add_filter, xpath: "//div[text()='Add filter']") # add_id change_for_1_2
 
     # user filter
     div(:users_filter, xpath: "//div[@label='Users']") # add_id
@@ -37,11 +39,13 @@ module TestingAppServer
       instance_eval("#{filter}_filter_element.click", __FILE__, __LINE__) # choose action from documents filter menu
       choose_group_filter(params[:group_name]) if params[:group_name]
       choose_user_filter(params[:user_name]) if params[:user_name]
-      sleep 2 # wait to load search results
+      add_filter_element.click
+      @instance.webdriver.wait_until { !add_filter_element.present? }
+      OnlyofficeLoggerHelper.sleep_and_log('Wait to load search results', 2)
     end
 
     def open_filter_menu
-      add_filter_element.click
+      open_filter_element.click
       @instance.webdriver.wait_until do
         documents_filter_element.present?
       end
