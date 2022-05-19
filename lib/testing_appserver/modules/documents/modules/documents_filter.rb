@@ -2,7 +2,7 @@
 
 module TestingAppServer
   # AppServer Documents filter
-  # https://user-images.githubusercontent.com/40513035/145948844-ed1b4a67-0a0c-42e7-9daa-36f26ac4eaf5.png
+  # https://user-images.githubusercontent.com/40513035/169212451-3ef333d8-0e43-4000-bb25-1c709ba233f7.png
   module DocumentsFilter
     include PageObject
 
