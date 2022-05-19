@@ -2,19 +2,21 @@
 
 module TestingAppServer
   # AppServer Copy documents window
-  # https://user-images.githubusercontent.com/40513035/154239428-075b5467-6bb5-4a88-a3bd-862d08bd24c8.png
+  # https://user-images.githubusercontent.com/40513035/169239888-bf3b955a-6584-45c7-9e68-3c96a071fdad.png
   module DocumentsCopy
     include PageObject
 
-    window_xpath = "//*[contains(@class,'modal-dialog-aside')]"
+    window_xpath = "//*[contains(@class,'modal-dialog')]"
     span(:copy_to_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
     span(:copy_to_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
-    button(:confirm_copy, xpath: "#{window_xpath}//button[text()='Copy']") # add_id
+    span(:my_documents_dropdown, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'switcher')]")
+
+    div(:confirm_copy, xpath: "#{window_xpath}//div[text()='Copy here']") # add_id
     div(:loading_process, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
     def copy_to_folder(folder)
-      @instance.webdriver.wait_until { copy_to_my_documents_element.present? }
+      @instance.webdriver.wait_until { confirm_copy_element.present? }
       if %i[common my_documents].include?(folder)
         instance_eval("copy_to_#{folder}_element.click", __FILE__, __LINE__) # choose folder to move file
       else
@@ -26,7 +28,9 @@ module TestingAppServer
     end
 
     def select_folder(folder)
+      my_documents_dropdown_element.click
       folder_xpath = "//span[text()='#{folder}']"
+      @instance.webdriver.wait_until { @instance.webdriver.element_visible?(folder_xpath) }
       @instance.webdriver.driver.find_element(:xpath, folder_xpath).click
     end
   end

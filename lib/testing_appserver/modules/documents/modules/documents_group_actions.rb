@@ -8,7 +8,7 @@ require_relative 'pop_up_windows/documents_sharing_settings'
 
 module TestingAppServer
   # AppServer Documents group actions
-  # https://user-images.githubusercontent.com/40513035/154399060-d4e64342-f0cc-49d5-9d0a-673fd588fd02.png
+  # https://user-images.githubusercontent.com/40513035/169240519-65997808-66a9-4415-90f9-66f8d37ca100.png
   module DocumentsGroupActions
     include PageObject
     include DocumentsCopy
@@ -18,13 +18,13 @@ module TestingAppServer
     include DocumentsSharingSettings
 
     header_xpath = "//div[contains(@class, 'table-container_group-menu')]"
-    button(:group_menu_share_file, xpath: "#{header_xpath}//button[text() = 'Share']") # add_id
-    button(:group_menu_download_file, xpath: "#{header_xpath}//button[text() = 'Download']") # add_id
-    button(:group_menu_download_as_file, xpath: "#{header_xpath}//button[text() = 'Download as']") # add_id
-    button(:group_menu_move_to, xpath: "#{header_xpath}//button[text() = 'Move to']") # add_id
-    button(:group_menu_copy_file, xpath: "#{header_xpath}//button[text() = 'Copy']") # add_id
-    button(:group_menu_delete_file, xpath: "#{header_xpath}//button[text() = 'Delete']") # add_id
-    button(:group_menu_remove_from_list, xpath: "#{header_xpath}//button[text() = 'Remove from list']") # add_id
+    button(:group_menu_share_file, xpath: "#{header_xpath}//button[@title = 'Share']") # add_id
+    button(:group_menu_download_file, xpath: "#{header_xpath}//button[@title='Download']") # add_id
+    button(:group_menu_download_as_file, xpath: "#{header_xpath}//button[@title = 'Download as']") # add_id
+    button(:group_menu_move_to, xpath: "#{header_xpath}//button[@title = 'Move to']") # add_id
+    button(:group_menu_copy_file, xpath: "#{header_xpath}//button[@title = 'Copy']") # add_id
+    button(:group_menu_delete_file, xpath: "#{header_xpath}//button[@title = 'Delete']") # add_id
+    button(:group_menu_remove_from_list, xpath: "#{header_xpath}//button[@title = 'Remove from list']") # add_id
 
     div(:file_loading_bar, xpath: "//div[contains(@class, 'layout-progress-bar')]")
 
