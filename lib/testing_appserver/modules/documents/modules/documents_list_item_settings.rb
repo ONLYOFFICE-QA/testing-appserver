@@ -10,7 +10,7 @@ require_relative 'document_creation_field'
 
 module TestingAppServer
   # AppServer Documents List Item settings
-  # https://user-images.githubusercontent.com/40513035/152883639-181ee5f8-093b-409b-bdcb-de3b611559c9.png
+  # https://user-images.githubusercontent.com/40513035/169487451-0255509f-d5cf-4040-a628-6682d0fc7ec1.png
   module DocumentsListItemSettings
     include PageObject
     include DocumentsCopy
@@ -24,6 +24,10 @@ module TestingAppServer
     span(:setting_edit, xpath: "//span[text() = 'Edit']")
     span(:setting_preview, xpath: "//span[text() = 'Preview']")
     span(:setting_sharing_settings, xpath: "//span[text() = 'Sharing settings']")
+
+    span(:setting_view_details, xpath: "//span[text() = 'View Details']")
+    div(:file_info, xpath: "//div[@id='InfoPanelWrapper']")
+    element(:file_info_title, xpath: "//div[@id='InfoPanelWrapper']//p[contains(@class, ' text')]")
 
     span(:setting_version_history, xpath: "//span[text() = 'Version history']")
     span(:setting_finalize_version, xpath: "//span[text() = 'Finalize version']")
@@ -66,6 +70,8 @@ module TestingAppServer
         finalize_version
       when :version_history
         version_history
+      when :view_details
+        view_details
       when :favorite
         mark_file_as_favorite
       when :download
@@ -83,6 +89,13 @@ module TestingAppServer
       when :delete
         delete_file
       end
+    end
+
+    # @return [String] File title for which info box is currently opened
+    def view_details
+      setting_view_details_element.click
+      @instance.webdriver.wait_until { file_info_element.present? }
+      file_info_title_element.text
     end
 
     def move_or_copy_menu
