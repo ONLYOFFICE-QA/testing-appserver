@@ -2,10 +2,7 @@
 
 shared_examples_for 'documents_select_all_checkbox' do |folder, all_files_and_folders, document_name,
   spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name|
-  it "[#{folder}] `Select all` checkbox works" do
-    documents_page.select_all_files
-    expect(documents_page).to be_files_checked(all_files_and_folders)
-  end
+  before { documents_page.check_file_checkbox(document_name) }
 
   it "[#{folder}] `Select all Documents` works" do
     documents_page.select_files_filter(:documents)

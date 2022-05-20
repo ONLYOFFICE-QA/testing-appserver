@@ -2,11 +2,9 @@
 
 module TestingAppServer
   # AppServer Documents select all filter
-  # https://user-images.githubusercontent.com/40513035/154398918-e0232123-9b8b-499d-ac86-1eaab0be015a.png
+  # https://user-images.githubusercontent.com/40513035/169463896-2be2c558-a153-49d4-b3d6-7fbc07db020b.png
   module DocumentsSelectAllFilter
     include PageObject
-
-    label(:select_all_checkbox, xpath: "//label[contains(@class, 'table-container_header-checkbox')]")
 
     div(:select_all_filter, xpath: "(//div[contains(@class, 'combo-button')])[1]") # add_id
     div(:select_all, xpath: "//div[@label='All']") # add_id
@@ -19,11 +17,6 @@ module TestingAppServer
     div(:select_spreadsheets, xpath: "//div[@label='Spreadsheets']") # add_id
     div(:select_all_files, xpath: "//div[@label='All files']") # add_id
 
-    def select_all_files
-      select_all_checkbox_element.click
-      @instance.webdriver.wait_until { select_all_filter_element.present? }
-    end
-
     def select_files_filter(type)
       open_select_all_filter
       instance_eval("select_#{type}_element.click", __FILE__, __LINE__) # choose filter for Select All checkbox
@@ -31,7 +24,6 @@ module TestingAppServer
     end
 
     def open_select_all_filter
-      select_all_files
       select_all_filter_element.click
       @instance.webdriver.wait_until { select_documents_element.present? }
     end
