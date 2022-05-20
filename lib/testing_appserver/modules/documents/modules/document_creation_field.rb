@@ -7,7 +7,7 @@ module TestingAppServer
     include PageObject
 
     text_field(:file_name_field, xpath: "//input[contains(@class, 'edit-text')]")
-    button(:save_file, xpath: "//*[contains(@class, 'edit-ok-icon')]/../../../button[1]") # add_id
+    button(:save_file, xpath: "(//button[contains(@class, 'edit-button')])[1]") # add_id
 
     def file_currently_editing?
       file_name_field_element.present?

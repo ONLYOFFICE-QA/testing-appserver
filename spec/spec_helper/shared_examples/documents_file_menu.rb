@@ -35,9 +35,20 @@ shared_examples_for 'documents_file_menu' do |folder, api_admin, new_document, v
 
       it "[#{folder}][File Menu] Download first version" do
         documents_page.file_settings(version_document, :version_history)
-        documents_page.download_version(1)
+        documents_page.version_menu(:download, 1)
         expect(documents_page).to be_file_downloaded(version_document)
       end
+
+      it "[#{folder}][File Menu] Edit comment for first version" do
+        documents_page.file_settings(version_document, :version_history)
+        comment = 'New comment for docx'
+        documents_page.version_menu(:edit_comment, 1, comment:)
+        expect(documents_page.document_comment(1)).to eq(comment)
+      end
+    end
+
+    it "[#{folder}][File Menu] View Details button works" do
+      expect(documents_page.file_settings(new_document, :view_details)).to eq(new_document)
     end
 
     it "[#{folder}][File Menu] Download button works" do
