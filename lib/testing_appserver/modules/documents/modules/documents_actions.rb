@@ -7,18 +7,18 @@ module TestingAppServer
     include PageObject
 
     # actions
-    div(:actions, xpath: "(//div[contains(@class, 'files-main-button')])[1]")
-    list_item(:actions_new_document, xpath: "//li[contains(@class, 'main-button_new-document')]")
-    list_item(:actions_new_spreadsheet, xpath: "//li[contains(@class, 'main-button_new-spreadsheet')]")
-    list_item(:actions_new_presentation, xpath: "//li[contains(@class, 'main-button_new-presentation')]")
-    list_item(:actions_new_folder, xpath: "//li[contains(@class, 'main-button_new-folder')]")
-    list_item(:actions_upload_files, xpath: "//li[contains(@class, 'main-button_upload-files')]")
-    list_item(:actions_upload_folders, xpath: "//li[contains(@class, 'main-button_upload-folders')]")
+    div(:actions, xpath: "(//div[@id='files_main-button'])[1]")
+    list_item(:actions_new_document, xpath: "//li[@id='main-button_new-document']")
+    list_item(:actions_new_spreadsheet, xpath: "//li[@id='main-button_new-spreadsheet']")
+    list_item(:actions_new_presentation, xpath: "//li[@id='main-button_new-presentation']")
+    list_item(:actions_new_folder, xpath: "//li[@id='main-button_new-folder']")
+    list_item(:actions_upload_files, xpath: "//li[@id='main-button_upload-files']")
+    list_item(:actions_upload_folders, xpath: "//li[@id='main-button_upload-folders']")
     text_field(:file_uploader, xpath: "//input[@id='customFileInput']")
 
-    list_item(:actions_form_template, xpath: "//li[contains(@class, 'main-button_new-form')]")
-    list_item(:actions_form_blank, xpath: "//li[contains(@class, 'main-button_new-form-from-blank')]")
-    list_item(:actions_form_from_file, xpath: "//li[contains(@class, 'main-button_new-form-from-file')]")
+    list_item(:actions_form_template, xpath: "//span[text()='Form template']/../parent::li") # add_id
+    span(:actions_form_blank, xpath: "//span[text()='Blank']") # add_id
+    span(:actions_form_from_file, xpath: "//span[text()='From text file']") # add_id
 
     div(:progress_bar, xpath: "//div[contains(@class, 'layout-progress-bar')]")
 
@@ -53,7 +53,8 @@ module TestingAppServer
 
     def actions_upload_file(file_path)
       file_uploader_element.send_keys(file_path)
-      @instance.webdriver.wait_until { !progress_bar_element.present? }
+      @instance.webdriver.wait_until { progress_bar_element.present? }
+      OnlyofficeLoggerHelper.sleep_and_log('Wait for file to be downloaded', 3)
     end
 
     def upload_file_and_folder_button_present?

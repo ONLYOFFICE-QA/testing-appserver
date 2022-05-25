@@ -9,7 +9,7 @@ module TestingAppServer
     button(:save_file_template, xpath: "//button[contains(@class, 'select-file-modal-dialog-buttons-save')]")
 
     def file_template(file_name)
-      "(//div[@class='files-list_full-name']/p[text()='#{file_name}'])[1]"
+      "//div[@class='selection-panel_files-list-body']//p[contains(text(), '#{file_name}')]"
     end
 
     def choose_file_for_form_template(file_name)
