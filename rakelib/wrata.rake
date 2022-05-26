@@ -2,16 +2,16 @@
 
 require 'wrata_api'
 
-appserver_wrata_user = 'appserver'
-
 namespace(:wrata) do
-  desc 'Check that correct user trying to run tests'
-  task :ensure_user do
+  # Method checks the launch of the wrata-staging.teamlab.info portal on behalf of the user.
+  # @param [String] user_name current portal user
+  # @return [True] if everything alright and raise an exception if not
+  def ensure_user(user_name)
     api = WrataApi::WrataApi.new
     current_user = api.profile['login']
-    next if current_user == appserver_wrata_user
+    return true if current_user == user_name
 
-    raise("You're trying to run wrata tests with #{current_user} instead of #{appserver_wrata_user}")
+    raise("You're trying to run wrata tests with #{current_user} instead of #{user_name}")
   end
 
   desc 'Turn on servers on Wrata'
@@ -36,10 +36,20 @@ namespace(:wrata) do
   end
 
   desc 'Run test for appserver'
-  task :run_appserver_tests, [:location] => :ensure_user do |_, args|
+  task :run_appserver_tests, [:location] do |_, args|
+    ensure_user('appserver')
     location = args[:location] || 'default'
     Rake::Task['wrata:wrata_turn_on_servers'].execute(count: 1)
     Rake::Task['wrata:add_tests_to_queue'].execute(location:, path: 'spec/functional_tests')
+    puts('One test node is setup. Please check that test are run fine on it')
+  end
+
+  desc 'Run test for personal'
+  task :run_personal_tests, [:location] do |_, args|
+    ensure_user('Personal')
+    location = args[:location] || 'default'
+    Rake::Task['wrata:wrata_turn_on_servers'].execute(count: 1)
+    Rake::Task['wrata:add_tests_to_queue'].execute(location:, path: 'spec/personal')
     puts('One test node is setup. Please check that test are run fine on it')
   end
 end
