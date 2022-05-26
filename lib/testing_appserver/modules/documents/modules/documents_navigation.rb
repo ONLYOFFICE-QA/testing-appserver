@@ -9,13 +9,13 @@ module TestingAppServer
     include PageObject
     include ConnectingAccountSignIn
 
-    list_item(:my_documents_folder, xpath: "//li[contains (@class, 'tree-node-my')]")
-    list_item(:shared_with_me_folder, xpath: "//li[contains (@class, 'tree-node-share')]")
-    list_item(:favorites_folder, xpath: "//li[contains (@class, 'tree-node-favorites')]")
-    list_item(:recent_folder, xpath: "//li[contains (@class, 'tree-node-recent')]")
-    list_item(:private_room_folder, xpath: "//li[contains (@class, 'tree-node-privacy')]")
-    list_item(:common_folder, xpath: "//li[contains (@class, 'tree-node-common')]")
-    list_item(:trash_folder, xpath: "//li[contains (@class, 'tree-node-trash')]")
+    div(:my_documents_folder, xpath: "//div[contains (@class, 'tree-node-my')]")
+    div(:shared_with_me_folder, xpath: "//div[contains (@class, 'tree-node-share')]")
+    div(:favorites_folder, xpath: "//div[contains (@class, 'tree-node-favorites')]")
+    div(:recent_folder, xpath: "//div[contains (@class, 'tree-node-recent')]")
+    div(:private_room_folder, xpath: "//div[contains (@class, 'tree-node-privacy')]")
+    div(:common_folder, xpath: "//div[contains (@class, 'tree-node-common')]")
+    div(:trash_folder, xpath: "//div[contains (@class, 'tree-node-trash')]")
 
     # Settings
     list_item(:documents_settings_folder, xpath: "//li[contains(@class, 'tree-settings')]")
