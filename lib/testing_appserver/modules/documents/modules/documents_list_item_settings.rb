@@ -47,7 +47,6 @@ module TestingAppServer
     span(:setting_delete, xpath: "//span[text() = 'Delete']") # add_id
 
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
-    element(:star_picture, xpath: "//*[contains(@class, 'favorite icons-group badge')]")
 
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 
@@ -171,7 +170,6 @@ module TestingAppServer
       setting_favorite_element.click
       @instance.webdriver.wait_until { success_toast_element.present? }
       success_toast_element.click # close notification toast to avoid hovering over other elements
-      @instance.webdriver.wait_until { star_picture_element.present? }
     end
   end
 end
