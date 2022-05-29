@@ -9,12 +9,14 @@ Before usage initialize with wrata api key from [https://wrata-url/clients/api_k
 ### Task for run all appserver portal tests
 
 * `rake wrata:run_appserver_tests` - run all portal test on default region (`info`)
-* `rake wrata:run_appserver_tests['com us']` - run all portal test on production `onlyoffice.com`
+* `rake wrata:run_appserver_tests['com us']` - run all portal test
+ on production `onlyoffice.com`
 
 ### Task for run all appserver personal tests
 
 * `rake wrata:run_personal_tests` - run all personal test on default region (`info`)
-* `rake wrata:run_personal_tests['com us']` - run all personal test on production `onlyoffice.com`
+* `rake wrata:run_personal_tests['com us']` - run all personal test
+ on production `onlyoffice.com`
 
 ## How to update secret config
 
