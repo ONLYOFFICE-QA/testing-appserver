@@ -1,4 +1,4 @@
-# ONLYOFFICE AppServer testing suit
+# ONLYOFFICE AppServer and ONLYOFFICE Personal testing suite
 
 Contains RSpec based tests for Appserver Portals and Personal.
 
