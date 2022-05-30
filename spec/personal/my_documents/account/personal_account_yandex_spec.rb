@@ -13,7 +13,7 @@ test = TestingAppServer::PersonalTestInstance.new(admin)
 my_documents_page = TestingAppServer::PersonalSite.new(test).personal_login(admin.mail, admin.pwd)
 yandex_data = TestingAppServer::GeneralData.documents_accounts[:yandex]
 folder_title = TestingAppServer::GeneralData.generate_random_name('Account_folder')
-my_documents_page.add_account(:yandex, yandex_data, folder_title)
+my_documents_page.add_account('Yandex', yandex_data, folder_title)
 test.webdriver.quit
 
 describe 'Document file actions' do

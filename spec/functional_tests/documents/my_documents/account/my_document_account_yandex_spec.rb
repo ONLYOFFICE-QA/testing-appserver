@@ -13,7 +13,7 @@ main_page, test = TestingAppServer::AppServerHelper.new.init_instance
 my_documents_page = main_page.main_page(:documents)
 yandex_data = TestingAppServer::GeneralData.documents_accounts[:yandex]
 folder_title = TestingAppServer::GeneralData.generate_random_name('Account_folder')
-_connected_clouds_page = my_documents_page.add_account(:yandex, yandex_data, folder_title)
+_connected_clouds_page = my_documents_page.add_account('Yandex', yandex_data, folder_title)
 test.webdriver.quit
 
 describe 'Document file actions' do

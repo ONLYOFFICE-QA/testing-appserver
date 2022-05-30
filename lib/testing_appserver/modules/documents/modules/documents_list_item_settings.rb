@@ -141,6 +141,7 @@ module TestingAppServer
       settings_version
       setting_show_version_history_element.click
       @instance.webdriver.wait_until { version_is_present?(1) }
+      @instance.webdriver.wait_until { !setting_show_version_history_element.present? }
     end
 
     def finalize_version

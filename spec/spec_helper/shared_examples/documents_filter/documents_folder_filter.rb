@@ -13,7 +13,7 @@ shared_examples_for 'documents_folder_filter' do |folder, files_array, folder_na
     expect(documents_page).not_to be_file_present(folder_name)
   end
 
-  it "[#{folder}] `No subfolders` filter works}" do
+  it "[#{folder}] `No subfolders` filter works" do
     documents_page.fill_filter('docx')
     expect(documents_page).to be_file_present(document_name)
     expect(documents_page).to be_file_present(document_name_folder)

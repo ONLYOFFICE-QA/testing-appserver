@@ -11,7 +11,7 @@ module TestingAppServer
     span(:copy_to_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
     span(:my_documents_dropdown, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'switcher')]")
 
-    div(:confirm_copy, xpath: "#{window_xpath}//div[text()='Copy here']") # add_id
+    button(:confirm_copy, xpath: "//button[contains(@class, 'select-file-modal-dialog-buttons-save')]")
     div(:loading_process, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 

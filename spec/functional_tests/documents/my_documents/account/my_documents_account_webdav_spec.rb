@@ -13,7 +13,7 @@ main_page, test = TestingAppServer::AppServerHelper.new.init_instance
 my_documents_page = main_page.main_page(:documents)
 webdav_data = TestingAppServer::GeneralData.documents_accounts[:webdav]
 folder_title = TestingAppServer::GeneralData.generate_random_name('Account_folder')
-_connected_clouds_page = my_documents_page.add_account(:webdav, webdav_data, folder_title)
+_connected_clouds_page = my_documents_page.add_account('Webdav', webdav_data, folder_title)
 test.webdriver.quit
 
 describe 'Document file actions' do
