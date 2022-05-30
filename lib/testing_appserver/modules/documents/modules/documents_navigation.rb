@@ -23,7 +23,7 @@ module TestingAppServer
 
     div(:webdav_account, xpath: "//div[@data-key='WebDav']")
     div(:add_account_more, xpath: "//div[@class='tree-thirdparty-list']/div[contains(@class, 'icon')]")
-    element(:cancel_add_account, xpath: "//*[contains(@class, 'modal-dialog-button_close')]")
+    div(:cancel_add_account, xpath: "(//*[contains(@class, 'modal-dialog-aside ')]/div)[2]")
 
     def documents_navigation(folder)
       open_settings if folder == :connected_clouds
@@ -54,7 +54,7 @@ module TestingAppServer
     end
 
     def add_account(type, account_data, folder_title, common: false)
-      if type == :webdav
+      if type == 'Webdav'
         webdav_account_element.click
       else
         choose_account_from_more(type)
@@ -74,7 +74,7 @@ module TestingAppServer
 
     def choose_account_from_more(type)
       add_account_more_element.click
-      account_img_xpath = "//img[contains(@src, '#{type}')]"
+      account_img_xpath = "//button[contains(@data-title, '#{type}')]"
       @instance.webdriver.wait_until { @instance.webdriver.element_visible?(account_img_xpath) }
       @instance.webdriver.driver.find_element(:xpath, account_img_xpath).click
     end

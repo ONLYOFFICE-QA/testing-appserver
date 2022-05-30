@@ -13,8 +13,8 @@ module TestingAppServer
     include ConnectingAccountSignIn
     include TopToolbar
 
-    link(:add_account, xpath: "//div[contains(@class, 'empty-folder_container')]//a[text()='Add account']") # add_id
-    button(:connect_cloud, xpath: "//button[text()='Connected cloud']") # add_id
+    link(:add_first_cloud, xpath: "//div[contains(@class, 'empty-connect_container-links')]//a[text()='Connect']") # add_id
+    div(:add_cloud, xpath: "//div[text()='Add']") # add_id
 
     def initialize(instance)
       super(instance.webdriver.driver)
@@ -23,11 +23,11 @@ module TestingAppServer
     end
 
     def wait_to_load
-      @instance.webdriver.wait_until { add_account_element.present? || connect_cloud_element.present? }
+      @instance.webdriver.wait_until { add_first_cloud_element.present? || add_cloud_element.present? }
     end
 
     def account_is_present?(folder_title)
-      folder_xpath = "//a[text()='#{folder_title}']"
+      folder_xpath = "//a[@title='#{folder_title}']"
       @instance.webdriver.element_visible?(folder_xpath)
     end
   end

@@ -11,7 +11,7 @@ module TestingAppServer
     text_field(:account_pwd, xpath: "//input[@name='passwordInput']")
     text_field(:account_folder_title, xpath: "//label[text()='Folder title']/../..//input")
     text_field(:account_to_common, xpath: "//span[contains(text(), 'Common')]/../input")
-    button(:account_save, xpath: "//button[text()='Save']")
+    div(:account_save, xpath: "//div[text()='Save']")
 
     def send_account_form(account, folder_title, common)
       @instance.webdriver.wait_until { account_pwd_element.present? }

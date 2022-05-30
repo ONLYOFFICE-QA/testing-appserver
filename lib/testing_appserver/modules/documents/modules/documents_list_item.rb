@@ -38,7 +38,7 @@ module TestingAppServer
     end
 
     def file_image_xpath(file_name)
-      "//div[@data-title='#{file_name}' and contains(@class, 'files-item')]//div[contains(@class, 'element-wrapper')]"
+      "//div[contains(@data-title, '#{file_name}') and contains(@class, 'files-item')]//div[contains(@class, 'element-wrapper')]"
     end
 
     def check_file_checkbox(file_name)
@@ -48,7 +48,7 @@ module TestingAppServer
     end
 
     def file_checkbox_xpath(file_name)
-      "//div[@data-title='#{file_name}' and contains(@class, 'files-item')]//label[contains(@class, 'row-checkbox')]"
+      "//div[contains(@data-title, '#{file_name}') and contains(@class, 'files-item')]//label[contains(@class, 'row-checkbox')]"
     end
 
     def file_checkbox_present?(file_name)
