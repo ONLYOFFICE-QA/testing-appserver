@@ -11,6 +11,7 @@ shared_examples_for 'documents_favorite_smoke' do |all_files|
 
   it '[Favorites] `Select all` Filters are present' do
     pending('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56391')
+    @favorites.check_file_checkbox(all_files[1])
     expect(@favorites).to be_select_all_filters_for_favorites_present
   end
 end

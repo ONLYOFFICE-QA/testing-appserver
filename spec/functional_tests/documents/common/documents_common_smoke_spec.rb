@@ -50,6 +50,7 @@ describe 'Documents Shared with me' do
   end
 
   it '[Common] `Select all` Filters are present' do
+    @common.check_file_checkbox(document_name)
     expect(@common).to be_all_select_all_filters_present
   end
 

@@ -12,6 +12,7 @@ shared_examples_for 'documents_recent_smoke' do |new_document, new_spreadsheet, 
   end
 
   it '[Recent] `Select all` Filters are present' do
+    @recent.check_file_checkbox(new_document)
     expect(@recent).to be_select_all_filters_for_recent_present
   end
 end
