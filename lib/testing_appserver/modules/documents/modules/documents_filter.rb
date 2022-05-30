@@ -17,7 +17,8 @@ module TestingAppServer
     div(:media_filter, xpath: "//div[@name='media-12']") # add_id
     div(:archives_filter, xpath: "//div[@name='archives-10']") # add_id
     div(:all_files_filter, xpath: "//div[@name='all files-1']") # add_id
-    div(:no_subfolders_filter, xpath: "//*[text()='No subfolders']/following-sibling::div") # add_id change_for_1_2
+    div(:no_subfolders_filter, xpath: "//*[text()='No subfolders']/following-sibling::div") # add_id
+    div(:clear_filter, xpath: "//h1[text()='Filter']/following-sibling::div") # add_id
 
     div(:add_filter, xpath: "//div[text()='Add filter']") # add_id change_for_1_2
 

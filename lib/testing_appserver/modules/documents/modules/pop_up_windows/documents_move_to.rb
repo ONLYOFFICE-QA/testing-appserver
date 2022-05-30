@@ -11,7 +11,7 @@ module TestingAppServer
     span(:move_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
     span(:my_documents_dropdown, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'switcher')]")
 
-    div(:confirm_move, xpath: "//div[text()='Move here']")
+    button(:confirm_move, xpath: "//button[contains(@class, 'select-file-modal-dialog-buttons-save')]")
     div(:moving_process_icon, xpath: "//div[contains(@class, 'layout-progress-bar')]")
     div(:success_move_toast, xpath: "//div[contains(@class, 'Toastify__toast--success')]")
 

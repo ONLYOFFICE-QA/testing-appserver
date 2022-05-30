@@ -68,6 +68,7 @@ describe 'Documents Shared with me' do
 
   it '[Shared with me] `Select all` Filters are present' do
     pending('https://bugzilla.onlyoffice.com/show_bug.cgi?id=56391')
+    @shared_with_me.check_file_checkbox(document_name)
     expect(@shared_with_me).to be_all_select_all_filters_present
   end
 

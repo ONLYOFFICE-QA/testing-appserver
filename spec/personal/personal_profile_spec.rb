@@ -29,13 +29,6 @@ describe 'Personal Profile' do
       expect(@personal_profile.profile_full_email).to eq(admin.mail)
     end
 
-    it 'Edit Personal Profile works: change Location' do
-      location = Faker::Address.city
-      edit_page = @personal_profile.edit_user
-      personal_profile = edit_page.edit_user_location(location)
-      expect(personal_profile.profile_location).to eq(location)
-    end
-
     describe 'Forbidden content for personal' do
       it 'Top bar modules navigation is not present for Personal' do
         expect(@personal_profile).not_to be_all_top_toolbar_modules_navigation_present
