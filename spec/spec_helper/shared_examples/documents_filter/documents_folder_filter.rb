@@ -21,4 +21,11 @@ shared_examples_for 'documents_folder_filter' do |folder, files_array, folder_na
     expect(documents_page).to be_file_present(document_name)
     expect(documents_page).not_to be_file_present(document_name_folder)
   end
+
+  it "[#{folder}] `Clear` filter works" do
+    documents_page.set_filter(:folders)
+    documents_page.set_filter(:clear)
+    expect(documents_page).to be_files_present(files_array - [document_name_folder])
+    expect(documents_page).to be_file_present(folder_name)
+  end
 end
