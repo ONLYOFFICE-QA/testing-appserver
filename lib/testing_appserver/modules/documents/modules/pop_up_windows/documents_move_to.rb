@@ -6,9 +6,9 @@ module TestingAppServer
   module DocumentsMoveTo
     include PageObject
 
-    window_xpath = "//*[contains(@class,'modal-dialog')]"
-    span(:move_my_documents, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
-    span(:move_common, xpath: "#{window_xpath}//li[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
+    window_xpath = "//*[contains(@class,'selection-panel')]"
+    span(:move_my_documents, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'content')]")
+    span(:move_common, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-common')]/span[contains(@class, 'content')]")
     span(:my_documents_dropdown, xpath: "#{window_xpath}//div[contains(@class, 'tree-node-my')]/span[contains(@class, 'switcher')]")
 
     button(:confirm_move, xpath: "//button[contains(@class, 'select-file-modal-dialog-buttons-save')]")
