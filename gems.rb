@@ -13,6 +13,7 @@ gem 'palladium'
 gem 'rake'
 gem 'rspec'
 gem 'rspec_passed_time_formatter'
+gem 'rspec-retry'
 gem 'wrata_api'
 
 group :development do
