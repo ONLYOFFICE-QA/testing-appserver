@@ -13,7 +13,7 @@ module TestingAppServer
     include TopToolbar
 
     button(:edit_profile, xpath: "//button[contains(@class, 'edit-profile-button')]")
-    link(:profile_email, xpath: "//a[contains(@class, 'email-link')]")
+    paragraph(:profile_email, xpath: "//div[contains(@class, 'section-wrapper-content')]//p")
     div(:profile_location, xpath: "//div[contains(@class, 'profile-info_location')]")
     h1(:profile_full_name_header, xpath: "//h1[contains(@class, 'header-headline')]")
 
