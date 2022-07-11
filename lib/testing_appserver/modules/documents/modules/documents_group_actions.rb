@@ -24,7 +24,7 @@ module TestingAppServer
     button(:group_menu_move_to, xpath: "#{header_xpath}//button[@title = 'Move to']") # add_id
     button(:group_menu_copy_file, xpath: "#{header_xpath}//button[@title = 'Copy']") # add_id
     button(:group_menu_delete_file, xpath: "#{header_xpath}//button[@title = 'Delete']") # add_id
-    button(:group_menu_remove_from_list, xpath: "#{header_xpath}//button[@title = 'Remove from list']") # add_id
+    button(:group_menu_remove_from_list, xpath: "#{header_xpath}//button[@title = 'Remove from favorites']") # add_id
 
     div(:file_loading_bar, xpath: "//div[contains(@class, 'layout-progress-bar')]")
 
@@ -79,7 +79,7 @@ module TestingAppServer
     end
 
     def personal_all_group_actions_for_favorites_present?
-      group_menu_delete_file_element.present? && download_copy_download_as_present? &&
+      group_menu_remove_from_list_element.present? && download_copy_download_as_present? &&
         !group_menu_move_to_element.present? && !group_menu_share_file_element.present?
     end
 
