@@ -28,6 +28,7 @@ module TestingAppServer
 
     def wait_to_load
       @instance.webdriver.wait_until { header_my_documents_element.present? }
+      sleep 3
     end
   end
 end
