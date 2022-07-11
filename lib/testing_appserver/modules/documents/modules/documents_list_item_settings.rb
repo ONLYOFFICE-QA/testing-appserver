@@ -167,7 +167,6 @@ module TestingAppServer
 
     def mark_file_as_favorite
       setting_favorite_element.click
-      # @instance.webdriver.wait_until { success_toast_element.present? }
       @instance.webdriver.wait_until_element_visible(success_toast_element)
       success_toast_element.click # close notification toast to avoid hovering over other elements
     end
