@@ -1,33 +1,41 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'tempfile'
 
 test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
 admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
-# create files title
-document_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Document')}.docx"
-spreadsheet_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Spreadsheet')}.xlsx"
-presentation_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Presentation')}.pptx"
-archive_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Archive')}.zip"
-picture_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Image')}.jpg"
-audio_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Audio')}.mp3"
-all_files = [document_name, spreadsheet_name, presentation_name, archive_name, picture_name, audio_name]
+# create temp files
+document = Tempfile.new(%w[My_Document .docx])
+spreadsheet = Tempfile.new(%w[My_Spreadsheet .xlsx])
+presentation = Tempfile.new(%w[My_presentation .pptx])
+archive = Tempfile.new(%w[My_archive .zip])
+picture = Tempfile.new(%w[My_Image .jpg])
+audio = Tempfile.new(%w[My_audio .mp3])
+
+all_files = [document, spreadsheet, presentation, archive, picture, audio]
 
 # upload files to temporary folder and portal
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
-  api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
+  api_admin.documents.upload_to_my_document(File.path(file))
 end
 
 # mark documents as favorite
 @test = TestingAppServer::PersonalTestInstance.new(admin)
 my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
 all_files.each do |file|
-  my_documents.file_settings(file, :favorite)
+  my_documents.file_settings(File.basename(file), :favorite)
 end
+
+# create array with file names
+all_files.map! do |tempfile|
+  File.basename(tempfile)
+end
+
 @test.webdriver.quit
 
 describe 'Documents Favorites for Personal' do
@@ -54,7 +62,7 @@ describe 'Documents Favorites for Personal' do
   end
 
   it '[Personal][Favorites] All group actions present: Download, Download as, Copy, Delete' do
-    @favorites.check_file_checkbox(document_name)
+    @favorites.check_file_checkbox(all_files[0])
     expect(@favorites).to be_personal_all_group_actions_for_favorites_present
   end
 end
