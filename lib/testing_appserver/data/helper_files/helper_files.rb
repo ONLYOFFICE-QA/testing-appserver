@@ -18,10 +18,10 @@ module TestingAppServer
       }
     end
 
-    def self.upload_to_tmp_folder(file)
+    def self.copy_file_to_temp(file)
       file_extension = File.extname(file)[1..].to_sym
       FileUtils.cp(SampleFilesLocation.path_to_file + SampleFilesLocation.file_by_format[file_extension],
-                   File.path(file))
+                   file.path)
     end
 
     def self.delete_from_tmp_folder(file)

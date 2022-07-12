@@ -16,23 +16,23 @@ archive = Tempfile.new(%w[My_archive .zip])
 picture = Tempfile.new(%w[My_Image .jpg])
 audio = Tempfile.new(%w[My_audio .mp3])
 
-all_files = [document, spreadsheet, presentation, archive, picture, audio]
+temp_files_full_paths = [document, spreadsheet, presentation, archive, picture, audio]
 
 # upload files to temporary folder and portal
-all_files.each do |file|
-  TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
-  api_admin.documents.upload_to_my_document(File.path(file))
+temp_files_full_paths.each do |file|
+  TestingAppServer::SampleFilesLocation.copy_file_to_temp(file)
+  api_admin.documents.upload_to_my_document(file.path)
 end
 
 # mark documents as favorite
 @test = TestingAppServer::PersonalTestInstance.new(admin)
 my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
-all_files.each do |file|
+temp_files_full_paths.each do |file|
   my_documents.file_settings(File.basename(file), :favorite)
 end
 
 # create array with file names
-all_files.map! do |tempfile|
+temp_files_names = temp_files_full_paths.map do |tempfile|
   File.basename(tempfile)
 end
 
@@ -40,8 +40,8 @@ end
 
 describe 'Documents Favorites for Personal' do
   after :all do
-    api_admin.documents.delete_files_by_title(all_files)
-    all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
+    api_admin.documents.delete_files_by_title(temp_files_names)
+    temp_files_full_paths.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do
@@ -55,14 +55,14 @@ describe 'Documents Favorites for Personal' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_favorite_smoke', all_files
+  it_behaves_like 'documents_favorite_smoke', temp_files_names
 
   it '[Personal][Favorites] Search field Filters are present' do
     expect(@favorites).to be_all_files_filters_present
   end
 
   it '[Personal][Favorites] All group actions present: Download, Download as, Copy, Delete' do
-    @favorites.check_file_checkbox(all_files[0])
+    @favorites.check_file_checkbox(temp_files_names[0])
     expect(@favorites).to be_personal_all_group_actions_for_favorites_present
   end
 end
