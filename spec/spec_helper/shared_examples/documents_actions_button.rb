@@ -77,12 +77,12 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
 
   describe 'Form Template From File' do
     before do
-      @new_form_from_file = TestingAppServer::GeneralData.generate_random_name('New_Form_From_File')
+      @new_form_from_file = Tempfile.new(%w[New_Form_From_File .docxf])
       @new_form_document = Tempfile.new(%w[New_Document .docx])
       TestingAppServer::SampleFilesLocation.copy_file_to_temp(@new_form_document)
       api_admin.documents.upload_to_my_document(@new_form_document.path)
       pending('500 (Internal Server Error) for Form Template From File creation') if @test.product == :appserver
-      @documents_page.create_file_from_action(:form_from_file, @new_form_from_file, form_template: File.basename(@new_form_document))
+      @documents_page.create_file_from_action(:form_from_file, File.basename(@new_form_from_file), form_template: File.basename(@new_form_document))
     end
 
     after do
@@ -113,7 +113,6 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
 
   describe 'File Upload' do
     before do
-      # @document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
       @document = Tempfile.new(%w[My_Document .docx])
       TestingAppServer::SampleFilesLocation.copy_file_to_temp(@document)
     end
