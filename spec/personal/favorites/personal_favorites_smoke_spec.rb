@@ -41,7 +41,6 @@ end
 describe 'Documents Favorites for Personal' do
   after :all do
     api_admin.documents.delete_files_by_title(temp_files_names)
-    temp_files_full_paths.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do

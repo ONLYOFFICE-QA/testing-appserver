@@ -24,10 +24,6 @@ module TestingAppServer
                    file.path)
     end
 
-    def self.delete_from_tmp_folder(file)
-      FileUtils.rm(SampleFilesLocation.path_to_tmp_file + file)
-    end
-
     def self.files_by_extension(files, extension)
       extension_files = []
       files.each { |file| extension_files << file if file.end_with?(extension.to_s) }
