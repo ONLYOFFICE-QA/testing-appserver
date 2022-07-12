@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'tempfile'
+
 shared_examples_for 'documents_actions_button' do |folder, api_admin|
   describe 'Document' do
     before do
@@ -75,12 +77,12 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
 
   describe 'Form Template From File' do
     before do
-      @new_form_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
       @new_form_from_file = TestingAppServer::GeneralData.generate_random_name('New_Form_From_File')
-      TestingAppServer::SampleFilesLocation.upload_to_tmp_folder("#{@new_form_document}.docx")
-      api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + "#{@new_form_document}.docx")
+      @new_form_document = Tempfile.new(%w[New_Document .docx])
+      TestingAppServer::SampleFilesLocation.copy_file_to_temp(@new_form_document)
+      api_admin.documents.upload_to_my_document(@new_form_document.path)
       pending('500 (Internal Server Error) for Form Template From File creation') if @test.product == :appserver
-      @documents_page.create_file_from_action(:form_from_file, @new_form_from_file, form_template: @new_form_document)
+      @documents_page.create_file_from_action(:form_from_file, @new_form_from_file, form_template: File.basename(@new_form_document))
     end
 
     after do
@@ -111,19 +113,18 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
 
   describe 'File Upload' do
     before do
-      @document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
-      TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(@document_name)
+      # @document_name = "My_Document_#{SecureRandom.hex(7)}.docx"
+      @document = Tempfile.new(%w[My_Document .docx])
+      TestingAppServer::SampleFilesLocation.copy_file_to_temp(@document)
     end
 
     after do
-      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title(@document_name))
-      TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(@document_name)
+      api_admin.documents.delete_group(files: api_admin.documents.id_by_file_title(File.basename(@document)))
     end
 
     it "[#{folder}] `Upload file` from Actions menu works" do
-      file_path = TestingAppServer::SampleFilesLocation.path_to_tmp_file + @document_name
-      @documents_page.actions_upload_file(file_path)
-      expect(api_admin.documents).to be_document_exist(@document_name)
+      @documents_page.actions_upload_file(@document.path)
+      expect(api_admin.documents).to be_document_exist(File.basename(@document))
     end
 
     it "[#{folder}] Upload file and folder buttons from Actions menu are visible" do
