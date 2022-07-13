@@ -74,7 +74,7 @@ shared_examples_for 'documents_actions_button' do |folder, api_admin|
       expect(@documents_page.check_opened_file_name).to eq("#{@new_form_blank}.docxf")
     end
   end
-  
+
   describe 'Form Template From File' do
     before do
       @new_form_document = Tempfile.new(%w[New_Document .docx])
