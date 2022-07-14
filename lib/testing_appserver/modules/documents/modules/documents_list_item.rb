@@ -10,9 +10,7 @@ module TestingAppServer
     include PageObject
     include DocumentsListItemSettings
     include DocumentsSharingSettings
-
-    #elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")
-
+    
     image(:empty_folder, xpath: "//img[@alt='Empty folder image']") # add_id
 
     def files_list
