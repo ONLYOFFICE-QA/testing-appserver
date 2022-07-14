@@ -10,7 +10,7 @@ module TestingAppServer
     include PageObject
     include DocumentsListItemSettings
     include DocumentsSharingSettings
-    
+
     image(:empty_folder, xpath: "//img[@alt='Empty folder image']") # add_id
 
     def files_list
