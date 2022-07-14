@@ -11,23 +11,20 @@ module TestingAppServer
     include DocumentsListItemSettings
     include DocumentsSharingSettings
 
-    elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")
+    #elements(:item_title, xpath: "//div[contains(@class, 'table-container_cell')]/a")
 
     image(:empty_folder, xpath: "//img[@alt='Empty folder image']") # add_id
 
+    def files_list
+      @instance.webdriver.get_text_of_several_elements("//div[contains(@class, 'table-container_cell')]/a")
+    end
+
     def file_present?(file_name)
-      item_title_elements.each do |current_element|
-        return true if @instance.webdriver.get_attribute(current_element, 'title').include?(file_name)
-      end
-      false
+      files_list.include?(file_name)
     end
 
     def file_copies_count(file_name)
-      counter = 0
-      item_title_elements.each do |current_element|
-        counter += 1 if @instance.webdriver.get_attribute(current_element, 'title').include?(file_name)
-      end
-      counter
+      files_list.count(file_name)
     end
 
     def files_present?(files)
