@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 shared_examples_for 'documents_select_all_checkbox' do |folder, all_files_and_folders, document_name,
-  spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name, test_files|
+  spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name|
   before { documents_page.check_file_checkbox(document_name) }
 
   it "[#{folder}] `Select all Documents` works" do
@@ -56,10 +56,5 @@ shared_examples_for 'documents_select_all_checkbox' do |folder, all_files_and_fo
   it "[#{folder}] `Select all All` works" do
     documents_page.select_files_filter(:all)
     expect(documents_page).to be_files_checked(all_files_and_folders)
-  end
-
-  it 'Select 2 files with the same name works' do
-    documents_page.check_file_checkbox(test_files[1])
-    expect(documents_page).to be_file_checkbox_present(test_files[1])
   end
 end

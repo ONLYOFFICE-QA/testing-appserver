@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'tempfile'
 
 test_manager = TestingAppServer::PersonalTestManager.new(suite_name: File.basename(__FILE__))
 
@@ -18,20 +17,11 @@ archive_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Archive
 picture_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Image')}.jpg"
 all_files = [document_name, spreadsheet_name, presentation_name, audio_name, archive_name, picture_name]
 
-# create 2 files with the same names and different extensions
-random_name = TestingAppServer::GeneralData.generate_random_name('My_File')
-test_document = "#{random_name}.docx"
-test_spreadsheet = "#{random_name}.xlsx"
-test_files = [test_document, test_spreadsheet]
-
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
   api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
 end
-test_files.each do |file|
-  TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
-  api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
-end
+
 folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_by_folder_type(folder_name)
 all_files_and_folders = all_files + [folder_name]
@@ -54,7 +44,7 @@ describe 'Documents filter for Personal' do
   end
 
   it_behaves_like 'documents_select_all_checkbox', 'My Documents', all_files_and_folders, document_name,
-                  spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name, test_files do
+                  spreadsheet_name, presentation_name, audio_name, archive_name, picture_name, folder_name do
     let(:documents_page) { @documents_page }
   end
 end
