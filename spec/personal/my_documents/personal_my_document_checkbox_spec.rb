@@ -35,7 +35,7 @@ describe 'Checkbox in Personal' do
     @test.webdriver.quit
   end
 
-  it 'Select 2 files with the same name works' do
+  it 'From two files with same name second can be selected' do
     @documents_page.check_file_checkbox(spreadsheet)
     expect(@documents_page).to be_file_checkbox_present(spreadsheet)
   end

@@ -16,12 +16,10 @@ audio_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Audio')}.
 archive_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Archive')}.zip"
 picture_name = "#{TestingAppServer::GeneralData.generate_random_name('My_Image')}.jpg"
 all_files = [document_name, spreadsheet_name, presentation_name, audio_name, archive_name, picture_name]
-
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.upload_to_tmp_folder(file)
   api_admin.documents.upload_to_my_document(TestingAppServer::SampleFilesLocation.path_to_tmp_file + file)
 end
-
 folder_name = Faker::Hipster.word
 api_admin.documents.create_folder_by_folder_type(folder_name)
 all_files_and_folders = all_files + [folder_name]
