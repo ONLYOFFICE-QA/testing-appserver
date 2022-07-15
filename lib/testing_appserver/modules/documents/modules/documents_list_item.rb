@@ -14,7 +14,7 @@ module TestingAppServer
     image(:empty_folder, xpath: "//img[@alt='Empty folder image']") # add_id
 
     def files_list
-      @instance.webdriver.get_text_of_several_elements("//div[contains(@class, 'table-container_cell')]/a")
+      @instance.webdriver.get_attributes_of_several_elements("//div[contains(@class, 'table-container_cell')]/a", 'title')
     end
 
     def file_present?(file_name)
