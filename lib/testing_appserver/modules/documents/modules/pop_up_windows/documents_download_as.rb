@@ -6,8 +6,8 @@ module TestingAppServer
   module DocumentsDownloadAs
     include PageObject
 
-    span(:chose_format, xpath: "(//h1[text()='Download as']/../..//div[@id = 'rowContainer']//span)[1]") # add_id
-    button(:download_save, xpath: "//button[contains(@class, 'button-dialog-accept')]")
+    span(:chose_format, xpath: "//h1[text()='Download as']/../..//span[contains(@class, 'text')]") # add_id
+    button(:download_save, xpath: "//div[contains(@class, 'modal-dialog-aside-footer')]//button[1]")
 
     def format_dropdown(format)
       "(//div[@data-key='#{format}'])[1]"
