@@ -11,19 +11,16 @@ new_document = Tempfile.new(%w[New_Document .docx])
 new_spreadsheet = Tempfile.new(%w[New_Spreadsheet .xlsx])
 new_presentation = Tempfile.new(%w[New_Presentation .pptx])
 all_files = [new_document, new_spreadsheet, new_presentation]
+all_files_titles = []
 all_files.each do |file|
   TestingAppServer::SampleFilesLocation.copy_file_to_temp(file)
   api_admin.documents.upload_to_my_document(file.path)
-end
-
-all_files_titles = all_files.map do |file|
-  File.basename(file)
+  all_files_titles << File.basename(file)
 end
 
 describe 'Personal My Documents Download As' do
   after :all do
     api_admin.documents.delete_files_by_title(all_files_titles)
-    all_files.each { |file| TestingAppServer::SampleFilesLocation.delete_from_tmp_folder(file) }
   end
 
   before do
