@@ -32,7 +32,20 @@ module TestingAppServer
       choose_file_for_form_template(form_template) if document_type == :form_from_file
       add_name_to_file(title)
       @instance.webdriver.switch_to_main_tab
-      @instance.webdriver.wait_until { file_present?(title) }
+      @instance.webdriver.wait_until(PageObject.default_page_wait, "File with name #{title} is not in the list") do
+        case document_type
+        when :new_document
+          file_present?("#{title}.docx")
+        when :new_spreadsheet
+          file_present?("#{title}.xlsx")
+        when :new_presentation
+          file_present?("#{title}.pptx")
+        when :form_blank, :form_from_file
+          file_present?("#{title}.docxf")
+        when :new_folder
+          file_present?(title)
+        end
+      end
     end
   end
 end
