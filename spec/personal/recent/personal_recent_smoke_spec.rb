@@ -43,7 +43,7 @@ describe 'Documents Recent' do
   end
 
   it '[AppServer][Recent] All group filters fore Recent present: Download, Download as, Copy' do
-    @recent.check_file_checkbox(new_document)
+    @recent.check_file_checkbox(all_files[0])
     expect(@recent).to be_download_copy_download_as_present
     expect(@recent.group_menu_share_file_element).not_to be_present
     expect(@recent.group_menu_move_to_element).not_to be_present
