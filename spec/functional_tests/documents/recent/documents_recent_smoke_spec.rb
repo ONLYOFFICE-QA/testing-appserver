@@ -10,7 +10,7 @@ api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 new_document = TestingAppServer::GeneralData.generate_random_name('New_Document')
 new_spreadsheet = TestingAppServer::GeneralData.generate_random_name('New_Spreadsheet')
 new_presentation = TestingAppServer::GeneralData.generate_random_name('New_Presentation')
-all_files = ["#{new_document}.docx", "#{new_spreadsheet}.xlsx", "#{new_presentation}.pptx"]
+all_files = %W[#{new_document}.docx #{new_spreadsheet}.xlsx #{new_presentation}.pptx]
 
 # create recent files
 main_page, @test = TestingAppServer::AppServerHelper.new.init_instance
@@ -36,14 +36,14 @@ describe 'Documents Recent' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_recent_smoke', new_document, new_spreadsheet, new_presentation
+  it_behaves_like 'documents_recent_smoke', all_files
 
   it '[Recent] Search field Filters are present' do
     expect(@recent).to be_all_search_filters_for_recent_present
   end
 
   it '[Recent] All group filters fore Recent present: Share, Download, Download as, Copy' do
-    @recent.check_file_checkbox("#{new_document}.docx")
+    @recent.check_file_checkbox(all_files[0])
     expect(@recent).to be_all_group_actions_for_resent_present
   end
 end

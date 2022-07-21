@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-shared_examples_for 'documents_recent_smoke' do |new_document, new_spreadsheet, new_presentation|
+shared_examples_for 'documents_recent_smoke' do |all_files|
   it '[Recent] Actions menu button is disable' do
     expect(@recent).not_to be_actions_enabled
   end
 
   it '[Recent] Documents created and opened in My Documents exist in Recent' do
-    expect(@recent).to be_file_present(new_document)
-    expect(@recent).to be_file_present(new_spreadsheet)
-    expect(@recent).to be_file_present(new_presentation)
+    all_files.each do |file|
+      expect(@recent).to be_file_present(file)
+    end
   end
 
   it '[Recent] `Select all` Filters are present' do
-    @recent.check_file_checkbox(new_document)
+    @recent.check_file_checkbox(all_files[0])
     expect(@recent).to be_select_all_filters_for_recent_present
   end
 end
