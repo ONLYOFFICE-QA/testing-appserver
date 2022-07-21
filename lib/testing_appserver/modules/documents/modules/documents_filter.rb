@@ -7,6 +7,7 @@ module TestingAppServer
     include PageObject
 
     div(:open_filter, xpath: "(//div[contains(@class, 'section-header_filter')]/div/div)[2]")
+    div(:close_filter, xpath: '//section/div[3]/div/div[3]/div[3]')
 
     # type filter
     div(:folders_filter, xpath: "//div[@name='folders-2']") # add_id
@@ -40,6 +41,11 @@ module TestingAppServer
       instance_eval("#{filter}_filter_element.click", __FILE__, __LINE__) # choose action from documents filter menu
       choose_group_filter(params[:group_name]) if params[:group_name]
       choose_user_filter(params[:user_name]) if params[:user_name]
+      if filter == :clear
+        close_filter_element.click
+        OnlyofficeLoggerHelper.sleep_and_log('Wait to load search results', 2)
+        return
+      end
       add_filter_element.click
       @instance.webdriver.wait_until { !add_filter_element.present? }
       OnlyofficeLoggerHelper.sleep_and_log('Wait to load search results', 2)
