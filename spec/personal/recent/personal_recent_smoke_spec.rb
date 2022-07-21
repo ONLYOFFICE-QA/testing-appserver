@@ -36,7 +36,7 @@ describe 'Documents Recent' do
     @test.webdriver.quit
   end
 
-  it_behaves_like 'documents_recent_smoke', new_document, all_files
+  it_behaves_like 'documents_recent_smoke', all_files
 
   it '[AppServer][Recent] Search field Filters are present' do
     expect(@recent).to be_docx_xlsx_pptx_filters_present
