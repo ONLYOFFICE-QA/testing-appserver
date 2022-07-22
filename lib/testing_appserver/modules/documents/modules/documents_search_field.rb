@@ -11,5 +11,14 @@ module TestingAppServer
     def search_file(document_name)
       search_field_element.send_keys(document_name)
     end
+
+    def not_found?
+      @instance.webdriver.wait_until { not_found_visible? }
+    end
+
+    def not_found_visible?
+      not_found_xpath = "//div[contains(@class, 'section-scroll scroll-body')]//span[text() = 'Nothing found']"
+      @instance.webdriver.element_visible?(not_found_xpath)
+    end
   end
 end
