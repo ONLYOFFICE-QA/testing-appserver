@@ -10,7 +10,6 @@ api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 first_document = Tempfile.new(%w[New_Document .docx])
 second_document = Tempfile.new(%w[New_Document .docx])
-random_document = TestingAppServer::GeneralData.generate_random_name('My_document')
 temp_docs = [first_document, second_document]
 temp_docs_titles = [File.basename(first_document, '.docx'), File.basename(second_document, '.docx')]
 
@@ -42,7 +41,8 @@ describe 'Documents search field' do
   end
 
   it "'Nothing Found' works" do
+    random_document = TestingAppServer::GeneralData.generate_random_name('My_document')
     @documents_page.search_file(random_document)
-    expect(@documents_page).to be_not_found
+    expect(@documents_page).to be_wait_until_not_found
   end
 end

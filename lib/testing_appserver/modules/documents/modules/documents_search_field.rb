@@ -12,7 +12,7 @@ module TestingAppServer
       search_field_element.send_keys(document_name)
     end
 
-    def not_found?
+    def wait_until_not_found?
       @instance.webdriver.wait_until { not_found_visible? }
     end
 
