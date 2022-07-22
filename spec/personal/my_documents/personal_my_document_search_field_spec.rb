@@ -34,11 +34,12 @@ describe 'Documents search field' do
     @test.webdriver.quit
   end
 
-  # it 'Search field works' do
-  #   @documents_page.search_file(temp_docs_titles[0])
-  #   expect(@documents_page).to be_file_present(temp_docs_titles[0])
-  #   expect(@documents_page).not_to be_file_present(temp_docs_titles[1])
-  # end
+  it 'Search field works' do
+    pending('https://bugzilla.onlyoffice.com/show_bug.cgi?id=58239')
+    @documents_page.search_file(temp_docs_titles[0])
+    expect(@documents_page).to be_file_present(temp_docs_titles[0])
+    expect(@documents_page).not_to be_file_present(temp_docs_titles[1])
+  end
 
   it "'Nothing Found' works" do
     @documents_page.search_file(random_document)
