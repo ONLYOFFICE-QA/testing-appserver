@@ -43,6 +43,7 @@ describe 'Documents search field' do
   it "'Nothing Found' works" do
     random_document = TestingAppServer::GeneralData.generate_random_name('My_document')
     @documents_page.search_file(random_document)
-    expect(@documents_page).to be_wait_until_not_found
+    @documents_page.wait_until_not_found
+    expect(@documents_page).to be_not_found_visible
   end
 end
