@@ -11,6 +11,7 @@ require_relative 'documents_group_actions'
 require_relative 'documents_list_item'
 require_relative 'documents_navigation'
 require_relative 'documents_select_all_filter'
+require_relative 'documents_search_field'
 
 module TestingAppServer
   # All documents required
@@ -26,6 +27,7 @@ module TestingAppServer
     include DocumentsNavigation
     include DocumentsSelectAllFilter
     include TopToolbar
+    include DocumentsSearchField
 
     def create_file_from_action(document_type, title, form_template: nil)
       actions_documents(document_type)
