@@ -36,6 +36,5 @@ module TestingAppServer
       header_trash_icon_element.click
       close_icon_element.click
     end
-
   end
 end

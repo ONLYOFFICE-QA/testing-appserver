@@ -3,7 +3,7 @@
 require_relative 'pop_up_windows/documents_copy'
 require_relative 'pop_up_windows/documents_download_as'
 require_relative 'pop_up_windows/documents_move_to'
-require_relative 'pop_up_windows/documents_move_to_trash_window'
+require_relative 'pop_up_windows/documents_move_to_trash'
 require_relative 'pop_up_windows/documents_sharing_settings'
 
 module TestingAppServer
