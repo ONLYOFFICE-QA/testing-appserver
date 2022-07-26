@@ -11,13 +11,13 @@ api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 describe 'Trash folder for Personal' do
   before do
     @document = Tempfile.new(%w[My_Document .docx])
+    @document_name = File.basename(@document)
     TestingAppServer::SampleFilesLocation.copy_file_to_temp(@document)
     api_admin.documents.upload_to_my_document(@document.path)
     @test = TestingAppServer::PersonalTestInstance.new(admin)
     @my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
-    @my_documents.file_settings(File.basename(@document), :delete)
+    @my_documents.file_settings(@document_name, :delete)
     @trash = @my_documents.documents_navigation(:trash)
-    @document = File.basename(@document)
   end
 
   after do |example|
@@ -26,11 +26,11 @@ describe 'Trash folder for Personal' do
   end
 
   it '`Restore` option works' do
-    @trash.check_file_checkbox(@document)
+    @trash.check_file_checkbox(@document_name)
     @trash.restore_from_trash
-    expect(@trash).not_to be_file_present(@document)
+    expect(@trash).not_to be_file_present(@document_name)
     @documents = @my_documents.documents_navigation(:my_documents)
-    expect(@documents).to be_file_present(@document)
+    expect(@documents).to be_file_present(@document_name)
   end
 
   it '`Empty trash` header button works' do
@@ -45,11 +45,11 @@ describe 'Trash folder for Personal' do
 
   it '`Cancel` button closes pop up window' do
     @trash.empty_trash_cancel_button_clicked
-    expect(@trash).to be_file_present(@document)
+    expect(@trash).to be_file_present(@document_name)
   end
 
   it '`Close` icon closes pop up window' do
     @trash.empty_trash_close_icon_clicked
-    expect(@trash).to be_file_present(@document)
+    expect(@trash).to be_file_present(@document_name)
   end
 end

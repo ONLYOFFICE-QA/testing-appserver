@@ -3,7 +3,7 @@
 require_relative 'pop_up_windows/documents_copy'
 require_relative 'pop_up_windows/documents_download_as'
 require_relative 'pop_up_windows/documents_move_to'
-require_relative 'pop_up_windows/documents_move_to_trash'
+require_relative 'pop_up_windows/documents_move_to_trash_window'
 require_relative 'pop_up_windows/documents_sharing_settings'
 
 module TestingAppServer
@@ -14,7 +14,7 @@ module TestingAppServer
     include DocumentsCopy
     include DocumentsDownloadAs
     include DocumentsMoveTo
-    include DocumentsMoveToTrash
+    include DocumentsMoveToTrashWindow
     include DocumentsSharingSettings
 
     header_xpath = "//div[contains(@class, 'table-container_group-menu')]"

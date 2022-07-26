@@ -9,8 +9,8 @@ module TestingAppServer
   class DocumentsTrash
     include DocumentsModules
     include PageObject
-    include DocumentsMoveToTrash
-    include DocumentsEmptyTrash
+    include DocumentsMoveToTrashWindow
+    include DocumentsEmptyTrashWindow
 
     element(:header_trash, xpath: "//h1[@title='Trash' or text()='Trash']") # add_id
 

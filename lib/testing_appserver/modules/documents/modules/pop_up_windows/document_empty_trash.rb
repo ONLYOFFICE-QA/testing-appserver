@@ -3,7 +3,7 @@
 module TestingAppServer
   # Appserver empty Trash pop up
   # https://user-images.githubusercontent.com/38238032/180782386-b20b4d63-516a-4dc4-8fe9-b903feebd516.jpg
-  module DocumentsEmptyTrash
+  module DocumentsEmptyTrashWindow
     include PageObject
     svg_xpath = "/*[name() = 'svg' and contains(@data-src, 'images/clear.trash.react.svg')]"
 
@@ -18,17 +18,13 @@ module TestingAppServer
     def empty_trash_header_button_clicked
       header_trash_icon_element.click
       delete_button
-      @instance.webdriver.wait_until { !deleting_process_icon_element.present? }
-      @instance.webdriver.wait_until { success_delete_toast_element.present? }
-      @instance.webdriver.wait_until { !success_delete_toast_element.present? }
+      wait_trash_operations_completed
     end
 
     def empty_trash_sidebar_button_clicked
       sidebar_trash_icon_element.click
       delete_button
-      @instance.webdriver.wait_until { !deleting_process_icon_element.present? }
-      @instance.webdriver.wait_until { success_delete_toast_element.present? }
-      @instance.webdriver.wait_until { !success_delete_toast_element.present? }
+      wait_trash_operations_completed
     end
 
     def empty_trash_cancel_button_clicked
@@ -40,5 +36,6 @@ module TestingAppServer
       header_trash_icon_element.click
       close_icon_element.click
     end
+
   end
 end
