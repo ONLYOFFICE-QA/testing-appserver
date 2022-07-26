@@ -36,7 +36,6 @@ module TestingAppServer
       restore_save
       @instance.webdriver.wait_until { success_delete_toast_element.present? }
       @instance.webdriver.wait_until { !success_delete_toast_element.present? }
-      @instance.webdriver.wait_until { !header_trash_icon? }
     end
 
     def trash_empty?

@@ -5,6 +5,8 @@ require_relative 'pop_up_windows/documents_download_as'
 require_relative 'pop_up_windows/documents_move_to'
 require_relative 'pop_up_windows/documents_move_to_trash'
 require_relative 'pop_up_windows/documents_sharing_settings'
+require_relative 'pop_up_windows/document_empty_trash'
+require_relative 'documents_list_item'
 
 module TestingAppServer
   # AppServer Documents group actions
@@ -16,6 +18,8 @@ module TestingAppServer
     include DocumentsMoveTo
     include DocumentsMoveToTrashWindow
     include DocumentsSharingSettings
+    include DocumentsListItem
+    include DocumentsEmptyTrashWindow
 
     header_xpath = "//div[contains(@class, 'table-container_group-menu')]"
     button(:group_menu_share_file, xpath: "#{header_xpath}//button[@title = 'Share']") # add_id
@@ -56,6 +60,18 @@ module TestingAppServer
     def group_menu_delete
       group_menu_delete_file_element.click
       accept_deletion
+    end
+
+    def remove_all_files_and_clean_trash
+      unless files_list.empty?
+        files_list.each do |file|
+          check_file_checkbox(file)
+        end
+        group_menu_delete
+      end
+      documents_navigation(:trash)
+      empty_trash_header_button_clicked unless files_list.empty?
+      documents_navigation(:my_documents)
     end
 
     def all_group_actions_present?
