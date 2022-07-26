@@ -25,12 +25,37 @@ describe 'Trash folder for Personal' do
     @test.webdriver.quit
   end
 
-  it '`Restore` option works' do
-    @trash.check_file_checkbox(@document_name)
-    @trash.restore_from_trash
-    expect(@trash).not_to be_file_present(@document_name)
-    @documents = @my_documents.documents_navigation(:my_documents)
-    expect(@documents).to be_file_present(@document_name)
+  describe '`Restore` option works' do
+    before do
+      @second_document_name = TestingAppServer::GeneralData.generate_random_name('My_Document')
+      @documents = @my_documents.documents_navigation(:my_documents)
+      @documents.create_file_from_action(:new_document, @second_document_name)
+      @my_documents.file_settings(@second_document_name, :delete)
+      @trash = @my_documents.documents_navigation(:trash)
+    end
+
+    after do
+      @my_documents.file_settings(@document_name, :delete)
+      api_admin.documents.delete_files_by_title([@second_document_name])
+    end
+
+    it 'Restores both files' do
+      @trash.check_file_checkbox(@document_name)
+      @trash.check_file_checkbox(@second_document_name)
+      @trash.restore_from_trash
+      expect(@trash).not_to be_files_present([@document_name, "#{@second_document_name}.docx"])
+      @documents = @my_documents.documents_navigation(:my_documents)
+      expect(@documents).to be_files_present([@document_name, "#{@second_document_name}.docx"])
+    end
+
+    it 'Only selected file is restored' do
+      @trash.check_file_checkbox(@document_name)
+      @trash.restore_from_trash
+      expect(@trash).not_to be_file_present(@document_name)
+      expect(@trash).to be_file_present("#{@second_document_name}.docx")
+      @documents = @my_documents.documents_navigation(:my_documents)
+      expect(@documents).to be_file_present(@document_name)
+    end
   end
 
   it '`Empty trash` header button works' do
