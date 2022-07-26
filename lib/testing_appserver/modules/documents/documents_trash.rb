@@ -11,11 +11,10 @@ module TestingAppServer
     include PageObject
     include DocumentsMoveToTrash
     include DocumentsEmptyTrash
-
-    header_xpath = "//div[contains(@class, 'table-container_group-menu')]"
+    
     element(:header_trash, xpath: "//h1[@title='Trash' or text()='Trash']") # add_id
 
-    button(:group_menu_restore, xpath: "#{header_xpath}//button[@title = 'Restore']")
+    button(:group_menu_restore, xpath: "//div[contains(@class, 'table-container_group-menu')]//button[@title = 'Restore']")
     button(:restore_save, xpath: "//button[contains(@class, 'select-file-modal-dialog-buttons-save')]")
 
     span(:restore_to_my_documents, xpath: "//span[@class = 'rc-tree-title']")
