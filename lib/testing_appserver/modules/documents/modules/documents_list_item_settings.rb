@@ -16,7 +16,7 @@ module TestingAppServer
     include DocumentsCopy
     include DocumentsDownloadAs
     include DocumentsMoveTo
-    include DocumentsMoveToTrash
+    include DocumentsMoveToTrashWindow
     include DocumentsSharingSettings
     include DocumentsVersionHistory
     include DocumentsCreationField

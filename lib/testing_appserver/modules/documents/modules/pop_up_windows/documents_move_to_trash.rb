@@ -3,7 +3,7 @@
 module TestingAppServer
   # AppServer Move To Trash(Delete) window
   # https://user-images.githubusercontent.com/40513035/169240332-d318e16e-9bc8-46bb-93d8-8e24927f32e8.png
-  module DocumentsMoveToTrash
+  module DocumentsMoveToTrashWindow
     include PageObject
 
     div(:move_to_trash, xpath: "//div[text()='Move to Trash']") # add_id
@@ -13,6 +13,10 @@ module TestingAppServer
     def accept_deletion
       @instance.webdriver.wait_until { move_to_trash_element.present? }
       move_to_trash_element.click
+      wait_trash_operations_completed
+    end
+
+    def wait_trash_operations_completed
       @instance.webdriver.wait_until { !deleting_process_icon_element.present? }
       @instance.webdriver.wait_until { success_delete_toast_element.present? }
       @instance.webdriver.wait_until { !success_delete_toast_element.present? }

@@ -14,7 +14,7 @@ module TestingAppServer
     include DocumentsCopy
     include DocumentsDownloadAs
     include DocumentsMoveTo
-    include DocumentsMoveToTrash
+    include DocumentsMoveToTrashWindow
     include DocumentsSharingSettings
 
     header_xpath = "//div[contains(@class, 'table-container_group-menu')]"
