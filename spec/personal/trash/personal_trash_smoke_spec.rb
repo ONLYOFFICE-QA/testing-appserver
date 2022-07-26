@@ -9,7 +9,6 @@ admin = TestingAppServer::PersonalUserData.new
 api_admin = TestingAppServer::ApiHelper.new(admin.portal, admin.mail, admin.pwd)
 
 describe 'Trash folder for Personal' do
-
   before do
     @document = Tempfile.new(%w[My_Document .docx])
     TestingAppServer::SampleFilesLocation.copy_file_to_temp(@document)

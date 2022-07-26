@@ -11,7 +11,7 @@ module TestingAppServer
     include PageObject
     include DocumentsMoveToTrash
     include DocumentsEmptyTrash
-    
+
     element(:header_trash, xpath: "//h1[@title='Trash' or text()='Trash']") # add_id
 
     button(:group_menu_restore, xpath: "//div[contains(@class, 'table-container_group-menu')]//button[@title = 'Restore']")
