@@ -62,16 +62,16 @@ module TestingAppServer
       accept_deletion
     end
 
-    def group_menu_delete_all_files(my_documents)
+    def remove_all_files_and_clean_trash
       unless files_list.empty?
         files_list.each do |file|
           check_file_checkbox(file)
         end
         group_menu_delete
       end
-      my_documents.documents_navigation(:trash)
+      documents_navigation(:trash)
       empty_trash_header_button_clicked unless files_list.empty?
-      my_documents.documents_navigation(:my_documents)
+      documents_navigation(:my_documents)
     end
 
     def all_group_actions_present?

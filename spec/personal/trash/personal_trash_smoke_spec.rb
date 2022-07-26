@@ -12,7 +12,7 @@ describe 'Trash folder for Personal' do
   before do
     @test = TestingAppServer::PersonalTestInstance.new(admin)
     @my_documents = TestingAppServer::PersonalSite.new(@test).personal_login(admin.mail, admin.pwd)
-    @my_documents.group_menu_delete_all_files(@my_documents)
+    @my_documents.remove_all_files_and_clean_trash
     @document = Tempfile.new(%w[My_Document .docx])
     @document_name = File.basename(@document)
     TestingAppServer::SampleFilesLocation.copy_file_to_temp(@document)
