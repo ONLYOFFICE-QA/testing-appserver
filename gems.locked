@@ -50,19 +50,19 @@ GEM
       onlyoffice_logger_helper (~> 1)
       rubyzip (~> 2)
     onlyoffice_logger_helper (1.3.0)
-    onlyoffice_s3_wrapper (0.6.0)
+    onlyoffice_s3_wrapper (1.0.0)
       aws-sdk-s3 (~> 1)
-      onlyoffice_file_helper (~> 0)
+      onlyoffice_file_helper (< 2)
     onlyoffice_tcm_helper (0.3.2)
       onlyoffice_file_helper (~> 0)
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
       onlyoffice_logger_helper (~> 1)
-    onlyoffice_webdriver_wrapper (1.9.0)
+    onlyoffice_webdriver_wrapper (1.10.1)
       headless (~> 2)
-      onlyoffice_file_helper (~> 0)
+      onlyoffice_file_helper (< 2)
       onlyoffice_logger_helper (~> 1)
-      onlyoffice_s3_wrapper (~> 0, >= 0.5.0)
+      onlyoffice_s3_wrapper (>= 0.5.0, < 2)
       page-object (~> 2)
       selenium-webdriver (~> 4)
       watir (~> 7)
@@ -144,7 +144,7 @@ DEPENDENCIES
   onlyoffice_file_helper
   onlyoffice_tcm_helper
   onlyoffice_testrail_wrapper
-  onlyoffice_webdriver_wrapper (~> 1.9)
+  onlyoffice_webdriver_wrapper (~> 1.10)
   overcommit
   page-object
   palladium
