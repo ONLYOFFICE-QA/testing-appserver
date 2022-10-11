@@ -58,7 +58,7 @@ GEM
     onlyoffice_testrail_wrapper (0.3.0)
       onlyoffice_bugzilla_helper (~> 0.1)
       onlyoffice_logger_helper (~> 1)
-    onlyoffice_webdriver_wrapper (1.11.0)
+    onlyoffice_webdriver_wrapper (1.12.0)
       headless (~> 2)
       onlyoffice_file_helper (< 2)
       onlyoffice_logger_helper (~> 1)
