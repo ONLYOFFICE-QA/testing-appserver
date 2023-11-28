@@ -120,7 +120,7 @@ GEM
       rubocop (~> 1.33)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
-    selenium-webdriver (4.12.0)
+    selenium-webdriver (4.15.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -128,7 +128,7 @@ GEM
     watir (7.2.2)
       regexp_parser (>= 1.2, < 3)
       selenium-webdriver (~> 4.2)
-    websocket (1.2.9)
+    websocket (1.2.10)
     wrata_api (1.1.0)
     yml_reader (0.7)
 
