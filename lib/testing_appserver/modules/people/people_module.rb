@@ -28,7 +28,7 @@ module TestingAppServer
     end
 
     def user_not_exist?(full_name)
-      @instance.webdriver.driver.find_elements(:xpath, user_element(full_name)).size.zero?
+      @instance.webdriver.driver.find_elements(:xpath, user_element(full_name)).empty?
     end
 
     def user_element(full_name)
