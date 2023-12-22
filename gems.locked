@@ -35,7 +35,7 @@ GEM
       concurrent-ruby (~> 1.0)
     iniparse (1.5.0)
     jmespath (1.6.2)
-    json (2.6.3)
+    json (2.7.1)
     mini_mime (1.1.5)
     multi_xml (0.6.0)
     onlyoffice_api (1.0.1)
