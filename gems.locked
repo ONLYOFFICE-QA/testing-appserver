@@ -36,7 +36,7 @@ GEM
     iniparse (1.5.0)
     jmespath (1.6.2)
     json (2.6.3)
-    mini_mime (1.1.2)
+    mini_mime (1.1.5)
     multi_xml (0.6.0)
     onlyoffice_api (1.0.1)
       httparty (~> 0.16)
