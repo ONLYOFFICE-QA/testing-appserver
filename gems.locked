@@ -43,7 +43,7 @@ GEM
     onlyoffice_api (1.0.1)
       httparty (~> 0.16)
     onlyoffice_bugzilla_helper (0.6.1)
-    onlyoffice_documentserver_testing_framework (2.15.0)
+    onlyoffice_documentserver_testing_framework (2.16.0)
       onlyoffice_logger_helper (~> 1)
       onlyoffice_webdriver_wrapper (~> 1, >= 1.10.0)
     onlyoffice_file_helper (2.1.0)
