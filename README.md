@@ -2,6 +2,9 @@
 
 Contains RSpec based tests for Appserver Portals and Personal.
 
+***The AppServer project is deprecated, so this testing repo also.***  
+Please refer to next generation of AppServer - DocSpace and it's [testing repo](https://github.com/ONLYOFFICE-QA/testing-docspace)
+
 ## Rake Tasks
 
 Before usage initialize with wrata api key from [https://wrata-url/clients/api_keys](https://wrata-url/clients/api_keys)
@@ -22,7 +25,7 @@ Before usage initialize with wrata api key from [https://wrata-url/clients/api_k
 
 1. `rake decrypt_secret_config`
 2. Edit `framework/data/private_data/data.yml`
-   via any text editor  
+   via any text editor
    For example add new line `foo: bar` in end of file
 3. `rake update_secret_config`
 4. Add `framework/data/private_data/data.yml.gpg` to VCS
